@@ -15,6 +15,11 @@ public class ParentPK implements Serializable {
     @Column(name = "student_id")
     private long studentId;
 
+    public ParentPK (long studentId, String name) {
+        this.studentId = studentId;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
