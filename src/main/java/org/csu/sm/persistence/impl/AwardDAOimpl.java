@@ -6,6 +6,7 @@ import org.csu.sm.persistence.AwardDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by ltaoj on 2017/8/7.
  */
+@Repository
 public class AwardDAOimpl implements AwardDAO{
 
     public void insertAward(AwardRecord awardRecord) throws PersistenceException {

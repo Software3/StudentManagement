@@ -5,12 +5,14 @@ import org.csu.sm.persistence.StudentDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
 
 /**
  * Created by ltaoj on 2017/8/7.
  */
+@Repository
 public class StudentDAOimpl implements StudentDAO{
     public void insertStudent(Student student) throws PersistenceException {
         Session session = HibernateUtil.getSession();
