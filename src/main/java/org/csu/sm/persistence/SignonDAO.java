@@ -23,5 +23,5 @@ public interface SignonDAO {
      * @return
      * @throws PersistenceException
      */
-    Integer teacherLogin(Teacher teacher) throws PersistenceException;
+    Teacher teacherLogin(Teacher teacher) throws PersistenceException;
 }
