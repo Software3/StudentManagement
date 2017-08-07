@@ -18,10 +18,25 @@ public interface SignonDAO {
     Integer studentLogin(Signon signon) throws PersistenceException;
 
     /**
+     * 学生修改登录密码
+     * @param signon
+     * @throws PersistenceException
+     */
+    void updateStudentSignon(Signon signon) throws PersistenceException;
+
+    /**
      * 登录成功返回老师信息，失败返回null
      * @param teacher
      * @return
      * @throws PersistenceException
      */
     Teacher teacherLogin(Teacher teacher) throws PersistenceException;
+
+    /**
+     * 教师修改登录密码
+     * @param username
+     * @param password
+     * @throws PersistenceException
+     */
+    void updateTeacherSignon(String username, String password) throws PersistenceException;
 }

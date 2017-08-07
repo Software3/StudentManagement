@@ -25,6 +25,13 @@ public class SignonDAOimpl implements SignonDAO{
         return list.size() > 0 ? 1 : 0;
     }
 
+    public void updateStudentSignon(Signon signon) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(signon);
+        transaction.commit();
+    }
+
     public Teacher teacherLogin(Teacher teacher) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -32,5 +39,14 @@ public class SignonDAOimpl implements SignonDAO{
         List<Teacher> list = session.createQuery(hql).list();
         transaction.commit();
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public void updateTeacherSignon(String username, String password) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Teacher teacher = session.get(Teacher.class, username);
+        teacher.setPassword(password);
+        session.update(teacher);
+        transaction.commit();
     }
 }
