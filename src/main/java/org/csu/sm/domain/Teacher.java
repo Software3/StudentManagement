@@ -21,6 +21,8 @@ public class Teacher {
     private String email;
     @Column(name = "majors")
     private String majors;
+    @Column(name = "role")
+    private int role;
 
     public String getName() {
         return name;
@@ -70,6 +72,14 @@ public class Teacher {
         this.majors = majors;
     }
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,7 +93,7 @@ public class Teacher {
         if (phone != null ? !phone.equals(teacher.phone) : teacher.phone != null) return false;
         if (email != null ? !email.equals(teacher.email) : teacher.email != null) return false;
         if (majors != null ? !majors.equals(teacher.majors) : teacher.majors != null) return false;
-
+        if (role != teacher.role) return false;
         return true;
     }
 
@@ -95,6 +105,7 @@ public class Teacher {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (majors != null ? majors.hashCode() : 0);
+        result = 31 * result + role;
         return result;
     }
 }

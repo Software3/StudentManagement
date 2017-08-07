@@ -15,6 +15,11 @@ public class FailexamRecordPK implements Serializable {
     @Column(name = "student_id")
     private long studentId;
 
+    public FailexamRecordPK(String subject, long studentId) {
+        this.subject = subject;
+        this.studentId = studentId;
+    }
+
     public String getSubject() {
         return subject;
     }

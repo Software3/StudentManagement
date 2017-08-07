@@ -19,6 +19,12 @@ public class AwardRecordPK implements Serializable {
     @Column(name = "student_id")
     private long studentId;
 
+    public AwardRecordPK(String content, Date date, long studentId) {
+        this.content = content;
+        this.date = date;
+        this.studentId = studentId;
+    }
+
     public String getContent() {
         return content;
     }
