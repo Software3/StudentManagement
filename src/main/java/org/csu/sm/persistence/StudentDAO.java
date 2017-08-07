@@ -22,7 +22,7 @@ public interface StudentDAO {
      * @return
      * @throws PersistenceException
      */
-    Integer deleteStudent(long studentId) throws PersistenceException;
+    long deleteStudent(long studentId) throws PersistenceException;
 
     /**
      * 更新学生基本信息
