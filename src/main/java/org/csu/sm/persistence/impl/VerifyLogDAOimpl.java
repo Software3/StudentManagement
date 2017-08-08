@@ -5,6 +5,7 @@ import org.csu.sm.persistence.VerifyLogDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by ltaoj on 2017/8/8.
  */
+@Repository
 public class VerifyLogDAOimpl implements VerifyLogDAO{
     public List<VerifyLog> getVerifyLogListByCounselorName(String counselorName) throws PersistenceException {
         Session session = HibernateUtil.getSession();
