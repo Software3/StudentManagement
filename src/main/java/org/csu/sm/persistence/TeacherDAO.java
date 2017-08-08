@@ -14,4 +14,12 @@ public interface TeacherDAO {
      * @throws PersistenceException
      */
     void updateTeacher(Teacher teacher) throws PersistenceException;
+
+    /**
+     * 查看教师信息
+     * @param username
+     * @return
+     * @throws PersistenceException
+     */
+    Teacher getTeacher(String username) throws PersistenceException;
 }

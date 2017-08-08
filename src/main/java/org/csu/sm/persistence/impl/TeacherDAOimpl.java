@@ -21,4 +21,12 @@ public class TeacherDAOimpl implements TeacherDAO{
         session.update(teacher);
         transaction.commit();
     }
+
+    public Teacher getTeacher(String username) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Teacher teacher = session.get(Teacher.class, username);
+        transaction.commit();
+        return teacher;
+    }
 }
