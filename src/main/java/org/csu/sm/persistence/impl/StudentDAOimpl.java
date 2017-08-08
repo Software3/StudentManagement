@@ -8,12 +8,14 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  * Created by ltaoj on 2017/8/7.
  */
 @Repository
 public class StudentDAOimpl implements StudentDAO{
+
     public void insertStudent(Student student) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -43,5 +45,14 @@ public class StudentDAOimpl implements StudentDAO{
         Student student = session.get(Student.class, studentId);
         transaction.commit();
         return student;
+    }
+
+    public List<Student> getStudentListByVerifyState(int verifyState) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Student as s where verifyState=" + verifyState;
+        List<Student> list = session.createQuery(hql).list();
+        transaction.commit();
+        return list;
     }
 }

@@ -3,6 +3,7 @@ package org.csu.sm.persistence;
 import org.csu.sm.domain.Student;
 
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  * Created by ltaoj on 2017/8/7.
@@ -38,4 +39,11 @@ public interface StudentDAO {
      * @throws PersistenceException
      */
     Student getStudent(long studentId) throws PersistenceException;
+
+    /**
+     * 通过审核状态查找学生
+     * @return
+     * @throws PersistenceException
+     */
+    List<Student> getStudentListByVerifyState(int verifyState) throws PersistenceException;
 }
