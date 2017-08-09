@@ -73,4 +73,9 @@ public class AccountActionBean extends AbstractActionBean {
     public String showAuditedLog() {
         return "teacher/auditedLog";
     }
+
+    @RequestMapping(value = "auditInformation", method = RequestMethod.GET)
+    public String showAuditInformation() {
+        return "teacher/auditInformation";
+    }
 }
