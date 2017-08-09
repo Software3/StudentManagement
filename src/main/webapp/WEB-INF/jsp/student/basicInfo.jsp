@@ -101,7 +101,7 @@
                     <div class="field-box">
                         <label class="text-success"></label>
                         <div class="col-md-4 actions">
-                            <input class="form-control btn-flat primary" value="确认修改" type="button" />
+                            <input id="confirmModify" class="form-control btn-flat primary" value="确认修改" type="button" />
                         </div>
                     </div>
                 </form>
@@ -121,6 +121,7 @@
 <script src="js/jquery.uniform.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/widge/alert.js"></script>
 
 <!-- call this page plugins -->
 <script type="text/javascript">
@@ -131,12 +132,27 @@
 
         // select2 plugin for select elements
         $(".select2").select2({
-            placeholder: "Select a State"
+            placeholder: "请选择专业"
         });
 
         // datepicker plugin
         $('.input-datepicker').datepicker().on('changeDate', function (ev) {
             $(this).datepicker('hide');
+        });
+
+        // alert
+        $("#confirmModify").click(function () {
+            $("#myAlert").append(alertSuccess());
+        });
+
+        $(function () {
+            var elm = $('#myAlert');
+            var startPos = $(elm).offset().top;
+            $.event.add(window, "scroll", function () {
+                var p = $(window).scrollTop();
+                $(elm).css('position', ((p) > startPos) ? 'fixed' : 'static');
+                $(elm).css('top', ((p) > startPos) ? '0px' : '');
+            });
         });
     });
 </script>

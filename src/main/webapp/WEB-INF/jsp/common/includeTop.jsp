@@ -163,9 +163,12 @@
     </ul>
 </div>
 <!-- end sidebar -->
+
 <!-- main container -->
 <div class="content">
-
+    <!-- alert begin-->
+    <div id="myAlert"></div>
+    <!-- alert end-->
     <!-- settings changer -->
     <div class="skins-nav">
         <a href="#" class="skin first_nav selected">
