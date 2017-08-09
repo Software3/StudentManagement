@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by ltaoj on 2017/8/8.
  */
 @Controller
-public class AccountActionBean extends AbstractActionBean{
+public class AccountActionBean extends AbstractActionBean {
     private AccountService accountService;
+
     @Autowired
     public AccountActionBean(AccountService accountService) {
         this.accountService = accountService;
@@ -27,10 +28,6 @@ public class AccountActionBean extends AbstractActionBean{
         return "student/basicInfo";
     }
 
-    @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
-    public String showTeacherHome() {
-        return "teacher/index";
-    }
 
     @RequestMapping(value = "parentsInfo", method = RequestMethod.GET)
     public String showParentInfo() {
@@ -45,5 +42,35 @@ public class AccountActionBean extends AbstractActionBean{
     @RequestMapping(value = "failexamSitu", method = RequestMethod.GET)
     public String showFailexamSitu() {
         return "student/failexamSitu";
+    }
+
+    @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
+    public String showTeacherHome() {
+        return "teacher/index";
+    }
+
+    @RequestMapping(value = "noAudited", method = RequestMethod.GET)
+    public String showNoAudited() {
+        return "teacher/noAudited";
+    }
+
+    @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)
+    public String showteacherBasicInfo() {
+        return "teacher/teacherBasicInfo";
+    }
+
+    @RequestMapping(value = "audited", method = RequestMethod.GET)
+    public String showAudited() {
+        return "teacher/audited";
+    }
+
+    @RequestMapping(value = "uncommitted", method = RequestMethod.GET)
+    public String showUncommitted() {
+        return "teacher/uncommitted";
+    }
+
+    @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
+    public String showAuditedLog() {
+        return "teacher/auditedLog";
     }
 }

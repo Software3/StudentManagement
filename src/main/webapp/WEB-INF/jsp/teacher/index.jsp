@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/teacIncludeTop.jsp" %>
-
 </div>
 <!-- scripts for this page -->
 <%--<script src="js/wysihtml5-0.3.0.js"></script>--%>
