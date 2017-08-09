@@ -49,7 +49,7 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">查看信息</a></li>
+                            <li><a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">查看信息</a></li>
+                            <li><a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -78,7 +78,7 @@
 <!-- end main container -->
 
 <!-- this page specific styles -->
-<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen"/>
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
