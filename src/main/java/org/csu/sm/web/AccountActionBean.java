@@ -26,4 +26,9 @@ public class AccountActionBean extends AbstractActionBean{
     public String showBasicInfo() {
         return "student/basicInfo";
     }
+
+    @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
+    public String showTeacherHome() {
+        return "teacher/index";
+    }
 }
