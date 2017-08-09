@@ -289,7 +289,8 @@
     </div>
 </div>
 
-
+<!-- this page specific styles -->
+<link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>

@@ -32,11 +32,6 @@
     <link rel="stylesheet" type="text/css" href="css/compiled/elements.css">
     <link rel="stylesheet" type="text/css" href="css/compiled/icons.css">
 
-    <!-- this page specific styles -->
-    <link rel="stylesheet" href="css/compiled/form-showcase.css" type="text/css" media="screen" />
-    <%--<!-- this page specific styles -->--%>
-    <%--<link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />--%>
-
     <!-- open sans font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -111,9 +106,9 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a href="<%=request.getContextPath()%>/basicInfo">基本信息</a></li>
-                <li><a href="#">家长信息</a></li>
-                <li><a href="#">奖励情况</a></li>
-                <li><a href="#">挂科情况</a></li>
+                <li><a href="<%=request.getContextPath()%>/parentsInfo">家长信息</a></li>
+                <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
+                <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
                 <li><a href="#">退队说明</a></li>
                 <li><a href="#">退出登录</a></li>
             </ul>
@@ -153,9 +148,9 @@
             </a>
             <ul class="submenu">
                 <li><a href="<%=request.getContextPath()%>/basicInfo">基本信息</a></li>
-                <li><a href="new-user.html">家长信息</a></li>
-                <li><a href="user-profile.html">奖励情况</a></li>
-                <li><a href="#">挂科情况</a></li>
+                <li><a href="<%=request.getContextPath()%>/parentsInfo">家长信息</a></li>
+                <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
+                <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
                 <li><a href="#">退队说明</a></li>
             </ul>
         </li>

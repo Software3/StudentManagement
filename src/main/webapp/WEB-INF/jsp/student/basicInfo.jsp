@@ -28,7 +28,10 @@
                     <div class="field-box">
                         <label>性别:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" value="男" />
+                            <select style="width:250px" class="select2">
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
                         </div>
                     </div>
                     <div class="field-box">
@@ -40,13 +43,13 @@
                     <div class="field-box">
                         <label>籍贯:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="Please insert a valid email address" data-placement="top" type="text" />
+                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入籍贯" data-placement="top" type="text" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>家庭居住地:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="Please insert a valid email address" data-placement="top" type="text" />
+                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入详细的家庭居住地" data-placement="top" type="text" />
                         </div>
                         <%--<div class="col-md-7">--%>
                             <%--<div class="predefined">--%>
@@ -68,7 +71,7 @@
                     <div class="field-box">
                         <label>就业单位:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" value="中南大学" />
+                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入就业单位" data-placement="top" type="text" value="中南大学" />
                         </div>
                     </div>
                     <div class="field-box">
@@ -95,6 +98,12 @@
                             <textarea class="form-control" rows="4"></textarea>
                         </div>
                     </div>
+                    <div class="field-box">
+                        <label class="text-success"></label>
+                        <div class="col-md-4 actions">
+                            <input class="form-control btn-flat primary" value="确认修改" type="button" />
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -102,6 +111,8 @@
 </div>
 <!-- end main container -->
 
+<!-- this page specific styles -->
+<link rel="stylesheet" href="css/compiled/form-showcase.css" type="text/css" media="screen" />
 <!-- scripts for this page -->
 <script src="js/wysihtml5-0.3.0.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
