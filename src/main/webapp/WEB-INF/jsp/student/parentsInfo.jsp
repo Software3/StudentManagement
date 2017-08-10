@@ -61,8 +61,8 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a onclick="editRow(this)" href="#">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
+                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -83,8 +83,8 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a onclick="editRow(this)" href="#">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
+                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -99,7 +99,7 @@
 
 <!-- modal start-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true"></div>
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true"></div>
 <!-- modal end-->
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
@@ -115,7 +115,9 @@
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#addModal").append(model()[0]);
+        $("#addModal").append(model("添加新成员", 3, getModelForm(0), function () {
+            console.log("1234");
+        })[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
@@ -126,13 +128,13 @@
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ name + "</a> </td> <td class='description'>" + phone + "</td> " +
-                "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a onclick='editRow(this)' href='#'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='delete' href='#'>删除</a></li> </ul> </td> </tr>")
+                "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
         });
     });
 
     // delete member
     function deleteRow(node) {
-        var index = $(".delete").index($(node));
+        var index = $(".myDelete").index($(node));
         var rowTr = $("tbody")[0].rows[index];
         var parentName = rowTr.children[0].children[2].innerHTML;
         var parentPhone = trim(rowTr.children[1].innerHTML);
@@ -146,11 +148,16 @@
     }
 
     function editRow(node) {
-        var index = $(".delete").index($(node));
+        var index = $(".myEdit").index($(node));
         var rowTr = $("tbody")[0].rows[index];
         var parentName = rowTr.children[0].children[2].innerHTML;
         var parentPhone = trim(rowTr.children[1].innerHTML);
         var parentRelation = rowTr.children[2].children[0].innerHTML;
+        var values = [parentName, parentPhone, parentRelation];
+        $("#editModal").empty();
+        $("#editModal").append(model("修改成员信息", 3, getModelForm(0), function () {
+            console.log("1234");
+        }, values)[0]);
     }
 </script>
 </body>
