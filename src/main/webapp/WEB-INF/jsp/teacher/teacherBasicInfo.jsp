@@ -26,15 +26,6 @@
                         </div>
                     </div>
                     <div class="field-box">
-                        <label>性别:</label>
-                        <div class="col-md-7">
-                            <select style="width:250px" class="select2">
-                                <option value="male">男</option>
-                                <option value="female">女</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-box">
                         <label>联系方式:</label>
                         <div class="col-md-7">
                             <input class="form-control inline-input" type="text" value="15537397854" />
@@ -51,27 +42,15 @@
                         </div>
                     </div>
                     <div class="field-box">
-                        <label>就业单位:</label>
-                        <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入就业单位" data-placement="top" type="text" value="中南大学" />
-                        </div>
-                    </div>
-                    <div class="field-box">
                         <label>辅导学生类型:</label>
                         <div class="col-md-7">
                             <input class="form-control inline-input" type="text" readonly="readonly" value="本科生" />
                         </div>
                     </div>
                     <div class="field-box">
-                        <label>备注:</label>
-                        <div class="col-md-7">
-                            <textarea class="form-control" rows="4"></textarea>
-                        </div>
-                    </div>
-                    <div class="field-box">
                         <label class="text-success"></label>
                         <div class="col-md-4 actions">
-                            <input class="form-control btn-flat primary" value="确认修改" type="button" />
+                            <input id="confirmModify" class="form-control btn-flat primary" value="确认修改" type="button" />
                         </div>
                     </div>
                 </form>
@@ -91,6 +70,7 @@
 <script src="js/jquery.uniform.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/widge/alert.js"></script>
 
 <!-- call this page plugins -->
 <script type="text/javascript">
@@ -107,6 +87,22 @@
         // datepicker plugin
         $('.input-datepicker').datepicker().on('changeDate', function (ev) {
             $(this).datepicker('hide');
+        });
+    });
+
+    // alert
+    $("#confirmModify").click(function () {
+        $("#myAlert").append(alert("success", "修改成功！"));
+    });
+
+    // alert position when scroll
+    $(function () {
+        var elm = $('#myAlert');
+        var startPos = $(elm).offset().top;
+        $.event.add(window, "scroll", function () {
+            var p = $(window).scrollTop();
+            $(elm).css('position', ((p) > startPos) ? 'fixed' : 'static');
+            $(elm).css('top', ((p) > startPos) ? '0px' : '');
         });
     });
 </script>

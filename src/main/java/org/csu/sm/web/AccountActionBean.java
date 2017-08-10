@@ -44,6 +44,7 @@ public class AccountActionBean extends AbstractActionBean {
         return "student/failexamSitu";
     }
 
+
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
     public String showTeacherHome() {
         return "teacher/index";
@@ -77,5 +78,15 @@ public class AccountActionBean extends AbstractActionBean {
     @RequestMapping(value = "auditInformation", method = RequestMethod.GET)
     public String showAuditInformation() {
         return "teacher/auditInformation";
+    }
+
+    @RequestMapping(value = "studentInformation", method = RequestMethod.GET)
+    public String showStudentInformation() {
+        return "teacher/studentInformation";
+    }
+
+    @RequestMapping(value = "studentList", method = RequestMethod.GET)
+    public String showStudentList() {
+        return "teacher/studentList";
     }
 }

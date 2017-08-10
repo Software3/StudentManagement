@@ -152,6 +152,7 @@
         var parentPhone = trim(rowTr.children[1].innerHTML);
         var parentRelation = rowTr.children[2].children[0].innerHTML;
     }
+
 </script>
 </body>
 </html>

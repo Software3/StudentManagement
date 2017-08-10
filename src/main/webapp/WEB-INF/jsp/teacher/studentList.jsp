@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 51157
-  Date: 2017/8/9
-  Time: 19:15
+  Date: 2017/8/10
+  Time: 22:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
     <div class="table-wrapper products-table section">
         <div class="row head">
             <div class="col-md-12">
-                <h4>未审核学生</h4>
+                <h4>学生列表</h4>
             </div>
         </div>
 
@@ -31,10 +31,6 @@
                         <span class="line"></span>
                         学号
                     </th>
-                    <th class="col-md-2">
-                        <span class="line"></span>
-                        操作
-                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,13 +43,6 @@
                     <td class="description">
                         3903150327
                     </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
-                    </td>
                 </tr>
                 <!-- row -->
                 <tr class="first">
@@ -63,13 +52,6 @@
                     </td>
                     <td class="description">
                         3903150326
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
                     </td>
                 </tr>
                 </tbody>
@@ -82,10 +64,11 @@
 <!-- end main container -->
 
 <!-- this page specific styles -->
-<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen"/>
+<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
 </body>
 </html>
+
