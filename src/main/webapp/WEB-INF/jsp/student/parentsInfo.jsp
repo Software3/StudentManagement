@@ -148,16 +148,45 @@
     }
 
     function editRow(node) {
-        var index = $(".myEdit").index($(node));
+        var values = getValues(node, "myEdit");
+        $("#editModal").empty();
+        $("#editModal").append(model("修改成员信息", 3, getModelForm(1), function () {
+            // 取值
+            var name = $("#editName")[0].value;
+            var phone = $("#editPhone")[0].value;
+            var relation = $("#editRelation")[0].value;
+
+            // 赋值
+            var index = $(".myEdit").index($(node));
+            var rowTr = $("tbody")[0].rows[index];
+            rowTr.children[0].children[2].innerHTML = name;
+            rowTr.children[1].innerHTML = phone;
+            rowTr.children[2].children[0].innerHTML = relation;
+
+            // 隐藏modal，弹出alert
+            $('#editModal').modal('hide');
+            $("#myAlert").append(alert("success", "修改成功！"));
+        }, values)[0]);
+    }
+
+    /**
+     * 获取name, phone, relation的值
+     * @param node
+     * @param name
+     * @returns {[*,*,*]}
+     */
+    function getValues(node, name) {
+        var index = undefined;
+        if (name == "myEdit") {
+            index = $(".myEdit").index($(node));
+        }else if (name == "myDelete") {
+            index = $(".myDelete").index($(node));
+        }
         var rowTr = $("tbody")[0].rows[index];
         var parentName = rowTr.children[0].children[2].innerHTML;
         var parentPhone = trim(rowTr.children[1].innerHTML);
         var parentRelation = rowTr.children[2].children[0].innerHTML;
-        var values = [parentName, parentPhone, parentRelation];
-        $("#editModal").empty();
-        $("#editModal").append(model("修改成员信息", 3, getModelForm(0), function () {
-            console.log("1234");
-        }, values)[0]);
+        return [parentName, parentPhone, parentRelation];
     }
 </script>
 </body>
