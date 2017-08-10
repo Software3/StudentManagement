@@ -4,7 +4,14 @@
  */
 var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholder: '请输入家长姓名'},
     {label: '联系方式:', id: 'parentPhone', type: 'text', placeholder: '请输入家长联系方式'},
-    {label: '关系:', id: 'parentRelation', type: 'text', placeholder: '请输入与你的关系'}],];
+    {label: '关系:', id: 'parentRelation', type: 'text', placeholder: '请输入与你的关系'}],
+    [{label: '姓名:', id: 'editName', type: 'text', placeholder: '请输入家长姓名'},
+        {label: '联系方式:', id: 'editPhone', type: 'text', placeholder: '请输入家长联系方式'},
+        {label: '关系:', id: 'editRelation', type: 'text', placeholder: '请输入与你的关系'}],
+    [{label: '获奖名称:', id: 'awardContent', type: 'text', placeholder: '请输入获奖名称'},
+        {label: '获奖时间:', id: 'awardDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}],
+    [{label: '获奖名称:', id: 'editContent', type: 'text', placeholder: '请输入获奖名称'},
+        {label: '获奖时间:', id: 'editDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}]];
 
 /**
  * 通过传入下标值获取模态框样式
@@ -69,8 +76,8 @@ function model(title, rowNum, rowObjArray, feedback, values) {
         var body = createElementWithAttribute("div", {class: "modal-body"});
         body.appendChild(createForm(rowNum, rowObjArray, values));
         var footer = createElementWithAttribute("div", {class: "modal-footer"});
-        footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-default', 'data-dismiss': 'modal'}), '关闭'));
-        footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-primary', id: 'confirmAdd', onclick: 'feedback()'}), '确认添加'));
+        footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-default', 'data-dismiss': 'modal'}), '取消'));
+        footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-primary', id: 'confirmAdd', onclick: 'feedback()'}), '确认'));
         content.appendChild(header);
         content.appendChild(body);
         content.appendChild(footer);

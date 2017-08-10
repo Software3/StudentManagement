@@ -20,7 +20,7 @@
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a id="newNumber" class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加新成员</a>
+                <a id="newMember" class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加新成员</a>
             </div>
         </div>
 
@@ -115,9 +115,7 @@
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#addModal").append(model("添加新成员", 3, getModelForm(0), function () {
-            console.log("1234");
-        })[0]);
+        $("#addModal").append(model("添加新成员", 3, getModelForm(0), function () {})[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
