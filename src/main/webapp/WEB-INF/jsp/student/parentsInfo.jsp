@@ -20,7 +20,7 @@
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a id="newNumber" class="btn-flat success new-product" data-toggle="modal" href="#myModal">添加新成员</a>
+                <a id="newNumber" class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加新成员</a>
             </div>
         </div>
 
@@ -61,7 +61,7 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">编辑</a></li>
+                            <li><a onclick="editRow(this)" href="#">编辑</a></li>
                             <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
                         </ul>
                     </td>
@@ -83,7 +83,7 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">编辑</a></li>
+                            <li><a onclick="editRow(this)" href="#">编辑</a></li>
                             <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
                         </ul>
                     </td>
@@ -98,7 +98,7 @@
 <!-- end main container -->
 
 <!-- modal start-->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- modal end-->
 <!-- this page specific styles -->
@@ -115,7 +115,7 @@
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#myModal").append(model()[0]);
+        $("#addModal").append(model()[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
@@ -124,9 +124,9 @@
             var phone = $("#parentPhone")[0].value;
             var relation = $("#parentRelation")[0].value;
             $('#addModal').modal('hide');
-            $("#addModal").append(alert("success", "添加成功！"));
+            $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ name + "</a> </td> <td class='description'>" + phone + "</td> " +
-                "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a href='#'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='delete' href='#'>删除</a></li> </ul> </td> </tr>")
+                "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a onclick='editRow(this)' href='#'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='delete' href='#'>删除</a></li> </ul> </td> </tr>")
         });
     });
 
