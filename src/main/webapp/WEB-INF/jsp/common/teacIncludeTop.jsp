@@ -156,8 +156,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#">学生列表</a></li>
-                <li><a href="#">学生资料</a></li>
+                <li><a href="studentList">学生列表</a></li>
+                <li><a href="studentInformation">学生资料</a></li>
             </ul>
         </li>
         <li>
@@ -183,7 +183,7 @@
 <!-- end sidebar -->
 <!-- main container -->
 <div class="content">
-
+    <div id="myAlert"></div>
     <!-- settings changer -->
     <div class="skins-nav">
         <a href="#" class="skin first_nav selected">

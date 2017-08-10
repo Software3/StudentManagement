@@ -186,6 +186,7 @@
         var parentRelation = rowTr.children[2].children[0].innerHTML;
         return [parentName, parentPhone, parentRelation];
     }
+
 </script>
 </body>
 </html>
