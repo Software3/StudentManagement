@@ -92,7 +92,7 @@
         $("#confirmAdd").click(function () {
             // 成功后隐藏模态框,弹出提示框，并且刷新界面
             var term = $("#failedTerm")[0].value;
-            var date = $("#failedDate")[0].value;
+            var subject = $("#failedSubject")[0].value;
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ term + "</a> </td> <td class='description'>" + date + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
@@ -104,7 +104,7 @@
         var index = $(".myDelete").index($(node));
         var rowTr = $("tbody")[0].rows[index];
         var term = rowTr.children[0].children[2].innerHTML;
-        var date = trim(rowTr.children[1].innerHTML);
+        var subject = trim(rowTr.children[1].innerHTML);
         $(rowTr).fadeTo("fast", 0.01, function () {
             $(rowTr).slideUp("fast", function () {
                 $(rowTr).remove();
@@ -119,13 +119,13 @@
         $("#editModal").append(model("修改挂科记录", 2, getModelForm(5), function () {
             // 取值
             var term = $("#editTerm")[0].value;
-            var date = $("#editDate")[0].value;
+            var subject = $("#editSubject")[0].value;
 
             // 赋值
             var index = $(".myEdit").index($(node));
             var rowTr = $("tbody")[0].rows[index];
             rowTr.children[0].children[2].innerHTML = term;
-            rowTr.children[1].innerHTML = date;
+            rowTr.children[1].innerHTML = subject;
 
             // 隐藏modal，弹出alert
             $('#editModal').modal('hide');
@@ -148,8 +148,8 @@
         }
         var rowTr = $("tbody")[0].rows[index];
         var term = rowTr.children[0].children[2].innerHTML;
-        var date = trim(rowTr.children[1].innerHTML);
-        return [term, date];
+        var subject = trim(rowTr.children[1].innerHTML);
+        return [term, subject];
     }
 </script>
 </body>

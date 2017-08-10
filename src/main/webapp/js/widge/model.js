@@ -11,7 +11,11 @@ var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholde
     [{label: '获奖名称:', id: 'awardContent', type: 'text', placeholder: '请输入获奖名称'},
         {label: '获奖时间:', id: 'awardDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}],
     [{label: '获奖名称:', id: 'editContent', type: 'text', placeholder: '请输入获奖名称'},
-        {label: '获奖时间:', id: 'editDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}]];
+        {label: '获奖时间:', id: 'editDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}],
+    [{label: '学期:', id: 'failedTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
+        {label: '科目:', id: 'failedSubject', type: 'text', placeholder: '请输入科目'}],
+    [{label: '学期:', id: 'editTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
+        {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目'}]];
 
 /**
  * 通过传入下标值获取模态框样式
