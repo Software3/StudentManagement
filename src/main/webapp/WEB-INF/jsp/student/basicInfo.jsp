@@ -142,9 +142,10 @@
 
         // alert
         $("#confirmModify").click(function () {
-            $("#myAlert").append(alertSuccess());
+            $("#myAlert").append(alert("success", "修改成功！"));
         });
 
+        // alert position when scroll
         $(function () {
             var elm = $('#myAlert');
             var startPos = $(elm).offset().top;

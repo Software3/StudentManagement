@@ -20,7 +20,7 @@
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a class="btn-flat success new-product">添加新成员</a>
+                <a id="newNumber" class="btn-flat success new-product" data-toggle="modal" href="#myModal">添加新成员</a>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                     <td>
                         <ul class="actions">
                             <li><a href="#">编辑</a></li>
-                            <li class="last"><a href="#">删除</a></li>
+                            <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -84,7 +84,7 @@
                     <td>
                         <ul class="actions">
                             <li><a href="#">编辑</a></li>
-                            <li class="last"><a href="#">删除</a></li>
+                            <li class="last"><a onclick="deleteRow(this)" class="delete" href="#">删除</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -97,11 +97,61 @@
 </div>
 <!-- end main container -->
 
+<!-- modal start-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<!-- modal end-->
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/widge/model.js"></script>
+<script src="js/widge/alert.js"></script>
+<script src="js/util/util.js"></script>
+
+<!-- call this page plugins -->
+<script type="text/javascript">
+    $(function () {
+        // init modal
+        $("#myModal").append(model()[0]);
+
+        // add new member
+        $("#confirmAdd").click(function () {
+            // 成功后隐藏模态框,弹出提示框，并且刷新界面
+            var name = $("#parentName")[0].value;
+            var phone = $("#parentPhone")[0].value;
+            var relation = $("#parentRelation")[0].value;
+            $('#addModal').modal('hide');
+            $("#addModal").append(alert("success", "添加成功！"));
+            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ name + "</a> </td> <td class='description'>" + phone + "</td> " +
+                "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a href='#'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='delete' href='#'>删除</a></li> </ul> </td> </tr>")
+        });
+    });
+
+    // delete member
+    function deleteRow(node) {
+        var index = $(".delete").index($(node));
+        var rowTr = $("tbody")[0].rows[index];
+        var parentName = rowTr.children[0].children[2].innerHTML;
+        var parentPhone = trim(rowTr.children[1].innerHTML);
+        var parentRelation = rowTr.children[2].children[0].innerHTML;
+        $(rowTr).fadeTo("fast", 0.01, function () {
+            $(rowTr).slideUp("fast", function () {
+                $(rowTr).remove();
+            })
+        })
+//        $("tbody")[0].removeChild(rowTr);
+    }
+
+    function editRow(node) {
+        var index = $(".delete").index($(node));
+        var rowTr = $("tbody")[0].rows[index];
+        var parentName = rowTr.children[0].children[2].innerHTML;
+        var parentPhone = trim(rowTr.children[1].innerHTML);
+        var parentRelation = rowTr.children[2].children[0].innerHTML;
+    }
+</script>
 </body>
 </html>
