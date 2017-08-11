@@ -42,24 +42,23 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <div class="img">
-                            <img src="img/table-img.png">
-                        </div>
-                        <a href="#" class="name">2015界程序设计大赛 </a>
-                    </td>
-                    <td class="description">
-                        2016-02-01
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="award" items="${awardList}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name"><c:out value="${award.content}"/> </a>
+                        </td>
+                        <td class="description">
+                            <c:out value="${award.date}"/>
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                                <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

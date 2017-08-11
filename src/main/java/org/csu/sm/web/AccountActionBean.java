@@ -55,22 +55,6 @@ public class AccountActionBean extends AbstractActionBean {
         }
     }
 
-    @RequestMapping(value = "parentsInfo", method = RequestMethod.GET)
-    public String showParentInfo() {
-        return "student/parentsInfo";
-    }
-
-    @RequestMapping(value = "awardSitu", method = RequestMethod.GET)
-    public String showAwardSitu() {
-        return "student/awardSitu";
-    }
-
-    @RequestMapping(value = "failexamSitu", method = RequestMethod.GET)
-    public String showFailexamSitu() {
-        return "student/failexamSitu";
-    }
-
-
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
     public String showTeacherHome() {
         return "teacher/index";

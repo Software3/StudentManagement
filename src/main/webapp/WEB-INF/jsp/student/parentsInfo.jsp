@@ -45,49 +45,26 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <div class="img">
-                            <img src="img/table-img.png">
-                        </div>
-                        <a href="#" class="name">张三 </a>
-                    </td>
-                    <td class="description">
-                        15616177562
-                    </td>
-                    <td>
-                        <span class="label label-success">父亲</span>
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
-                        </ul>
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <div class="img">
-                            <img src="img/table-img.png">
-                        </div>
-                        <a href="#" class="name">李四 </a>
-                    </td>
-                    <td class="description">
-                        15612567562
-                    </td>
-                    <td>
-                        <span class="label label-success">母亲</span>
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="parent" items="${parentList}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name"><c:out value="${parent.name}"/> </a>
+                        </td>
+                        <td class="description">
+                            <c:out value="${parent.phone}"/>
+                        </td>
+                        <td>
+                            <span class="label label-success"><c:out value="${parent.relation}"/></span>
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                                <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -125,7 +102,7 @@
             var relation = $("#parentRelation")[0].value;
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
-            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ name + "</a> </td> <td class='description'>" + phone + "</td> " +
+            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>"+ name + "</a> </td> <td class='description'>" + phone + "</td> " +
                 "<td> <span class='label label-success'>"+ relation + "</span> </td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
         });
     });
