@@ -1,10 +1,13 @@
 package org.csu.sm.web;
 
 import org.csu.sm.domain.Signon;
+import org.csu.sm.domain.Student;
 import org.csu.sm.domain.Teacher;
 import org.csu.sm.exception.action.HandleAccountServiceException;
 import org.csu.sm.exception.service.AccountServiceException;
+import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.service.AccountService;
+import org.csu.sm.service.InfoManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,12 +54,6 @@ public class AccountActionBean extends AbstractActionBean {
             throw new HandleAccountServiceException(e);
         }
     }
-    @RequestMapping(value = "/basicInfo", method = RequestMethod.GET)
-    public String showBasicInfo(@RequestParam(value = "userid", defaultValue = "") long studentId,
-                                @RequestParam(value = "authenticated", defaultValue = "true") boolean authenticated) {
-        return "student/basicInfo";
-    }
-
 
     @RequestMapping(value = "parentsInfo", method = RequestMethod.GET)
     public String showParentInfo() {
