@@ -22,6 +22,7 @@ public class AwardDAOimpl implements AwardDAO{
         Transaction transaction = session.beginTransaction();
         session.save(awardRecord);
         transaction.commit();
+        session.close();
     }
 
     public void updateAward(AwardRecord awardRecord) throws PersistenceException {
@@ -29,6 +30,7 @@ public class AwardDAOimpl implements AwardDAO{
         Transaction transaction = session.beginTransaction();
         session.update(awardRecord);
         transaction.commit();
+        session.close();
     }
 
     public long deleteAward(AwardRecord awardRecord) throws PersistenceException {
@@ -37,6 +39,7 @@ public class AwardDAOimpl implements AwardDAO{
         AwardRecord awardRecord1 = session.get(AwardRecord.class, new AwardRecordPK(awardRecord.getContent(), awardRecord.getDate(), awardRecord.getStudentId()));
         if (awardRecord != null) session.delete(awardRecord);
         transaction.commit();
+        session.close();
         return awardRecord != null ? awardRecord.getStudentId() : -1;
     }
 

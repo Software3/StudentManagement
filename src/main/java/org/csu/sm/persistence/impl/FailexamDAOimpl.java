@@ -21,6 +21,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Transaction transaction = session.beginTransaction();
         session.save(failexamRecord);
         transaction.commit();
+        session.close();
     }
 
     public void updateFailexam(FailexamRecord failexamRecord) throws PersistenceException {
@@ -28,6 +29,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Transaction transaction = session.beginTransaction();
         session.update(failexamRecord);
         transaction.commit();
+        session.close();
     }
 
     public long deleteFailexam(long studentId, String subject) throws PersistenceException {
@@ -36,6 +38,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         FailexamRecord failexamRecord = session.get(FailexamRecord.class, new FailexamRecordPK(subject, studentId));
         if (failexamRecord != null) session.delete(failexamRecord);
         transaction.commit();
+        session.close();
         return failexamRecord != null ? studentId : -1;
     }
 

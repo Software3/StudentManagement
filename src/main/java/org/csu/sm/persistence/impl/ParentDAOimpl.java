@@ -21,6 +21,7 @@ public class ParentDAOimpl implements ParentDAO{
         Transaction transaction = session.beginTransaction();
         session.save(parent);
         transaction.commit();
+        session.close();
     }
 
     public void updateParent(Parent parent) throws PersistenceException {
@@ -28,6 +29,7 @@ public class ParentDAOimpl implements ParentDAO{
         Transaction transaction = session.beginTransaction();
         session.update(parent);
         transaction.commit();
+        session.close();
     }
 
     public long deleteParent(long studentId, String name) throws PersistenceException {
@@ -36,6 +38,7 @@ public class ParentDAOimpl implements ParentDAO{
         Parent parent = session.get(Parent.class, new ParentPK(studentId, name));
         if (parent != null) session.delete(parent);
         transaction.commit();
+        session.close();
         return parent != null ? studentId : -1;
     }
 

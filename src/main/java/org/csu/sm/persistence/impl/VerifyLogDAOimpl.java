@@ -29,6 +29,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO{
         Transaction transaction = session.beginTransaction();
         session.save(verifyLog);
         transaction.commit();
+        session.close();
     }
 
     public List<VerifyLog> getVerifyLogListByStudentId(long studentId) throws PersistenceException {

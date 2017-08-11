@@ -20,6 +20,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         Transaction transaction = session.beginTransaction();
         session.save(withdrawInst);
         transaction.commit();
+        session.close();
     }
 
     public void updateWithdrawInst(WithdrawInst withdrawInst) throws PersistenceException {
@@ -27,6 +28,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         Transaction transaction = session.beginTransaction();
         session.update(withdrawInst);
         transaction.commit();
+        session.close();
     }
 
     public List<WithdrawInst> getWithdrawInst(long studentId) throws PersistenceException {
