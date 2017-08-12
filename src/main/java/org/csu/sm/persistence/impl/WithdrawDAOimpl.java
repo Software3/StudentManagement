@@ -39,4 +39,24 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         transaction.commit();
         return list;
     }
+
+    public WithdrawInst getWithdrawInst(int instId) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        WithdrawInst withdrawInst = session.get(WithdrawInst.class, instId);
+        transaction.commit();
+        session.close();
+        return withdrawInst;
+    }
+
+    public WithdrawInst deleteWithdrawInst(int instId, long studentId) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from WithdrawInst as w where instId=" + instId + " and studentId=" + studentId;
+        List<WithdrawInst> list = session.createQuery(hql).list();
+        if (list.size() > 0) session.delete(list.get(0));
+        transaction.commit();
+        session.close();
+        return list.size() > 0 ? list.get(0) : null;
+    }
 }
