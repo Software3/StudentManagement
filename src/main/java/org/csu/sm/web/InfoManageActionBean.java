@@ -151,7 +151,7 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
-    @RequestMapping(value = "deAward", method = RequestMethod.POST)
+    @RequestMapping(value = "delAward", method = RequestMethod.POST)
     public ResponseEntity<Result> deleteAward(@RequestBody AwardRecord awardRecord) {
         try {
             List<AwardRecord> awardList = infoManageService.deleteAwardInfo(awardRecord);
