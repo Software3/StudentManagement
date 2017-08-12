@@ -12,6 +12,7 @@ public interface StudentDAO {
 
     /**
      * 添加学生基本信息
+     *
      * @param student
      * @throws PersistenceException
      */
@@ -19,6 +20,7 @@ public interface StudentDAO {
 
     /**
      * 通过学号删除学生基本信息
+     *
      * @param studentId
      * @return
      * @throws PersistenceException
@@ -27,6 +29,7 @@ public interface StudentDAO {
 
     /**
      * 更新学生基本信息
+     *
      * @param student
      * @throws PersistenceException
      */
@@ -34,6 +37,7 @@ public interface StudentDAO {
 
     /**
      * 通过学号查找学生基本信息
+     *
      * @param studentId
      * @return
      * @throws PersistenceException
@@ -42,8 +46,18 @@ public interface StudentDAO {
 
     /**
      * 通过审核状态查找学生
+     *
      * @return
      * @throws PersistenceException
      */
     List<Student> getStudentListByVerifyState(int verifyState) throws PersistenceException;
+
+    /**
+     * 通过老师查找学生列表
+     *
+     * @param teacherId
+     * @return
+     * @throws PersistenceException
+     */
+    List<Student> getStudentListByTeacherId(String teacherId) throws PersistenceException;
 }

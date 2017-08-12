@@ -28,7 +28,6 @@ public class AccountActionBean extends AbstractActionBean {
         return "student/basicInfo";
     }
 
-
     @RequestMapping(value = "parentsInfo", method = RequestMethod.GET)
     public String showParentInfo() {
         return "student/parentsInfo";
@@ -39,9 +38,11 @@ public class AccountActionBean extends AbstractActionBean {
         return "student/awardSitu";
     }
 
+
     @RequestMapping(value = "failexamSitu", method = RequestMethod.GET)
     public String showFailexamSitu() {
         return "student/failexamSitu";
     }
+
 
 }

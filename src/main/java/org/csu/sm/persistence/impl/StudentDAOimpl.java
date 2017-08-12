@@ -55,4 +55,13 @@ public class StudentDAOimpl implements StudentDAO{
         transaction.commit();
         return list;
     }
+
+    public List<Student> getStudentListByTeacherId(String teacherId) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Student as s where counselorName=" + teacherId;
+        List<Student> list = session.createQuery(hql).list();
+        transaction.commit();
+        return list;
+    }
 }
