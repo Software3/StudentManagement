@@ -8,7 +8,7 @@
         <!--配置连接数据库的基本操作-->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">
-            <![CDATA[jdbc:mysql://localhost:3306/schoolrulessystem?useUnicode=true&characterEncoding=utf8]]>
+            <![CDATA[jdbc:mysql://localhost:3306/studentmanagement?useUnicode=true&characterEncoding=utf8]]>
         </property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
