@@ -7,7 +7,7 @@ var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholde
     {label: '关系:', id: 'parentRelation', type: 'text', placeholder: '请输入与你的关系'}],
     [{label: '姓名:', id: 'editName', type: 'text', placeholder: '请输入家长姓名'},
         {label: '联系方式:', id: 'editPhone', type: 'text', placeholder: '请输入家长联系方式'},
-        {label: '关系:', id: 'editRelation', type: 'text', placeholder: '请输入与你的关系'}],
+        {label: '关系:', id: 'editRelation', type: 'text', placeholder: '请输入与你的关系,如父亲或者母亲'}],
     [{label: '获奖名称:', id: 'awardContent', type: 'text', placeholder: '请输入获奖名称'},
         {label: '获奖时间:', id: 'awardDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'}],
     [{label: '获奖名称:', id: 'editContent', type: 'text', placeholder: '请输入获奖名称'},
