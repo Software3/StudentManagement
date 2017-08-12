@@ -24,7 +24,6 @@
                 <thead>
                 <tr>
                     <th class="col-md-5">
-                        <input type="checkbox">
                         姓名
                     </th>
                     <th class="col-md-5">
@@ -41,27 +40,25 @@
                 <!-- row -->
                 <tr class="first">
                     <td>
-                        <input type="checkbox">
                         <a href="#" class="name">王五 </a>
                     </td>
                     <td class="description">
                         3903150328
                     </td>
                     <td>
-                        <span clas="label label-success">通过</span>
+                        <span class="label label-success">通过</span>
                     </td>
                 </tr>
                 <!-- row -->
                 <tr class="first">
                     <td>
-                        <input type="checkbox">
                         <a href="#" class="name">玄六 </a>
                     </td>
                     <td class="description">
                         3903150326
                     </td>
                     <td>
-                        <span clas="label label-danger">未通过</span>
+                        <span class="label label-danger">未通过</span>
                     </td>
                 </tr>
                 </tbody>

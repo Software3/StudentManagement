@@ -35,7 +35,7 @@ public class SignonDAOimpl implements SignonDAO{
     public Teacher teacherLogin(Teacher teacher) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from Teacher as t where username=" + teacher.getUsername() + " and password=" + teacher.getPassword();
+        String hql = "from Teacher as t where username='" + teacher.getUsername() + "' and password='" + teacher.getPassword() + "'";
         List<Teacher> list = session.createQuery(hql).list();
         transaction.commit();
         return list.size() > 0 ? list.get(0) : null;

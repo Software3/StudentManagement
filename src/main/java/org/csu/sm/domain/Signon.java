@@ -14,6 +14,9 @@ public class Signon {
     @Column(name = "password")
     private String password;
 
+    public Signon() {
+    }
+
     public Signon(long studentId, String password) {
         this.studentId = studentId;
         this.password = password;

@@ -20,6 +20,7 @@ public class TeacherDAOimpl implements TeacherDAO{
         Transaction transaction = session.beginTransaction();
         session.update(teacher);
         transaction.commit();
+        session.close();
     }
 
     public Teacher getTeacher(String username) throws PersistenceException {

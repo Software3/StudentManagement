@@ -8,25 +8,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../common/teacIncludeTop.jsp" %>
 <div id="pad-wrapper">
+<div class="row filter-block">
+    <div class="pull-left">
+        <a  class="btn-flat success" href="<%=request.getContextPath()%>/audited">返回</a>
+    </div>
+</div>
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <div id="fuelux-wizard" class="wizard row">
                 <ul class="wizard-steps">
                     <li data-target="#step1" class="active">
                         <span class="step">1</span>
-                        <span class="title">General <br> information</span>
+                        <span class="title">基本 <br> 信息</span>
                     </li>
                     <li data-target="#step2">
                         <span class="step">2</span>
-                        <span class="title">Address <br> information</span>
+                        <span class="title">家长 <br> 信息</span>
                     </li>
                     <li data-target="#step3">
                         <span class="step">3</span>
-                        <span class="title">User <br> settings</span>
+                        <span class="title">奖励 <br> 情况</span>
                     </li>
                     <li data-target="#step4">
                         <span class="step">4</span>
-                        <span class="title">Payment <br> info</span>
+                        <span class="title">挂科 <br> 情况</span>
+                    </li>
+                    <li data-target="#step5">
+                        <span class="step">5</span>
+                        <span class="title">退队 <br> 说明</span>
                     </li>
                 </ul>
             </div>
@@ -34,129 +43,173 @@
                 <div class="step-pane active" id="step1">
                     <div class="row form-wrapper">
                         <div class="col-md-8">
-                            <form>
-                                <div class="field-box">
-                                    <label>Name:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box error">
-                                    <label>Company:</label>
-                                    <input class="form-control" type="text" />
-                                    <span class="alert-msg"><i class="icon-remove-sign"></i> Please enter your company</span>
-                                </div>
-                                <div class="field-box">
-                                    <label>Email:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box success">
-                                    <label>Username:</label>
-                                    <input class="form-control" type="text" />
-                                    <span class="alert-msg"><i class="icon-ok-sign"></i> Username available</span>
-                                </div>
-                            </form>
+                            <div class="field-box">
+                                <label>学号:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>姓名:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>性别:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>出生日期:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>籍贯:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>家庭居住地:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>专业:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>就业单位:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>辅导员姓名:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>辅导员联系方式:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
+                            <div class="field-box">
+                                <label>学生类型:</label>
+                                <input class="form-control" type="text" readonly="readonly" value="123456789"/>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="step-pane" id="step2">
                     <div class="row form-wrapper">
-                        <div class="col-md-8">
-                            <form>
-                                <div class="field-box">
-                                    <label>Address:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>City:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Postal/ZIP code:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Country:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                            </form>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-4">姓名
+                                        </th>
+                                        <th class="col-md-4">
+                                            <span class="line"></span>联系方式
+                                        </th>
+                                        <th class="col-md-4">
+                                            <span class="line"></span>与本人关系
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <a class="name">张三 </a>
+                                        </td>
+                                        <td class="description">
+                                            15616177562
+                                        </td>
+                                        <td>
+                                            <span class="label label-success">父亲</span>
+                                        </td>
+                                    </tr>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <a class="name">李四 </a>
+                                        </td>
+                                        <td class="description">
+                                            15612567562
+                                        </td>
+                                        <td>
+                                            <span class="label label-success">母亲</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="step-pane" id="step3">
                     <div class="row form-wrapper">
-                        <div class="col-md-8">
-                            <form>
-                                <div class="field-box">
-                                    <label>Username:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Photo:</label>
-                                    <input type="file" />
-                                </div>
-                                <div class="field-box">
-                                    <label>App name:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Time zone:</label>
-                                    <select>
-                                        <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                        <option value="Alaska">(GMT-09:00) Alaska</option>
-                                        <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                        <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                        <option value="Central Time (US &amp; Canada)">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                        <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                        <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option><option value="" disabled="disabled">-------------</option>
-                                        <option value="American Samoa">(GMT-11:00) American Samoa</option>
-                                        <option value="International Date Line West">(GMT-11:00) International Date Line West</option>
-                                        <option value="Midway Island">(GMT-11:00) Midway Island</option>
-                                    </select>
-                                </div>
-                            </form>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-6">获奖名称
+                                        </th>
+                                        <th class="col-md-6">
+                                            <span class="line"></span>获奖时间
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <a class="name">2015界程序设计大赛 </a>
+                                        </td>
+                                        <td class="description">
+                                            2016-02-01
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="step-pane" id="step4">
                     <div class="row form-wrapper payment-info">
-                        <div class="col-md-8">
-                            <form>
-                                <div class="field-box">
-                                    <label>Subscription Plan:</label>
-                                    <select id="plan">
-                                        <option value="66">Basic - $2.99/month (USD)</option>
-                                        <option value="67">Pro - $9.99/month (USD)</option>
-                                        <option value="68">Premium - $49.99/month (USD)</option>
-                                    </select>
-                                </div>
-                                <div class="field-box">
-                                    <label>Credit Card Number:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Expiration:</label>
-                                    <input class="form-control" style="width:60px;display:inline" placeholder="MM" type="text" />
-                                    &nbsp; / &nbsp;
-                                    <input class="form-control" style="width:85px;display:inline" placeholder="YYYY" type="text" />
-                                </div>
-                                <div class="field-box">
-                                    <label>Card CVC Number:</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                            </form>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-6">学期
+                                        </th>
+                                        <th class="col-md-6">
+                                            <span class="line"></span>科目
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <a class="name">2016-2017-2 </a>
+                                        </td>
+                                        <td class="description">
+                                            排球
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="wizard-actions">
                 <button type="button" disabled class="btn-glow primary btn-prev">
-                    <i class="icon-chevron-left"></i> Prev
+                    <i class="icon-chevron-left"></i> 上一级
                 </button>
                 <button type="button" class="btn-glow primary btn-next" data-last="Finish">
-                    Next <i class="icon-chevron-right"></i>
+                    下一级 <i class="icon-chevron-right"></i>
                 </button>
                 <button type="button" class="btn-glow success btn-finish">
-                    Setup your account!
+                    审核通过
+                </button>
+                <button type="button" class="btn-glow success btn-finish">
+                    审核不通过
                 </button>
             </div>
         </div>
@@ -165,11 +218,13 @@
 </div>
 <!-- end main container -->
 
+<link href="css/compiled/form-wizard.css" rel="stylesheet" media="screen"/>
 <!-- scripts for this page -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/fuelux.wizard.js"></script>
+
 
 <script type="text/javascript">
     $(function () {
@@ -178,9 +233,9 @@
             $btnNext = $('.wizard-actions .btn-next'),
             $btnFinish = $(".wizard-actions .btn-finish");
 
-        $wizard.wizard().on('finished', function(e) {
+        $wizard.wizard().on('finished', function (e) {
             // wizard complete code
-        }).on("changed", function(e) {
+        }).on("changed", function (e) {
             var step = $wizard.wizard("selectedItem");
             // reset states
             $btnNext.removeAttr("disabled");
@@ -190,16 +245,16 @@
 
             if (step.step === 1) {
                 $btnPrev.attr("disabled", "disabled");
-            } else if (step.step === 4) {
+            } else if (step.step === 5) {
                 $btnNext.hide();
                 $btnFinish.show();
             }
         });
 
-        $btnPrev.on('click', function() {
+        $btnPrev.on('click', function () {
             $wizard.wizard('previous');
         });
-        $btnNext.on('click', function() {
+        $btnNext.on('click', function () {
             $wizard.wizard('next');
         });
     });

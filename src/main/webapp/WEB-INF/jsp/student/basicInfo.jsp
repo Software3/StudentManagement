@@ -16,40 +16,40 @@
                     <div class="field-box">
                         <label>学号:</label>
                         <div class="col-md-7">
-                            <input class="form-control" type="text" readonly="readonly" value="3903150326" />
+                            <input id="studentId" class="form-control" type="text" readonly="readonly" value="<c:out value='${student.studentId}'/>" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>姓名:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" readonly="readonly" value="李涛江">
+                            <input id="name" class="form-control inline-input" type="text" readonly="readonly" value="<c:out value='${student.name}'/>">
                         </div>
                     </div>
                     <div class="field-box">
                         <label>性别:</label>
                         <div class="col-md-7">
-                            <select style="width:250px" class="select2">
-                                <option value="male">男</option>
-                                <option value="female">女</option>
+                            <select id="sex" style="width:250px" class="select2">
+                                <option value="1" <c:if test='${student.sex == 1}'>selected="true"</c:if>">男</option>
+                                <option value="0" <c:if test='${student.sex == 0}'>selected="true"</c:if>">女</option>
                             </select>
                         </div>
                     </div>
                     <div class="field-box">
                         <label>出生日期:</label>
                         <div class="col-md-7">
-                            <input type="text" value="03/29/2013" class="form-control input-datepicker" />
+                            <input id="birthday" type="text" placeholder="请填写出生日期，格式:2017-05-01" value="<c:out value="${student.birthday}"/>" class="form-control inline-input" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>籍贯:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入籍贯" data-placement="top" type="text" />
+                            <input id="nativePlace" class="form-control inline-input" value="<c:out value="${student.nativePlace}"/>" data-toggle="tooltip" data-trigger="focus" title="请输入籍贯" data-placement="top" type="text" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>家庭居住地:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入详细的家庭居住地" data-placement="top" type="text" />
+                            <input id="residence" class="form-control inline-input" value="<c:out value="${student.residence}"/>" data-toggle="tooltip" data-trigger="focus" title="请输入详细的家庭居住地" data-placement="top" type="text" />
                         </div>
                         <%--<div class="col-md-7">--%>
                             <%--<div class="predefined">--%>
@@ -61,41 +61,42 @@
                     <div class="field-box">
                         <label>专业:</label>
                         <div class="col-md-7">
-                            <select style="width:250px" class="select2">
-                                <option></option>
-                                <option value="SE">软件工程</option>
-                                <option value="CS">计算机科学与技术</option>
+                            <select id="major" style="width:250px" class="select2">
+                                <c:forEach var="item" items="${collegeList}">
+                                    <option value="${item}" <c:if test="${item == student.major}">selected="selected"</c:if>>${item}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
                     <div class="field-box">
                         <label>就业单位:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="请输入就业单位" data-placement="top" type="text" value="中南大学" />
+                            <input id="employmentUnit" class="form-control inline-input" value="<c:out value="${student.employmentUnit}"/>" data-toggle="tooltip" data-trigger="focus" title="请输入就业单位" data-placement="top" type="text" value="中南大学" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>辅导员姓名:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" value="罗俊" />
+                            <input id="counselorName" class="form-control inline-input" value="<c:out value="${student.counselorName}"/>" type="text" value="罗俊" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>辅导员联系方式:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" value="15537397854" />
+                            <input id="counselorPhone" class="form-control inline-input" value="<c:out value="${student.counselorPhone}"/>" type="text" value="15537397854" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>学生类型:</label>
                         <div class="col-md-7">
-                            <input class="form-control inline-input" type="text" readonly="readonly" value="本科生" />
+                            <input id="studentType" class="form-control inline-input" type="text" readonly="readonly" value="<c:if test="${student.studentType == 0}">本科生</c:if>
+                            <c:if test="${student.studentType == 1}">研究生</c:if><c:if test="${student.studentType == 2}">高水平运动员</c:if>" />
                         </div>
                     </div>
                     <div class="field-box">
                         <label>备注:</label>
                         <div class="col-md-7">
-                            <textarea class="form-control" rows="4"></textarea>
+                            <textarea id="remarks" class="form-control" rows="4"><c:out value="${student.remarks}"/></textarea>
                         </div>
                     </div>
                     <div class="field-box">
@@ -122,7 +123,8 @@
 <script src="js/select2.min.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/widge/alert.js"></script>
-
+<script src="js/util/ajaxUtil.js"></script>
+<script src="js/util/util.js"></script>
 <!-- call this page plugins -->
 <script type="text/javascript">
     $(function () {
@@ -142,7 +144,7 @@
 
         // alert
         $("#confirmModify").click(function () {
-            $("#myAlert").append(alert("success", "修改成功！"));
+            updateBasicInfo();
         });
 
         // alert position when scroll

@@ -24,6 +24,9 @@ public class Teacher {
     @Column(name = "role")
     private int role;
 
+    public Teacher() {
+    }
+
     public Teacher(String username, String password) {
         this.username = username;
         this.password = password;
