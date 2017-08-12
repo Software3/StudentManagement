@@ -51,7 +51,7 @@
                         <td>
                             <ul class="actions">
                                 <li>
-                                    <a href="<%=request.getContextPath()%>/auditInformation?studentId=${student.studentId}">查看信息</a>
+                                    <a href="<%=request.getContextPath()%>/auditInformation?studentId=${student.studentId}&teacherId=${teacherId}">查看信息</a>
                                 </li>
                             </ul>
                         </td>

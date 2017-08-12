@@ -49,7 +49,7 @@ public class AccountActionBean extends AbstractActionBean {
             if (object == null) {
                 return "redirect:/";
             }
-            return type == 0 ? ("redirect:/basicInfo?userid=" + account + "&authenticated=true") : ("redirect:/teacherhome?userid=" + account);
+            return type == 0 ? ("redirect:/basicInfo?userid=" + account + "&authenticated=true") : ("redirect:/teacherhome?teacherId=" + account);
         } catch (AccountServiceException e) {
             throw new HandleAccountServiceException(e);
         }

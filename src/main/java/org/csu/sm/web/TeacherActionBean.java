@@ -39,7 +39,7 @@ public class TeacherActionBean {
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
     public String showTeacherHome(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                   Model model) {
-        model.addAttribute("userid", teacherId);
+        model.addAttribute("teacherId", teacherId);
         return "teacher/index";
     }
 
@@ -50,6 +50,7 @@ public class TeacherActionBean {
             Teacher teacher = infoManageService.getTeacherInfo(teacherId);
             model.addAttribute("teacher", teacher);
             model.addAttribute("collegeList", Constant.getColleges());
+            model.addAttribute("teacherId", teacherId);
         } catch (InfoManageServiceException e) {
             e.printStackTrace();
         }
@@ -71,6 +72,7 @@ public class TeacherActionBean {
         try {
             List<Student> students = teacherService.getStudentListByTeacherIdAndState(teacherId, state);
             model.addAttribute("students", students);
+            model.addAttribute("teacherId", teacherId);
         } catch (TeacherServiceException e) {
             e.printStackTrace();
         }
@@ -78,7 +80,9 @@ public class TeacherActionBean {
     }
 
     @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
-    public String showAuditedLog() {
+    public String showAuditedLog(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                 Model model) {
+        model.addAttribute("teacherId", teacherId);
         return "teacher/auditedLog";
     }
 
@@ -90,7 +94,7 @@ public class TeacherActionBean {
      * @return
      */
     @RequestMapping(value = "auditInformation", method = RequestMethod.GET)
-    public String showAuditInformation(@RequestParam(value = "studentId", defaultValue = "") long studentId, Model model) {
+    public String showAuditInformation(@RequestParam(value = "studentId", defaultValue = "") long studentId, @RequestParam(value = "teacherId", defaultValue = "") String teacherId, Model model) {
         try {
             Student student = infoManageService.getBasicInfo(studentId);
             List<Parent> parents = infoManageService.getParentList(studentId);
@@ -102,6 +106,7 @@ public class TeacherActionBean {
             model.addAttribute("awardRecords", awardRecords);
             model.addAttribute("failexamRecords", failexamRecords);
             model.addAttribute("withdrawInsts", withdrawInsts);
+            model.addAttribute("teacherId", teacherId);
         } catch (InfoManageServiceException e) {
             e.printStackTrace();
         }
@@ -109,12 +114,16 @@ public class TeacherActionBean {
     }
 
     @RequestMapping(value = "studentInformation", method = RequestMethod.GET)
-    public String showStudentInformation() {
+    public String showStudentInformation(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                         Model model) {
+        model.addAttribute("teacherId", teacherId);
         return "teacher/studentInformation";
     }
 
     @RequestMapping(value = "studentList", method = RequestMethod.GET)
-    public String showStudentList() {
+    public String showStudentList(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                  Model model) {
+        model.addAttribute("teacherId", teacherId);
         return "teacher/studentList";
     }
 
@@ -126,7 +135,9 @@ public class TeacherActionBean {
      * @return
      */
     @RequestMapping(value = "auditInformationModifiable", method = RequestMethod.GET)
-    public String showauditInformationModifiable(@RequestParam(value = "studentId", defaultValue = "") long studentId, Model model) {
+    public String showauditInformationModifiable(@RequestParam(value = "studentId", defaultValue = "") long studentId,
+                                                 @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                                 Model model) {
         try {
             Student student = infoManageService.getBasicInfo(studentId);
             List<Parent> parents = infoManageService.getParentList(studentId);
@@ -138,6 +149,7 @@ public class TeacherActionBean {
             model.addAttribute("awardRecords", awardRecords);
             model.addAttribute("failexamRecords", failexamRecords);
             model.addAttribute("withdrawInsts", withdrawInsts);
+            model.addAttribute("teacherId", teacherId);
         } catch (InfoManageServiceException e) {
             e.printStackTrace();
         }
@@ -195,5 +207,10 @@ public class TeacherActionBean {
             e.printStackTrace();
         }
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "passStudent", method = RequestMethod.GET)
+    public ResponseEntity<Result> passStudent(@RequestParam String studentId) {
+        return null;
     }
 }

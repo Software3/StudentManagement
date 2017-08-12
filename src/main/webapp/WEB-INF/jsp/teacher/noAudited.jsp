@@ -51,8 +51,8 @@
                         <td>
                             <ul class="actions">
                                 <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                                <li><a href="#">通过</a></li>
-                                <li class="last"><a href="#">未通过</a></li>
+                                <li><a  onclick="pass(this)">通过</a></li>
+                                <li class="last"><a  onclick="fail(this)">未通过</a></li>
                             </ul>
                         </td>
                     </tr>
@@ -72,5 +72,56 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
+<script>
+    function pass() {
+        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        studentId = $.trim(studentId);
+        $.ajax({
+            url: 'getInformation',
+            dataType: 'text',
+            method: 'GET',
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+
+    function fail() {
+        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        studentId = $.trim(studentId);
+        $.ajax({
+            url: 'getInformation',
+            dataType: 'text',
+            method: 'GET',
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+</script>
 </body>
 </html>

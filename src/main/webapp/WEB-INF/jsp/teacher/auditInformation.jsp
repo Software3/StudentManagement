@@ -10,7 +10,8 @@
 <div id="pad-wrapper">
     <div class="row filter-block">
         <div class="pull-left">
-            <a class="btn-flat success" href="<%=request.getContextPath()%>/audited?teacherId="${userid}>返回</a>
+            <a class="btn-flat success"
+               href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1">返回</a>
         </div>
     </div>
     <div class="row">
@@ -125,7 +126,8 @@
                                                 <c:out value="${parent.phone}"/>
                                             </td>
                                             <td>
-                                                <span class="label label-success"><c:out value="${parent.relation}"/> </span>
+                                                <span class="label label-success"><c:out
+                                                        value="${parent.relation}"/> </span>
                                             </td>
                                         </tr>
                                     </c:forEach>
