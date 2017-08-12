@@ -156,7 +156,7 @@ function addAward() {
             console.log(data);
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
-            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <div class='img'> <img src='img/table-img.png'> </div> <a href='#' class='name'>"+ content + "</a> </td> <td class='description'>" + date + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
+            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>"+ content + "</a> </td> <td class='description'>" + date + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
         },
         error: function (xhr) {
             console.log("failed");
@@ -169,7 +169,7 @@ function addAward() {
 function delAward(node) {
     var index = $(".myDelete").index($(node));
     var rowTr = $("tbody")[0].rows[index];
-    var content = rowTr.children[0].children[2].innerHTML;
+    var content = rowTr.children[0].children[1].innerHTML;
     var date = trim(rowTr.children[1].innerHTML);
     var studentId = getStudentId();
     var json = {content: content, date: date, studentId: studentId};
@@ -217,7 +217,7 @@ function upAward(node, values) {
                 // 赋值
                 var index = $(".myEdit").index($(node));
                 var rowTr = $("tbody")[0].rows[index];
-                rowTr.children[0].children[2].innerHTML = content;
+                rowTr.children[0].children[1].innerHTML = content;
                 rowTr.children[1].innerHTML = date;
 
                 // 隐藏modal，弹出alert
@@ -249,7 +249,7 @@ function addFailed() {
             console.log(data);
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
-            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>"+ term + "</a> </td> <td class='description'>" + date + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>");
+            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>"+ term + "</a> </td> <td class='description'>" + subject + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>");
         },
         error: function (xhr) {
             console.log("failed");
@@ -262,7 +262,7 @@ function addFailed() {
 function delFailed(node) {
     var index = $(".myDelete").index($(node));
     var rowTr = $("tbody")[0].rows[index];
-    var term = rowTr.children[0].children[2].innerHTML;
+    var term = rowTr.children[0].children[1].innerHTML;
     var subject = trim(rowTr.children[1].innerHTML);
     var studentId = getStudentId();
     var json = {term: term, subject:subject, studentId: studentId};
@@ -310,7 +310,7 @@ function upFailed(node, values) {
                 // 赋值
                 var index = $(".myEdit").index($(node));
                 var rowTr = $("tbody")[0].rows[index];
-                rowTr.children[0].children[2].innerHTML = term;
+                rowTr.children[0].children[1].innerHTML = term;
                 rowTr.children[1].innerHTML = subject;
 
                 // 隐藏modal，弹出alert

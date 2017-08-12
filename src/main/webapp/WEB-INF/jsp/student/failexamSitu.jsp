@@ -80,6 +80,7 @@
 <script src="js/widge/model.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
+<script src="js/util/ajaxUtil.js"></script>
 
 <!-- call this page plugins -->
 <script type="text/javascript">
@@ -119,7 +120,8 @@
             index = $(".myDelete").index($(node));
         }
         var rowTr = $("tbody")[0].rows[index];
-        var term = rowTr.children[0].children[2].innerHTML;
+        console.log(rowTr.children[0])
+        var term = rowTr.children[0].children[1].innerHTML;
         var subject = trim(rowTr.children[1].innerHTML);
         return [term, subject];
     }
