@@ -1,8 +1,5 @@
 package org.csu.sm.domain;
 
-/**
- * Created by ltaoj on 17-6-12.
- */
 public class Result {
 
     private String result;
@@ -24,6 +21,12 @@ public class Result {
         String message = result.equals(RESULT_SUCCESS) ? "操作成功" : "";
         message = result.equals(RESULT_ERROR) ? "操作失败" : message;
         this.setMessage(message);
+    }
+
+    public Result(String result, String message, Object object) {
+        this.result = result;
+        this.message = message;
+        this.object = object;
     }
 
     public String getResult() {

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by ltaoj on 2017/8/8.
  */
 @Repository
-public class VerifyLogDAOimpl implements VerifyLogDAO{
+public class VerifyLogDAOimpl implements VerifyLogDAO {
     public List<VerifyLog> getVerifyLogListByCounselorName(String counselorName) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -29,6 +29,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO{
         Transaction transaction = session.beginTransaction();
         session.save(verifyLog);
         transaction.commit();
+        session.close();
     }
 
     public List<VerifyLog> getVerifyLogListByStudentId(long studentId) throws PersistenceException {

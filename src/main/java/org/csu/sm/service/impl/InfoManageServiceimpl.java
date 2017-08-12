@@ -44,10 +44,8 @@ public class InfoManageServiceimpl implements InfoManageService{
         return parentDAO.getParents(studentId);
     }
 
-    public void modifyParentsInfo(List<Parent> parentList) throws InfoManageServiceException {
-        for (int i = 0;i < parentList.size();i++) {
-            parentDAO.updateParent(parentList.get(i));
-        }
+    public void modifyParentInfo(Parent parent) throws InfoManageServiceException {
+        parentDAO.updateParent(parent);
     }
 
     public List<Parent> addParentInfo(Parent parent) throws InfoManageServiceException {
@@ -55,14 +53,17 @@ public class InfoManageServiceimpl implements InfoManageService{
         return parentDAO.getParents(parent.getStudentId());
     }
 
+    public List<Parent> deleteParentInfo(Parent parent) throws InfoManageServiceException {
+        parentDAO.deleteParent(parent.getStudentId(), parent.getName());
+        return parentDAO.getParents(parent.getStudentId());
+    }
+
     public List<AwardRecord> getAwardList(long studentId) throws InfoManageServiceException {
         return awardDAO.getAwardList(studentId);
     }
 
-    public void modifyAwardsInfo(List<AwardRecord> awardRecordList) throws InfoManageServiceException {
-        for (int i = 0;i < awardRecordList.size();i++) {
-            awardDAO.updateAward(awardRecordList.get(i));
-        }
+    public void modifyAwardInfo(AwardRecord awardRecord) throws InfoManageServiceException {
+        awardDAO.updateAward(awardRecord);
     }
 
     public List<AwardRecord> addAwardInfo(AwardRecord awardRecord) throws InfoManageServiceException {
@@ -70,14 +71,17 @@ public class InfoManageServiceimpl implements InfoManageService{
         return awardDAO.getAwardList(awardRecord.getStudentId());
     }
 
+    public List<AwardRecord> deleteAwardInfo(AwardRecord awardRecord) throws InfoManageServiceException {
+        awardDAO.deleteAward(awardRecord);
+        return awardDAO.getAwardList(awardRecord.getStudentId());
+    }
+
     public List<FailexamRecord> getFailexamList(long studentId) throws InfoManageServiceException {
         return failexamDAO.getFailexamList(studentId);
     }
 
-    public void modifyFailexamInfo(List<FailexamRecord> failexamRecordList) throws InfoManageServiceException {
-        for (int i = 0;i < failexamRecordList.size();i++) {
-            failexamDAO.insertFailexam(failexamRecordList.get(i));
-        }
+    public void modifyFailexamInfo(FailexamRecord failexamRecord) throws InfoManageServiceException {
+        failexamDAO.insertFailexam(failexamRecord);
     }
 
     public List<FailexamRecord> addFailexamInfo(FailexamRecord failexamRecord) throws InfoManageServiceException {
@@ -85,8 +89,17 @@ public class InfoManageServiceimpl implements InfoManageService{
         return failexamDAO.getFailexamList(failexamRecord.getStudentId());
     }
 
+    public List<FailexamRecord> deleteFailexamInfo(FailexamRecord failexamRecord) throws InfoManageServiceException {
+        failexamDAO.deleteFailexam(failexamRecord.getStudentId(), failexamRecord.getSubject());
+        return failexamDAO.getFailexamList(failexamRecord.getStudentId());
+    }
+
     public List<WithdrawInst> getWithdrawInstList(long studentId) throws InfoManageServiceException {
         return withdrawInstDAO.getWithdrawInst(studentId);
+    }
+
+    public WithdrawInst getWithdrawInst(int instId) throws InfoManageServiceException {
+        return withdrawInstDAO.getWithdrawInst(instId);
     }
 
     public void modifyWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException {
@@ -96,6 +109,10 @@ public class InfoManageServiceimpl implements InfoManageService{
     public List<WithdrawInst> addWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException {
         withdrawInstDAO.insertWithdrawInst(withdrawInst);
         return withdrawInstDAO.getWithdrawInst(withdrawInst.getStudentId());
+    }
+
+    public WithdrawInst deleteWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException {
+        return withdrawInstDAO.deleteWithdrawInst(withdrawInst.getInstId(), withdrawInst.getStudentId());
     }
 
     public Teacher getTeacherInfo(String username) throws InfoManageServiceException {

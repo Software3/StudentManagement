@@ -66,7 +66,7 @@
             url: 'getStudentList',
             dataType: 'json',
             method: 'GET',
-            data: {teacherId: 123},
+            data: {teacherId: ${userid}},
             success: function (data) {
                 var result = data.result;
                 if (result = 'success') {

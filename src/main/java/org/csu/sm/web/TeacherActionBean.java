@@ -1,9 +1,6 @@
 package org.csu.sm.web;
 
-import org.csu.sm.domain.Result;
-import org.csu.sm.domain.Student;
-import org.csu.sm.domain.Teacher;
-import org.csu.sm.domain.VerifyLog;
+import org.csu.sm.domain.*;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.exception.service.TeacherServiceException;
 import org.csu.sm.exception.service.VerifyServiceException;
@@ -14,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.text.ParagraphView;
 import java.util.List;
 
 /**
@@ -38,28 +37,44 @@ public class TeacherActionBean {
     }
 
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
-    public String showTeacherHome() {
+    public String showTeacherHome(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                  Model model) {
+        model.addAttribute("userid", teacherId);
         return "teacher/index";
     }
 
-    @RequestMapping(value = "noAudited", method = RequestMethod.GET)
-    public String showNoAudited() {
-        return "teacher/noAudited";
-    }
-
     @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)
-    public String showteacherBasicInfo() {
+    public String showteacherBasicInfo(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                                       Model model) {
+        try {
+            Teacher teacher = infoManageService.getTeacherInfo(teacherId);
+            model.addAttribute("teacher", teacher);
+            model.addAttribute("collegeList", Constant.getColleges());
+        } catch (InfoManageServiceException e) {
+            e.printStackTrace();
+        }
         return "teacher/teacherBasicInfo";
+
     }
 
-    @RequestMapping(value = "audited", method = RequestMethod.GET)
-    public String showAudited() {
-        return "teacher/audited";
-    }
-
-    @RequestMapping(value = "uncommitted", method = RequestMethod.GET)
-    public String showUncommitted() {
-        return "teacher/uncommitted";
+    /**
+     * 审核学生
+     *
+     * @param teacherId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "verify", method = RequestMethod.GET)
+    public String showAudited(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+                              @RequestParam(value = "state", defaultValue = "") String state,
+                              Model model) {
+        try {
+            List<Student> students = teacherService.getStudentListByTeacherIdAndState(teacherId, state);
+            model.addAttribute("students", students);
+        } catch (TeacherServiceException e) {
+            e.printStackTrace();
+        }
+        return state == "0" ? "teacher/uncommitted" : state == "1" ? "teacher/noAudited" : "teacher/audited";
     }
 
     @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
@@ -67,8 +82,29 @@ public class TeacherActionBean {
         return "teacher/auditedLog";
     }
 
+    /**
+     * 不可修改信息界面跳转
+     *
+     * @param studentId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "auditInformation", method = RequestMethod.GET)
-    public String showAuditInformation() {
+    public String showAuditInformation(@RequestParam(value = "studentId", defaultValue = "") long studentId, Model model) {
+        try {
+            Student student = infoManageService.getBasicInfo(studentId);
+            List<Parent> parents = infoManageService.getParentList(studentId);
+            List<AwardRecord> awardRecords = infoManageService.getAwardList(studentId);
+            List<FailexamRecord> failexamRecords = infoManageService.getFailexamList(studentId);
+            List<WithdrawInst> withdrawInsts = infoManageService.getWithdrawInstList(studentId);
+            model.addAttribute("student", student);
+            model.addAttribute("parents", parents);
+            model.addAttribute("awardRecords", awardRecords);
+            model.addAttribute("failexamRecords", failexamRecords);
+            model.addAttribute("withdrawInsts", withdrawInsts);
+        } catch (InfoManageServiceException e) {
+            e.printStackTrace();
+        }
         return "teacher/auditInformation";
     }
 
@@ -82,8 +118,29 @@ public class TeacherActionBean {
         return "teacher/studentList";
     }
 
+    /**
+     * 可修改信息界面跳转
+     *
+     * @param studentId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "auditInformationModifiable", method = RequestMethod.GET)
-    public String showauditInformationModifiable() {
+    public String showauditInformationModifiable(@RequestParam(value = "studentId", defaultValue = "") long studentId, Model model) {
+        try {
+            Student student = infoManageService.getBasicInfo(studentId);
+            List<Parent> parents = infoManageService.getParentList(studentId);
+            List<AwardRecord> awardRecords = infoManageService.getAwardList(studentId);
+            List<FailexamRecord> failexamRecords = infoManageService.getFailexamList(studentId);
+            List<WithdrawInst> withdrawInsts = infoManageService.getWithdrawInstList(studentId);
+            model.addAttribute("student", student);
+            model.addAttribute("parents", parents);
+            model.addAttribute("awardRecords", awardRecords);
+            model.addAttribute("failexamRecords", failexamRecords);
+            model.addAttribute("withdrawInsts", withdrawInsts);
+        } catch (InfoManageServiceException e) {
+            e.printStackTrace();
+        }
         return "teacher/auditInformationModifiable";
     }
 
@@ -123,6 +180,12 @@ public class TeacherActionBean {
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
     }
 
+    /**
+     * 学生列表
+     *
+     * @param teacherId
+     * @return
+     */
     @RequestMapping(value = "getStudentList", method = RequestMethod.GET)
     public ResponseEntity<Result> getStudentList(@RequestParam String teacherId) {
         try {

@@ -64,7 +64,6 @@
                 var result = data.result;
                 var auditedLogList = data.object
                 if (result == 'success') {
-                    alert(result)
                     for (var i = 0; i < auditedLogList.length; i++) {
                         var verifyOperate = auditedLogList[i].verifyOperate;
                         var label = verifyOperate == 1 ? "<span class=\"label label-success\">通过</span>" : "<span class=\"label label-danger\">未通过</span>"

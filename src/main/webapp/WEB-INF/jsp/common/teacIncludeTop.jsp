@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +147,7 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-toggle" href="<%=request.getContextPath()%>/teacherBasicInfo">
+            <a class="dropdown-toggle" href="<%=request.getContextPath()%>/teacherBasicInfo?teacherId=${userid}">
                 <i class="icon-cog"></i>
                 <span>我的信息</span>
             </a>
@@ -167,9 +170,9 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<%=request.getContextPath()%>/noAudited">未审核</a></li>
-                <li><a href="<%=request.getContextPath()%>/uncommitted">未提交</a></li>
-                <li><a href="<%=request.getContextPath()%>/audited">已审核</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${userid}&&state=1">未审核</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${userid}&&state=0">未提交</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${userid}&&state=2">已审核</a></li>
             </ul>
         </li>
         <li>

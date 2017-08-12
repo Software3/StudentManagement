@@ -39,39 +39,24 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">张三 </a>
-                    </td>
-                    <td class="description">
-                        3903150327
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">李四 </a>
-                    </td>
-                    <td class="description">
-                        3903150326
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="student" items="#{students}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name"><c:out value="${student.name}"/> </a>
+                        </td>
+                        <td class="description">
+                            <c:out value="${student.studentId}"/>
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
+                                <li><a href="#">通过</a></li>
+                                <li class="last"><a href="#">未通过</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

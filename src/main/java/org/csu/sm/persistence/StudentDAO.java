@@ -60,4 +60,13 @@ public interface StudentDAO {
      * @throws PersistenceException
      */
     List<Student> getStudentListByTeacherId(String teacherId) throws PersistenceException;
+
+    /**
+     * 通过老师和状态查找学生列表
+     * @param teacherId
+     * @param state
+     * @return
+     * @throws PersistenceException
+     */
+    List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws PersistenceException;
 }

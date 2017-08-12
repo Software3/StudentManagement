@@ -16,35 +16,37 @@
                 <div class="field-box">
                     <label>学工号:</label>
                     <div class="col-md-7">
-                        <input class="form-control" type="text" readonly="readonly" value="123456789"
+                        <input class="form-control" type="text" readonly="readonly" value="${teacher.username}"
                                id="schoolWorkNum"/>
                     </div>
                 </div>
                 <div class="field-box">
                     <label>姓名:</label>
                     <div class="col-md-7">
-                        <input class="form-control inline-input" type="text" readonly="readonly" value="桃子" id="name">
+                        <input class="form-control inline-input" type="text" readonly="readonly" value="${teacher.name}"
+                               id="name">
                     </div>
                 </div>
                 <div class="field-box">
                     <label>联系方式:</label>
                     <div class="col-md-7">
-                        <input class="form-control inline-input" type="text" value="15537397854" id="tel"/>
+                        <input class="form-control inline-input" type="text" value="${teacher.phone}" id="phone"/>
                     </div>
                 </div>
                 <div class="field-box">
                     <label>邮件:</label>
                     <div class="col-md-7">
-                        <input class="form-control inline-input" type="text" value="15537397854" id="email"/>
+                        <input class="form-control inline-input" type="text" value="${teacher.email}" id="email"/>
                     </div>
                 </div>
                 <div class="field-box">
                     <label>专业:</label>
                     <div class="col-md-7">
                         <select style="width:250px" class="select2" id="major">
-                            <option></option>
-                            <option value="SE">软件工程</option>
-                            <option value="CS">计算机科学与技术</option>
+                            <c:forEach var="item" items="${collegeList}">
+                                <option value="${item}"
+                                        <c:if test="${item == teacher.major}">selected="selected"</c:if>>${item}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
@@ -100,16 +102,24 @@
     // alert
     $("#confirmModify").click(function () {
         var teacher = {};
+        teacher.username = $('#schoolWorkNum').val();
+        teacher.password =${teacher.password};
         teacher.name = $('#name').val();
-        teacher.phone = $('tel').val();
-        teacher.majors = $('major').val();
-        teacher.role = $('type').val();
-        teacher.email = $('email').val();
+        teacher.phone = $('#tel').val();
+        teacher.majors = $('#major').val();
+        teacher.role = $('#type').val();
+        teacher.email = $('#email').val();
         $.ajax({
             url: 'getInformation',
             dataType: 'text',
             method: 'POST',
+            data: $.JSON(teacher),
             success: function (data) {
+                var result = data.result;
+                if (result == success)
+                    $("#myAlert").append(alert("success", "修改成功！"));
+                else
+                    $("#myAlert").append(alert("error", "修改失败！"));
             },
             error: function (xhr) {
                 // 导致出错的原因较多，以后再研究
@@ -125,7 +135,7 @@
             // 不管成功或失败都要做的工作
             console.log('complete');
         });
-        $("#myAlert").append(alert("success", "修改成功！"));
+
     });
 
     // alert position when scroll

@@ -20,7 +20,7 @@
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a class="btn-flat success new-product">添加挂科记录</a>
+                <a class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加挂科记录</a>
             </div>
         </div>
 
@@ -42,24 +42,23 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <div class="img">
-                            <img src="img/table-img.png">
-                        </div>
-                        <a href="#" class="name">2016-2017-2 </a>
-                    </td>
-                    <td class="description">
-                        排球
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a href="#">编辑</a></li>
-                            <li class="last"><a href="#">删除</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="failed" items="${failedList}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name"><c:out value="${failed.term}"/></a>
+                        </td>
+                        <td class="description">
+                            <c:out value="${failed.subject}"/>
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                                <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -68,12 +67,64 @@
 </div>
 </div>
 <!-- end main container -->
-
+<!-- modal start-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true"></div>
+<!-- modal end-->
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/widge/model.js"></script>
+<script src="js/widge/alert.js"></script>
+<script src="js/util/util.js"></script>
+<script src="js/util/ajaxUtil.js"></script>
+
+<!-- call this page plugins -->
+<script type="text/javascript">
+    $(function () {
+        // init modal
+        $("#addModal").append(model("添加挂科记录", 2, getModelForm(4), function () {})[0]);
+
+        // add new member
+        $("#confirmAdd").click(function () {
+            // 成功后隐藏模态框,弹出提示框，并且刷新界面
+            addFailed();
+        });
+    });
+
+    // delete member
+    function deleteRow(node) {
+        delFailed(node)
+//        $("tbody")[0].removeChild(rowTr);
+    }
+
+    function editRow(node) {
+        var values = getValues(node, "myEdit");
+        upFailed(node, values);
+    }
+
+    /**
+     * 获取name, phone, relation的值
+     * @param node
+     * @param name
+     * @returns {[*,*,*]}
+     */
+    function getValues(node, name) {
+        var index = undefined;
+        if (name == "myEdit") {
+            index = $(".myEdit").index($(node));
+        }else if (name == "myDelete") {
+            index = $(".myDelete").index($(node));
+        }
+        var rowTr = $("tbody")[0].rows[index];
+        console.log(rowTr.children[0])
+        var term = rowTr.children[0].children[1].innerHTML;
+        var subject = trim(rowTr.children[1].innerHTML);
+        return [term, subject];
+    }
+</script>
 </body>
 </html>

@@ -39,35 +39,24 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">王五 </a>
-                    </td>
-                    <td class="description">
-                        3903150328
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                        </ul>
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">玄六 </a>
-                    </td>
-                    <td class="description">
-                        3903150326
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="student" items="${students}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name">${student.name} </a>
+                        </td>
+                        <td class="description">
+                                ${audited.studentId}
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/auditInformation?studentId=${student.studentId}">查看信息</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

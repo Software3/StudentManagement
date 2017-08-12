@@ -14,13 +14,14 @@ import java.util.List;
  * Created by ltaoj on 2017/8/7.
  */
 @Repository
-public class StudentDAOimpl implements StudentDAO{
+public class StudentDAOimpl implements StudentDAO {
 
     public void insertStudent(Student student) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(student);
         transaction.commit();
+        session.close();
     }
 
     public long deleteStudent(long studentId) throws PersistenceException {
@@ -29,6 +30,7 @@ public class StudentDAOimpl implements StudentDAO{
         Student student = session.get(Student.class, studentId);
         if (student != null) session.delete(student);
         transaction.commit();
+        session.close();
         return student != null ? studentId : -1;
     }
 
@@ -37,6 +39,7 @@ public class StudentDAOimpl implements StudentDAO{
         Transaction transaction = session.beginTransaction();
         session.update(student);
         transaction.commit();
+        session.close();
     }
 
     public Student getStudent(long studentId) throws PersistenceException {
@@ -64,4 +67,14 @@ public class StudentDAOimpl implements StudentDAO{
         transaction.commit();
         return list;
     }
+
+    public List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Student as s where counselorName=" + teacherId + "and verifyState=" + state;
+        List<Student> list = session.createQuery(hql).list();
+        transaction.commit();
+        return list;
+    }
+
 }
