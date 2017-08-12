@@ -138,7 +138,7 @@
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
-            <a href="<%=request.getContextPath()%>/teacherhome>">
+            <a href="<%=request.getContextPath()%>/teacherhome">
                 <i class="icon-home"></i>
                 <span>首页</span>
             </a>

@@ -31,7 +31,6 @@
                 <thead>
                 <tr>
                     <th class="col-md-5">
-                        <input type="checkbox">
                         姓名
                     </th>
                     <th class="col-md-5">
@@ -48,7 +47,6 @@
                 <!-- row -->
                 <tr class="first">
                     <td>
-                        <input type="checkbox">
                         <a href="#" class="name">张三 </a>
                     </td>
                     <td class="description">
@@ -56,14 +54,13 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">查看信息</a></li>
+                            <li><a href="<%=request.getContextPath()%>/auditInformationModifiable">查看信息</a></li>
                         </ul>
                     </td>
                 </tr>
                 <!-- row -->
                 <tr class="first">
                     <td>
-                        <input type="checkbox">
                         <a href="#" class="name">李四 </a>
                     </td>
                     <td class="description">
@@ -71,7 +68,9 @@
                     </td>
                     <td>
                         <ul class="actions">
-                            <li><a href="#">查看信息</a></li>
+                            <li><a href="<%=request.getContextPath()%>/auditInformationModifiable"
+                                   onclick="getInformation(this)">查看信息</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -85,11 +84,38 @@
 <!-- end main container -->
 
 <!-- this page specific styles -->
-<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen"/>
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
+
+<script>
+    function getInformation(obj) {
+        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        studentId = $.trim(studentId);
+        $.ajax({
+            url: 'getInformation',
+            dataType: 'text',
+            method: 'GET',
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+</script>
 </body>
 </html>
 
