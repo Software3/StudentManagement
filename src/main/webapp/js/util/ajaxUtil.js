@@ -162,7 +162,7 @@ function addAward() {
         url: 'addAward',
         dataType: 'json',
         method: 'POST',
-        data: JSON.stringify(json),
+        data: json,
         success: function (data) {
             console.log("success");
             console.log(data);
@@ -304,7 +304,7 @@ function delFailed(node) {
 
 function upFailed(node, values) {
     $("#editModal").empty();
-    $("#editModal").append(model("修改挂科记录", 2, getModelForm(5), function () {
+    $("#editModal").append(model("修改挂科记录", 2, getModelForm(7), function () {
         // 取值
         var term = $("#editTerm")[0].value;
         var subject = $("#editSubject")[0].value;
@@ -336,4 +336,24 @@ function upFailed(node, values) {
             }
         })
     }, values)[0]);
+}
+
+function addWithdrawInst() {
+    var comment = $("#instComment").val();
+    var studentId = getStudentId();
+    var json = {comment: comment, studentId: studentId};
+    console.log(json);
+    $.ajaxFileUpload({
+        url: 'addWithdrawInst',
+        secureuri: false,
+        data: json,
+        fileElementId: 'instPicture',
+        dataType: 'json',
+        success: function (data, status) {
+            console.log(data);
+        },
+        error: function (data, status, e) {
+            console.log(e);
+        }
+    })
 }

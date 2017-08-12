@@ -89,6 +89,19 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
+    @RequestMapping(value = "withdrawInst", method = RequestMethod.GET)
+    public String showWithdrawInst(@RequestParam(value = "userid", defaultValue = "") long studentId,
+                                   @RequestParam(value = "authenticated", defaultValue = "true") boolean authenticated,
+                                   Model model) {
+        try {
+            List<WithdrawInst> withdrawInstList = infoManageService.getWithdrawInstList(studentId);
+            model.addAttribute("withdrawInstList", withdrawInstList);
+            return "student/withdrawInst";
+        } catch (InfoManageServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
+    }
+
     /************************************ json交互action **************************************/
 
     @RequestMapping(value = "/upBasicInfo", method = RequestMethod.POST)
@@ -196,9 +209,12 @@ public class InfoManageActionBean extends AbstractActionBean {
                                                      WithdrawInst withdrawInst, HttpServletRequest request) throws HandleFileUploadException {
         try {
             String path = request.getSession().getServletContext().getRealPath("upImg");
+            System.out.println(path);
             String fileName = instPicture.getOriginalFilename();
-            String targetName = (new Date().getTime()) + "_" + fileName + "_" + withdrawInst.getStudentId();
+            String targetName = (new Date().getTime()) + "_" + withdrawInst.getStudentId() + "_" + fileName;
+            System.out.println(targetName);
             IOUtil.saveFile(targetName, path, instPicture);
+            withdrawInst.setDescription("upImg/" + targetName);
             List<WithdrawInst> withdrawInstList =  infoManageService.addWithdrawInstInfo(withdrawInst);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "运动员退队信息添加成功", withdrawInstList), HttpStatus.OK);
         } catch (IOException e) {
@@ -216,7 +232,7 @@ public class InfoManageActionBean extends AbstractActionBean {
             String fileName = instPicture.getOriginalFilename();
             String targetName = (new Date().getTime()) + "_" + fileName + "_" + withdrawInst.getStudentId();
             IOUtil.saveFile(targetName, path, instPicture);
-            withdrawInst.setDescribe("upImg/" + targetName);
+            withdrawInst.setDescription("upImg/" + targetName);
             infoManageService.modifyWithdrawInstInfo(withdrawInst);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "运动员退队信息修改成功", null), HttpStatus.OK);
         } catch (IOException e) {
@@ -232,7 +248,7 @@ public class InfoManageActionBean extends AbstractActionBean {
             WithdrawInst withdrawInst1 = infoManageService.getWithdrawInst(withdrawInst.getInstId());
             WithdrawInst deletedInst = infoManageService.deleteWithdrawInstInfo(withdrawInst);
             String path = request.getSession().getServletContext().getRealPath("upImg");
-            IOUtil.removeFile(deletedInst.getDescribe(), path);
+            IOUtil.removeFile(deletedInst.getDescription(), path);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "退队说明删除成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
             throw new HandleInfoServiceException(e);

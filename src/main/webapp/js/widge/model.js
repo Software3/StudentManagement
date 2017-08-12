@@ -15,7 +15,11 @@ var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholde
     [{label: '学期:', id: 'failedTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
         {label: '科目:', id: 'failedSubject', type: 'text', placeholder: '请输入科目'}],
     [{label: '学期:', id: 'editTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
-        {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目'}]];
+        {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目'}],
+    [{label: '说明图片:', id: 'instPicture', type: 'file', placeholder: '请上传说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'instPicture'},
+        {label: '说明文字:', id: 'instComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}],
+    [{label: '说明图片:', id: 'editDescribe', type: 'file', placeholder: '请修改说明图片', accept: 'image/jpeg,image/png,image/gif', name: ''},
+        {label: '说明文字', id: 'editComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}]];
 
 /**
  * 通过传入下标值获取模态框样式
@@ -102,7 +106,13 @@ function model(title, rowNum, rowObjArray, feedback, values) {
             var formGroup = createFormGroup();
             formGroup.appendChild(createElementWithHTML(createElementWithAttribute("label", {for:objArray[i].id, class:"col-lg-2 control-label"}), objArray[i].label));
             var div = createElementWithAttribute("div", {class: "col-lg-10"});
-            div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"form-control", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i]}));
+            if (objArray[i].type == 'text'){
+                div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"form-control", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i]}));
+            } else if (objArray[i].type == 'file') {
+                div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"pull-left", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i], accept: objArray[i].accept, name: objArray[i].name}));
+            } else if (objArray[i].type == 'textarea') {
+                div.appendChild(createElementWithHTML(createElementWithAttribute("textarea", {class: 'form-control', id: objArray[i].id, placeholder: objArray[i].placeholder, rows: objArray[i].rows}), values[i]));
+            }
             formGroup.appendChild(div);
             form.appendChild(formGroup);
         }
