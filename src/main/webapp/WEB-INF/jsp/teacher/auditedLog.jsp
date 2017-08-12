@@ -59,7 +59,7 @@
             url: 'getAuditedLog',
             dataType: 'json',
             method: 'GET',
-            data: {teacherId: 123},
+            data: {teacherId: ${teacherId}},
             success: function (data) {
                 var result = data.result;
                 var auditedLogList = data.object

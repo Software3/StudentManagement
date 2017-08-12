@@ -9,11 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../common/teacIncludeTop.jsp" %>
 <div id="pad-wrapper">
-<div class="row filter-block">
-    <div class="pull-left">
-        <a  class="btn-flat success" href="<%=request.getContextPath()%>/studentInformation">返回</a>
+    <div class="row filter-block">
+        <div class="pull-left">
+            <a class="btn-flat success" href="<%=request.getContextPath()%>/studentInformation?teacherId=${teacherId}">返回</a>
+        </div>
     </div>
-</div>
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <div id="fuelux-wizard" class="wizard row">
@@ -46,11 +46,11 @@
                         <div class="col-md-8">
                             <div class="field-box">
                                 <label>学号:</label>
-                                <input class="form-control" type="text"  value="${student.studentId}"/>
+                                <input class="form-control" type="text" value="${student.studentId}"/>
                             </div>
                             <div class="field-box">
                                 <label>姓名:</label>
-                                <input class="form-control" type="text"  value="${student.name}"/>
+                                <input class="form-control" type="text" value="${student.name}"/>
                             </div>
                             <div class="field-box">
                                 <label>性别:</label>
@@ -58,11 +58,11 @@
                             </div>
                             <div class="field-box">
                                 <label>出生日期:</label>
-                                <input class="form-control" type="text"  value="${student.birthday}"/>
+                                <input class="form-control" type="text" value="${student.birthday}"/>
                             </div>
                             <div class="field-box">
                                 <label>籍贯:</label>
-                                <input class="form-control" type="text"  value="${student.residence}"/>
+                                <input class="form-control" type="text" value="${student.residence}"/>
                             </div>
                             <div class="field-box">
                                 <label>家庭居住地:</label>
@@ -70,23 +70,23 @@
                             </div>
                             <div class="field-box">
                                 <label>专业:</label>
-                                <input class="form-control" type="text"  value="${student.major}"/>
+                                <input class="form-control" type="text" value="${student.major}"/>
                             </div>
                             <div class="field-box">
                                 <label>就业单位:</label>
-                                <input class="form-control" type="text"  value="${student.employmentUnit}"/>
+                                <input class="form-control" type="text" value="${student.employmentUnit}"/>
                             </div>
                             <div class="field-box">
                                 <label>辅导员姓名:</label>
-                                <input class="form-control" type="text"  value="${student.counselorName}"/>
+                                <input class="form-control" type="text" value="${student.counselorName}"/>
                             </div>
                             <div class="field-box">
                                 <label>辅导员联系方式:</label>
-                                <input class="form-control" type="text"  value="${student.counselorPhone}"/>
+                                <input class="form-control" type="text" value="${student.counselorPhone}"/>
                             </div>
                             <div class="field-box">
                                 <label>学生类型:</label>
-                                <input class="form-control" type="text"  value="${student.studentType}"/>
+                                <input class="form-control" type="text" value="${student.studentType}"/>
                             </div>
                         </div>
                     </div>
@@ -111,17 +111,18 @@
                                     <tbody>
                                     <!-- row -->
                                     <c:forEach var="parent" items="${parents}">
-                                    <tr class="first">
-                                        <td>
-                                            <a class="name"><c:out value="${parent.name}"/> </a>
-                                        </td>
-                                        <td class="description">
-                                            <c:out value="${parent.phone}"/>
-                                        </td>
-                                        <td>
-                                            <span class="label label-success"><c:out value="${parent.relation}"/> </span>
-                                        </td>
-                                    </tr>
+                                        <tr class="first">
+                                            <td>
+                                                <a class="name"><c:out value="${parent.name}"/> </a>
+                                            </td>
+                                            <td class="description">
+                                                <c:out value="${parent.phone}"/>
+                                            </td>
+                                            <td>
+                                                <span class="label label-success"><c:out
+                                                        value="${parent.relation}"/> </span>
+                                            </td>
+                                        </tr>
                                     </c:forEach>
                                     <!-- row -->
                                     </tbody>
@@ -147,14 +148,14 @@
                                     <tbody>
                                     <!-- row -->
                                     <c:forEach var="awardRecord" items="${awardRecords}">
-                                    <tr class="first">
-                                        <td>
-                                            <a class="name"><c:out value="${awardRecord.content}"/> </a>
-                                        </td>
-                                        <td class="description">
-                                            <c:out value="${awardRecord.date}"/>
-                                        </td>
-                                    </tr>
+                                        <tr class="first">
+                                            <td>
+                                                <a class="name"><c:out value="${awardRecord.content}"/> </a>
+                                            </td>
+                                            <td class="description">
+                                                <c:out value="${awardRecord.date}"/>
+                                            </td>
+                                        </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
@@ -163,52 +164,52 @@
                     </div>
                 </div>
                 <div class="step-pane" id="step4">
-                <div class="row form-wrapper payment-info">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-6">学期
-                                    </th>
-                                    <th class="col-md-6">
-                                        <span class="line"></span>科目
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- row -->
-                                <c:forEach var="failexamRecord" items="${failexamRecords}">
-                                    <tr class="first">
-                                        <td>
-                                            <a class="name"><c:out value="${failexamRecord.term}"/> </a>
-                                        </td>
-                                        <td class="description">
-                                            <c:out value="${failexamRecord.subject}"/>
-                                        </td>
+                    <div class="row form-wrapper payment-info">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-6">学期
+                                        </th>
+                                        <th class="col-md-6">
+                                            <span class="line"></span>科目
+                                        </th>
                                     </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <c:forEach var="failexamRecord" items="${failexamRecords}">
+                                        <tr class="first">
+                                            <td>
+                                                <a class="name"><c:out value="${failexamRecord.term}"/> </a>
+                                            </td>
+                                            <td class="description">
+                                                <c:out value="${failexamRecord.subject}"/>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="wizard-actions">
-                <button type="button" disabled class="btn-glow primary btn-prev">
-                    <i class="icon-chevron-left"></i> 上一级
-                </button>
-                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
-                    下一级 <i class="icon-chevron-right"></i>
-                </button>
-                <button type="button" class="btn-glow success btn-finish">
-                    确认修改
-                </button>
+                <div class="wizard-actions">
+                    <button type="button" disabled class="btn-glow primary btn-prev">
+                        <i class="icon-chevron-left"></i> 上一级
+                    </button>
+                    <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                        下一级 <i class="icon-chevron-right"></i>
+                    </button>
+                    <button type="button" class="btn-glow success btn-finish">
+                        确认修改
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- end main container -->
 

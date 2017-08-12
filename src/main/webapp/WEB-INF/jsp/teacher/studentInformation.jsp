@@ -66,7 +66,7 @@
             url: 'getStudentList',
             dataType: 'json',
             method: 'GET',
-            data: {teacherId: ${userid}},
+            data: {teacherId: ${teacherId}},
             success: function (data) {
                 var result = data.result;
                 if (result = 'success') {
@@ -81,7 +81,7 @@
                             "</td>" +
                             "<td>" +
                             "<ul class=\"actions\">" +
-                            "<li><a href=\"<%=request.getContextPath()%>/auditInformationModifiable?studentId=" + studentList[i].studentId + "\">查看信息</a></li>" +
+                            "<li><a href=\"<%=request.getContextPath()%>/auditInformationModifiable?studentId=\" + studentList[i].studentId +\"&teacherId=\"+${teacherId}+\">查看信息</a></li>" +
                             "</ul>" +
                             "</td>" +
                             "</tr>"
@@ -108,30 +108,6 @@
             console.log('complete');
         });
     });
-    function getInformation(obj) {
-        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
-        studentId = $.trim(studentId);
-        $.ajax({
-            url: 'getInformation',
-            dataType: 'text',
-            method: 'GET',
-            success: function (data) {
-            },
-            error: function (xhr) {
-                // 导致出错的原因较多，以后再研究
-                alert('error:' + JSON.stringify(xhr));
-            }
-        }).done(function (data) {
-            // 请求成功后要做的工作
-            console.log('success');
-        }).fail(function () {
-            // 请求失败后要做的工作
-            console.log('error');
-        }).always(function () {
-            // 不管成功或失败都要做的工作
-            console.log('complete');
-        });
-    }
 </script>
 </body>
 </html>
