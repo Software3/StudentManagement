@@ -93,7 +93,9 @@
             method: 'POST',
             data: JSON.stringify(verify),
             success: function (data) {
-                alert(data.result)
+                if (data.result == "success") {
+                    //操作
+                }
             },
             error: function (xhr) {
                 // 导致出错的原因较多，以后再研究
@@ -129,7 +131,9 @@
             method: 'POST',
             data: JSON.stringify(verify),
             success: function (data) {
-                alert(data.result)
+                if (data.result == "success") {
+                    //操作
+                }
             },
             error: function (xhr) {
                 // 导致出错的原因较多，以后再研究
