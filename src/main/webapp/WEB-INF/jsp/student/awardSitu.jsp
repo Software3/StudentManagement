@@ -117,7 +117,7 @@
             index = $(".myDelete").index($(node));
         }
         var rowTr = $("tbody")[0].rows[index];
-        var content = rowTr.children[0].children[2].innerHTML;
+        var content = rowTr.children[0].children[1].innerHTML;
         var date = trim(rowTr.children[1].innerHTML);
         return [content, date];
     }

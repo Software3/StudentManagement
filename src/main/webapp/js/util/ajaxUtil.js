@@ -259,7 +259,7 @@ function delFailed(node) {
 
 function upFailed(node, values) {
     $("#editModal").empty();
-    $("#editModal").append(model("修改挂科记录", 2, getModelForm(7), function () {
+    $("#editModal").append(model("修改挂科记录", 2, getModelForm(5), function () {
         // 取值
         var term = $("#editTerm")[0].value;
         var subject = $("#editSubject")[0].value;
