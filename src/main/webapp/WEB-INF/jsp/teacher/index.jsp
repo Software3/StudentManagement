@@ -16,5 +16,4 @@
 <%--<script src="js/jquery.uniform.min.js"></script>--%>
 <script src="js/select2.min.js"></script>
 <script src="js/theme.js"></script>
-</body>
-</html>
+<%@include file="../common/teacIncludeBottom.jsp" %>

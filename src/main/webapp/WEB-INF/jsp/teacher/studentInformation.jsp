@@ -109,6 +109,5 @@
         });
     });
 </script>
-</body>
-</html>
+<%@include file="../common/teacIncludeBottom.jsp" %>
 
