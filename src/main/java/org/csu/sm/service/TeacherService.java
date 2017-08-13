@@ -21,6 +21,34 @@ public interface TeacherService {
      */
     List<Student> getStudentList(String teacherId) throws TeacherServiceException;
 
+    /**
+     * 获得指定学生列表通过老师ID和状态
+     *
+     * @param teacherId
+     * @param state
+     * @return
+     * @throws TeacherServiceException
+     */
     List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws TeacherServiceException;
+
+    /**
+     * 指定学生通过审核
+     * 1.改变学生审核状态由1改为2
+     * 2.向审核日志中添加审核通过信息
+     *
+     * @param verifyLog
+     * @throws TeacherServiceException
+     */
+    void auditedPass(VerifyLog verifyLog) throws TeacherServiceException;
+
+    /**
+     * 指定学生不通过审核
+     * 1.改变学生审核状态由1改为3
+     * 2.向审核日志中添加审核不通过信息
+     *
+     * @param verifyLog
+     * @throws TeacherServiceException
+     */
+    void auditedFail(VerifyLog verifyLog) throws TeacherServiceException;
 }
 

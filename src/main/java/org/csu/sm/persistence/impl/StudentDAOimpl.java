@@ -1,6 +1,7 @@
 package org.csu.sm.persistence.impl;
 
 import org.csu.sm.domain.Student;
+import org.csu.sm.domain.VerifyLog;
 import org.csu.sm.persistence.StudentDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
@@ -75,6 +76,15 @@ public class StudentDAOimpl implements StudentDAO {
         List<Student> list = session.createQuery(hql).list();
         transaction.commit();
         return list;
+    }
+
+    public void updateStudentVerifyState(VerifyLog verifyLog, boolean isVerify) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        Student student = session.load(Student.class, verifyLog.getStudentId());
+        student.setVerifyState(isVerify == true ? 2 : 3);
+        session.update(student);
+        transaction.commit();
     }
 
 }

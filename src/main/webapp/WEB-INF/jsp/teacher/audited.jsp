@@ -46,7 +46,7 @@
                             <a href="#" class="name">${student.name} </a>
                         </td>
                         <td class="description">
-                                ${audited.studentId}
+                                ${student.studentId}
                         </td>
                         <td>
                             <ul class="actions">
