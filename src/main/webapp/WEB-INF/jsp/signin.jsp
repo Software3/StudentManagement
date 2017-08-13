@@ -101,7 +101,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
-
+<script src="js/util/userUtil.js"></script>
 <!-- pre load bg imgs -->
 <script type="text/javascript">
     $(function () {
@@ -120,7 +120,7 @@
         $("#login").click(function () {
             var account = $("#account").val()
             var password = $("#password").val();
-            var type = ($("input:radio:checked").val() == 'option1') ? 0 : 1;
+            var type = $("input:radio:checked").val();
             if (!account) {
                 console.log("用户名不能为空");
                 return false;
@@ -130,21 +130,35 @@
                 return false;
             }
 
-            $("#loginForm").submit();
-//            var json = {account: account, password: password, type: type};
-//            $.ajaxSetup({contentType: 'application/json'});
-//            $.ajax({
-//                url: 'login',
-//                dataType: 'json',
-//                method: 'POST',
-//                data: JSON.stringify(json),
-//                success: function (data) {
-//                    console.log(data);
-//                },
-//                error: function (xhr) {
-//
-//                }
-//            })
+//            $("#loginForm").submit();
+            var json = {account: account, password: password, type: type};
+            $.ajaxSetup({contentType: 'application/json'});
+            $.ajax({
+                url: 'loginCheck',
+                dataType: 'json',
+                method: 'POST',
+                data: JSON.stringify(json),
+                success: function (data) {
+                    var result = data.object;
+                    if (result == undefined) {
+                        console.log("登录失败，请重试");
+                        return;
+                    }
+                    if (type == 0) {
+                        result.userid = result.studentId;
+                        saveStudent(result);
+                        window.location.href = '<%=request.getContextPath()%>/shome?userid=' + getStudentId();
+                        return;
+                    } else if (type == 1) {
+                        saveTeacher(result);
+                        window.location.href = '<%=request.getContextPath()%>/teacherhome?teacherId=' + getTeacherId();
+                        return;
+                    }
+                },
+                error: function (xhr) {
+
+                }
+            })
         });
     });
 </script>

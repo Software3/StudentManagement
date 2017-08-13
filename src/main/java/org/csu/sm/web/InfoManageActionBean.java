@@ -36,6 +36,11 @@ public class InfoManageActionBean extends AbstractActionBean {
     }
 
     /************************************** 页面跳转action ************************************/
+    @RequestMapping(value = "/shome", method = RequestMethod.GET)
+    public String showStudentHome() {
+        return "student/basicInfo";
+    }
+
     @RequestMapping(value = "/basicInfo", method = RequestMethod.GET)
     public String showBasicInfo(@RequestParam(value = "userid", defaultValue = "") long studentId,
                                 @RequestParam(value = "authenticated", defaultValue = "true") boolean authenticated,
