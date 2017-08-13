@@ -39,4 +39,12 @@ public interface SignonDAO {
      * @throws PersistenceException
      */
     void updateTeacherSignon(String username, String password) throws PersistenceException;
+
+    /**
+     * 根据学号获取登录信息
+     * @param studentId
+     * @return
+     * @throws PersistenceException
+     */
+    Signon getSignon(Long studentId) throws PersistenceException;
 }

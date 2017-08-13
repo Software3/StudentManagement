@@ -36,31 +36,8 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <a href="#" class="name">王五 </a>
-                    </td>
-                    <td class="description">
-                        3903150328
-                    </td>
-                    <td>
-                        <span class="label label-success">通过</span>
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <a href="#" class="name">玄六 </a>
-                    </td>
-                    <td class="description">
-                        3903150326
-                    </td>
-                    <td>
-                        <span class="label label-danger">未通过</span>
-                    </td>
-                </tr>
+                <tbody id="auditedLog">
+
                 </tbody>
             </table>
         </div>
@@ -76,5 +53,50 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
-</body>
-</html>
+<script>
+    $(function () {
+        $.ajax({
+            url: 'getAuditedLog',
+            dataType: 'json',
+            method: 'GET',
+            data: {teacherId: ${teacherId}},
+            success: function (data) {
+                var result = data.result;
+                var auditedLogList = data.object
+                if (result == 'success') {
+                    for (var i = 0; i < auditedLogList.length; i++) {
+                        var verifyOperate = auditedLogList[i].verifyOperate;
+                        var label = verifyOperate == 1 ? "<span class=\"label label-success\">通过</span>" : "<span class=\"label label-danger\">未通过</span>"
+                        $('#auditedLog').append("<tr class=\"first\">" +
+                            "<td>" +
+                            "<a>" + auditedLogList[i].studentName + "</a>" +
+                            "</td>" +
+                            "<td class=\"description\">" +
+                            auditedLogList[i].studentId +
+                            "</td>" +
+                            "<td>" +
+                            label +
+                            "</td>" +
+                            "</tr>");
+                    }
+                } else {
+                    alert("读取信息失败")
+                }
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    });
+</script>
+<%@include file="../common/teacIncludeBottom.jsp" %>

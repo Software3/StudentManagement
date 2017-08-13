@@ -30,4 +30,21 @@ public interface WithdrawInstDAO {
      * @throws PersistenceException
      */
     List<WithdrawInst> getWithdrawInst(long studentId) throws PersistenceException;
+
+    /**
+     * 获取某条退队说明
+     * @param instId
+     * @return
+     * @throws PersistenceException
+     */
+    WithdrawInst getWithdrawInst(int instId) throws PersistenceException;
+
+     /**
+     * 删除退队说明
+     * @param instId
+     * @param studentId
+     * @return
+     * @throws PersistenceException
+     */
+    WithdrawInst deleteWithdrawInst(int instId, long studentId) throws PersistenceException;
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 51157
@@ -10,8 +11,7 @@
 <div id="pad-wrapper">
     <div class="row filter-block">
         <div class="pull-left">
-            <a class="btn-flat success"
-               href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1">返回</a>
+            <a class="btn-flat success" href="<%=request.getContextPath()%>/studentInformation?teacherId=${teacherId}">返回</a>
         </div>
     </div>
     <div class="row">
@@ -46,55 +46,47 @@
                         <div class="col-md-8">
                             <div class="field-box">
                                 <label>学号:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.studentId}"/>
+                                <input class="form-control" type="text" value="${student.studentId}"/>
                             </div>
-                            <div class=" field-box">
+                            <div class="field-box">
                                 <label>姓名:</label>
-                                <input class="form-control" type="text" readonly="readonly" value="${student.name}"/>
+                                <input class="form-control" type="text" value="${student.name}"/>
                             </div>
                             <div class="field-box">
                                 <label>性别:</label>
-                                <input class="form-control" type="text" readonly="readonly" value="${student.sex}"/>
+                                <input class="form-control" type="text" value="${student.sex}"/>
                             </div>
                             <div class="field-box">
                                 <label>出生日期:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.birthday}"/>
+                                <input class="form-control" type="text" value="${student.birthday}"/>
                             </div>
                             <div class="field-box">
                                 <label>籍贯:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.residence}"/>
+                                <input class="form-control" type="text" value="${student.residence}"/>
                             </div>
                             <div class="field-box">
                                 <label>家庭居住地:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.nativePlace}"/>
+                                <input class="form-control" type="text" value="${student.nativePlace}"/>
                             </div>
                             <div class="field-box">
                                 <label>专业:</label>
-                                <input class="form-control" type="text" readonly="readonly" value="${student.major}"/>
+                                <input class="form-control" type="text" value="${student.major}"/>
                             </div>
                             <div class="field-box">
                                 <label>就业单位:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.employmentUnit}"/>
+                                <input class="form-control" type="text" value="${student.employmentUnit}"/>
                             </div>
                             <div class="field-box">
                                 <label>辅导员姓名:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.counselorName}"/>
+                                <input class="form-control" type="text" value="${student.counselorName}"/>
                             </div>
                             <div class="field-box">
                                 <label>辅导员联系方式:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.counselorPhone}"/>
+                                <input class="form-control" type="text" value="${student.counselorPhone}"/>
                             </div>
                             <div class="field-box">
                                 <label>学生类型:</label>
-                                <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.studentType}"/>
+                                <input class="form-control" type="text" value="${student.studentType}"/>
                             </div>
                         </div>
                     </div>
@@ -117,6 +109,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- row -->
                                     <c:forEach var="parent" items="${parents}">
                                         <tr class="first">
                                             <td>
@@ -131,6 +124,7 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
+                                    <!-- row -->
                                     </tbody>
                                 </table>
                             </div>
@@ -201,6 +195,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="wizard-actions">
                     <button type="button" disabled class="btn-glow primary btn-prev">
                         <i class="icon-chevron-left"></i> 上一级
@@ -209,10 +204,7 @@
                         下一级 <i class="icon-chevron-right"></i>
                     </button>
                     <button type="button" class="btn-glow success btn-finish">
-                        审核通过
-                    </button>
-                    <button type="button" class="btn-glow success btn-finish">
-                        审核不通过
+                        确认修改
                     </button>
                 </div>
             </div>

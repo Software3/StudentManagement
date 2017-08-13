@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
-  User: 51157
-  Date: 2017/8/9
-  Time: 19:15
+  User: lenovo
+  Date: 2017/8/12
+  Time: 20:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="../common/teacIncludeTop.jsp" %>
+<%@include file="../common/includeTop.jsp" %>
 <div id="pad-wrapper">
 
     <!-- products table-->
@@ -14,7 +14,7 @@
     <div class="table-wrapper products-table section">
         <div class="row head">
             <div class="col-md-12">
-                <h4>已审核学生</h4>
+                <h4>审核日志</h4>
             </div>
         </div>
 
@@ -24,7 +24,6 @@
                 <thead>
                 <tr>
                     <th class="col-md-5">
-                        <input type="checkbox">
                         姓名
                     </th>
                     <th class="col-md-5">
@@ -33,30 +32,35 @@
                     </th>
                     <th class="col-md-2">
                         <span class="line"></span>
-                        操作
+                        操作结果
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- row -->
-                <c:forEach var="student" items="${students}">
-                    <tr class="first">
-                        <td>
-                            <input type="checkbox">
-                            <a href="#" class="name">${student.name} </a>
-                        </td>
-                        <td class="description">
-                                ${audited.studentId}
-                        </td>
-                        <td>
-                            <ul class="actions">
-                                <li>
-                                    <a href="<%=request.getContextPath()%>/auditInformation?studentId=${student.studentId}&teacherId=${teacherId}">查看信息</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <tr class="first">
+                    <td>
+                        <a href="#" class="name">王五 </a>
+                    </td>
+                    <td class="description">
+                        3903150328
+                    </td>
+                    <td>
+                        <span class="label label-success">通过</span>
+                    </td>
+                </tr>
+                <!-- row -->
+                <tr class="first">
+                    <td>
+                        <a href="#" class="name">玄六 </a>
+                    </td>
+                    <td class="description">
+                        3903150326
+                    </td>
+                    <td>
+                        <span class="label label-danger">未通过</span>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -69,7 +73,4 @@
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen"/>
 <!-- scripts -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/theme.js"></script>
-<%@include file="../common/teacIncludeBottom.jsp" %>
+<%@include file="../common/includeBottom.jsp" %>

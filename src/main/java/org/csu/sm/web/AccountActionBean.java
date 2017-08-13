@@ -1,15 +1,18 @@
 package org.csu.sm.web;
 
-import org.csu.sm.domain.Signon;
-import org.csu.sm.domain.Student;
-import org.csu.sm.domain.Teacher;
+import org.csu.sm.domain.*;
 import org.csu.sm.exception.action.HandleAccountServiceException;
 import org.csu.sm.exception.service.AccountServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.service.AccountService;
 import org.csu.sm.service.InfoManageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,74 +32,64 @@ public class AccountActionBean extends AbstractActionBean {
         this.accountService = accountService;
     }
 
-    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
-    public String showLoginForm() {
-        return "signin";
-    }
+//    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
+//    public String showLoginForm() {
+//        return "signin";
+//    }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(String account, String password, Integer type) {
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login(String account, String password, Integer type) {
+//        Object object = null;
+//        try {
+//            switch (type) {
+//                case STUDENT:
+//                    object = accountService.studentLogin(new Signon(Long.parseLong(account), password));
+//                    break;
+//                case TEACHER:
+//                    object = accountService.teacherLogin(new Teacher(account, password));
+//                    break;
+//            }
+//            if (object == null) {
+//                return "redirect:/";
+//            }
+//            return type == 0 ? ("redirect:/basicInfo?userid=" + getPrincipal() + "&authenticated=true") : ("redirect:/teacherhome?teacherId=" + account);
+//        } catch (AccountServiceException e) {
+//            throw new HandleAccountServiceException(e);
+//        }
+//    }
+
+    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
         Object object = null;
         try {
-            switch (type) {
+            switch (loginMessage.getType()) {
                 case STUDENT:
-                    object = accountService.studentLogin(new Signon(Long.parseLong(account), password));
+                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
                     break;
                 case TEACHER:
-                    object = accountService.teacherLogin(new Teacher(account, password));
+                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
+                    ((Teacher) object).setPassword("");
                     break;
             }
-            if (object == null) {
-                return "redirect:/";
-            }
-            return type == 0 ? ("redirect:/basicInfo?userid=" + account + "&authenticated=true") : "redirect:/teacherhome";
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
         } catch (AccountServiceException e) {
             throw new HandleAccountServiceException(e);
         }
     }
 
-    @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
-    public String showTeacherHome() {
-        return "teacher/index";
+    @RequestMapping(value = "signin", method = RequestMethod.GET)
+    public String showSignin() {
+        return "signin";
     }
 
-    @RequestMapping(value = "noAudited", method = RequestMethod.GET)
-    public String showNoAudited() {
-        return "teacher/noAudited";
-    }
-
-    @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)
-    public String showteacherBasicInfo() {
-        return "teacher/teacherBasicInfo";
-    }
-
-    @RequestMapping(value = "audited", method = RequestMethod.GET)
-    public String showAudited() {
-        return "teacher/audited";
-    }
-
-    @RequestMapping(value = "uncommitted", method = RequestMethod.GET)
-    public String showUncommitted() {
-        return "teacher/uncommitted";
-    }
-
-    @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
-    public String showAuditedLog() {
-        return "teacher/auditedLog";
-    }
-
-    @RequestMapping(value = "auditInformation", method = RequestMethod.GET)
-    public String showAuditInformation() {
-        return "teacher/auditInformation";
-    }
-
-    @RequestMapping(value = "studentInformation", method = RequestMethod.GET)
-    public String showStudentInformation() {
-        return "teacher/studentInformation";
-    }
-
-    @RequestMapping(value = "studentList", method = RequestMethod.GET)
-    public String showStudentList() {
-        return "teacher/studentList";
+    public String getPrincipal(){
+        String userId=null;
+        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails){
+            userId=((UserDetails) principal).getUsername();
+        }else{
+            userId=principal.toString();
+        }
+        return userId;
     }
 }

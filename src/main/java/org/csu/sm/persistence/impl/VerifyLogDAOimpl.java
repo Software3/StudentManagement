@@ -14,7 +14,7 @@ import java.util.List;
  * Created by ltaoj on 2017/8/8.
  */
 @Repository
-public class VerifyLogDAOimpl implements VerifyLogDAO{
+public class VerifyLogDAOimpl implements VerifyLogDAO {
     public List<VerifyLog> getVerifyLogListByCounselorName(String counselorName) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();

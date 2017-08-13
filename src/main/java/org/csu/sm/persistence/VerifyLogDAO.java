@@ -11,6 +11,7 @@ import java.util.List;
 public interface VerifyLogDAO {
     /**
      * 老师查看审核日志
+     *
      * @param counselorName
      * @return
      * @throws PersistenceException
@@ -19,6 +20,7 @@ public interface VerifyLogDAO {
 
     /**
      * 添加审核日志
+     *
      * @param verifyLog
      * @throws PersistenceException
      */
@@ -26,9 +28,11 @@ public interface VerifyLogDAO {
 
     /**
      * 学生查看审核日志
+     *
      * @param studentId
      * @return
      * @throws PersistenceException
      */
     List<VerifyLog> getVerifyLogListByStudentId(long studentId) throws PersistenceException;
+
 }

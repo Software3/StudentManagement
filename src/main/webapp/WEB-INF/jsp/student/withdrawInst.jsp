@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2017/8/9
-  Time: 13:49
+  Date: 2017/8/12
+  Time: 20:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,13 +14,13 @@
     <div class="table-wrapper products-table section">
         <div class="row head">
             <div class="col-md-12">
-                <h4>挂科情况</h4>
+                <h4>高水平运动员入退队说明</h4>
             </div>
         </div>
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加挂科记录</a>
+                <a class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加入退队说明</a>
             </div>
         </div>
 
@@ -30,10 +30,10 @@
                 <tr>
                     <th class="col-md-3">
                         <input type="checkbox">
-                        学期
+                        图片说明
                     </th>
                     <th class="col-md-3">
-                        <span class="line"></span>科目
+                        <span class="line"></span>文本说明
                     </th>
                     <th class="col-md-3">
                         <span class="line">操作</span>
@@ -42,14 +42,16 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <c:forEach var="failed" items="${failedList}">
+                <c:forEach var="item" items="${withdrawInstList}">
                     <tr class="first">
                         <td>
-                            <input type="checkbox">
-                            <a href="#" class="name"><c:out value="${failed.term}"/></a>
+                            <input type="checkbox" id="inst_${item.instId}">
+                            <div>
+                                <img src="${item.description}" class="img-responsive" />
+                            </div>
                         </td>
                         <td class="description">
-                            <c:out value="${failed.subject}"/>
+                            ${item.comment}
                         </td>
                         <td>
                             <ul class="actions">
@@ -78,29 +80,30 @@
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
 <script src="js/util/ajaxUtil.js"></script>
+<script src="js/uploads/ajaxfileupload.js"></script>
 
 <!-- call this page plugins -->
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#addModal").append(model("添加挂科记录", 2, getModelForm(4), function () {})[0]);
+        $("#addModal").append(model("添加入退队说明", 2, getModelForm(6), function () {})[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
             // 成功后隐藏模态框,弹出提示框，并且刷新界面
-            addFailed();
+            addWithdrawInst();
         });
     });
 
     // delete member
     function deleteRow(node) {
-        delFailed(node)
+        delWithdrawInst(node)
 //        $("tbody")[0].removeChild(rowTr);
     }
 
     function editRow(node) {
         var values = getValues(node, "myEdit");
-        upFailed(node, values);
+        upWithdrawInst(node, values);
     }
 
     /**
@@ -117,10 +120,9 @@
             index = $(".myDelete").index($(node));
         }
         var rowTr = $("tbody")[0].rows[index];
-        console.log(rowTr.children[0])
-        var term = rowTr.children[0].children[1].innerHTML;
-        var subject = trim(rowTr.children[1].innerHTML);
-        return [term, subject];
+        var comment = trim(rowTr.children[1].innerHTML)
+        console.log(comment);
+        return [undefined,comment];
     }
 </script>
 <%@include file="../common/includeBottom.jsp" %>

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by ltaoj on 2017/8/7.
  */
 @Repository
-public class StudentDAOimpl implements StudentDAO{
+public class StudentDAOimpl implements StudentDAO {
 
     public void insertStudent(Student student) throws PersistenceException {
         Session session = HibernateUtil.getSession();
@@ -58,4 +58,23 @@ public class StudentDAOimpl implements StudentDAO{
         transaction.commit();
         return list;
     }
+
+    public List<Student> getStudentListByTeacherId(String teacherId) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Student as s where counselorName=" + teacherId;
+        List<Student> list = session.createQuery(hql).list();
+        transaction.commit();
+        return list;
+    }
+
+    public List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Student as s where counselorName=" + teacherId + "and verifyState=" + state;
+        List<Student> list = session.createQuery(hql).list();
+        transaction.commit();
+        return list;
+    }
+
 }

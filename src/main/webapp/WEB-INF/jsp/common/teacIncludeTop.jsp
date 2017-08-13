@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +51,9 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- persistence js -->
+    <script src="js/util/userUtil.js"></script>
+    <!-- persistence js -->
 </head>
 <body>
 <!-- navbar -->
@@ -138,13 +144,13 @@
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
-            <a href="<%=request.getContextPath()%>/teacherhome>">
+            <a href="<%=request.getContextPath()%>/teacherhome?teacherId=${teacherId}">
                 <i class="icon-home"></i>
                 <span>首页</span>
             </a>
         </li>
         <li>
-            <a class="dropdown-toggle" href="<%=request.getContextPath()%>/teacherBasicInfo">
+            <a class="dropdown-toggle" href="<%=request.getContextPath()%>/teacherBasicInfo?teacherId=${teacherId}">
                 <i class="icon-cog"></i>
                 <span>我的信息</span>
             </a>
@@ -156,8 +162,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="studentList">学生列表</a></li>
-                <li><a href="studentInformation">学生资料</a></li>
+                <li><a href="studentList?teacherId=${teacherId}">学生列表</a></li>
+                <li><a href="studentInformation?teacherId=${teacherId}">学生资料</a></li>
             </ul>
         </li>
         <li>
@@ -167,13 +173,13 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<%=request.getContextPath()%>/noAudited">未审核</a></li>
-                <li><a href="<%=request.getContextPath()%>/uncommitted">未提交</a></li>
-                <li><a href="<%=request.getContextPath()%>/audited">已审核</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1">未审核</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=0">未提交</a></li>
+                <li><a href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=2">已审核</a></li>
             </ul>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/auditedLog">
+            <a href="<%=request.getContextPath()%>/auditedLog?teacherId=${teacherId}">
                 <i class="icon-calendar-empty"></i>
                 <span>审核日志</span>
             </a>

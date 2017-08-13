@@ -116,12 +116,9 @@
 <link rel="stylesheet" href="css/compiled/form-showcase.css" type="text/css" media="screen" />
 <!-- scripts for this page -->
 <script src="js/wysihtml5-0.3.0.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.datepicker.js"></script>
 <script src="js/jquery.uniform.min.js"></script>
 <script src="js/select2.min.js"></script>
-<script src="js/theme.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/ajaxUtil.js"></script>
 <script src="js/util/util.js"></script>
@@ -159,5 +156,4 @@
         });
     });
 </script>
-</body>
-</html>
+<%@include file="../common/includeBottom.jsp" %>

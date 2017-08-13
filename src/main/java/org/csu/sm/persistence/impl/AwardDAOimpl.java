@@ -37,7 +37,7 @@ public class AwardDAOimpl implements AwardDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         AwardRecord awardRecord1 = session.get(AwardRecord.class, new AwardRecordPK(awardRecord.getContent(), awardRecord.getDate(), awardRecord.getStudentId()));
-        if (awardRecord != null) session.delete(awardRecord);
+        if (awardRecord1 != null) session.delete(awardRecord1);
         transaction.commit();
         session.close();
         return awardRecord != null ? awardRecord.getStudentId() : -1;

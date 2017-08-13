@@ -39,39 +39,24 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">张三 </a>
-                    </td>
-                    <td class="description">
-                        3903150327
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">李四 </a>
-                    </td>
-                    <td class="description">
-                        3903150326
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                            <li><a href="#">通过</a></li>
-                            <li class="last"><a href="#">未通过</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="student" items="#{students}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name"><c:out value="${student.name}"/> </a>
+                        </td>
+                        <td class="description">
+                            <c:out value="${student.studentId}"/>
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
+                                <li><a  onclick="pass(this)">通过</a></li>
+                                <li class="last"><a  onclick="fail(this)">未通过</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -87,5 +72,55 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
-</body>
-</html>
+<script>
+    function pass() {
+        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        studentId = $.trim(studentId);
+        $.ajax({
+            url: 'getInformation',
+            dataType: 'text',
+            method: 'GET',
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+
+    function fail() {
+        var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        studentId = $.trim(studentId);
+        $.ajax({
+            url: 'getInformation',
+            dataType: 'text',
+            method: 'GET',
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+</script>
+<%@include file="../common/teacIncludeBottom.jsp" %>
