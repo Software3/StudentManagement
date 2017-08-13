@@ -1,9 +1,3 @@
-var studentId = 3903150326;
-
-function getStudentId() {
-    return studentId;
-}
-
 function updateBasicInfo() {
     var studentId = $("#studentId").val();
     var name = $("#name").val();
@@ -31,8 +25,6 @@ function updateBasicInfo() {
         studentType: studentType,
         remarks: remarks
     };
-    console.log(studentId + " " + name + " " + sex + " " + birthday + " " + nativePlace + " " + residence + " " + major + " " + employmentUnit);
-    console.log(counselorName + " " + counselorPhone + " " + studentType + " " + remarks);
     $.ajaxSetup({contentType: 'application/json'});
     $.ajax({
         url: 'upBasicInfo',
@@ -40,14 +32,10 @@ function updateBasicInfo() {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success")
-            console.log(data);
             $("#myAlert").append(alert("success", "修改成功！"));
         },
         error: function (xhr) {
             $("#myAlert").append(alert("danger", "修改失败！请稍后重试"))
-            console.log("failed")
-            console.log(xhr);
         }
     });
 }
@@ -59,7 +47,6 @@ function addMember() {
     var relation = $("#parentRelation").val() == '父亲' ? 1 : 0;
     var studentId = getStudentId();
     var json = {name: name, phone: phone, relation: relation, studentId: studentId};
-    console.log(json);
     $.ajaxSetup({contentType: 'application/json'});
     $.ajax({
         url: 'addMember',
@@ -67,16 +54,12 @@ function addMember() {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>" + name + "</a> </td> <td class='description'>" + phone + "</td> " +
-                "<td> <span class='label label-success'>" + relation + "</span> </td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
+                "<td> <span class='label label-success'>" + $("#parentRelation").val() + "</span> </td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "添加失败！"));
         }
     })
@@ -97,8 +80,6 @@ function delMember(node) {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $(rowTr).fadeTo("fast", 0.01, function () {
                 $(rowTr).slideUp("fast", function () {
                     $(rowTr).remove();
@@ -107,8 +88,6 @@ function delMember(node) {
             $("#myAlert").append(alert("success", "删除成功！"));
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "删除失败！"));
         }
     })
@@ -130,22 +109,18 @@ function upMember(node, values) {
             method: 'POST',
             data: JSON.stringify(json),
             success: function (data) {
-                console.log("success");
-                console.log(data);
                 // 赋值
                 var index = $(".myEdit").index($(node));
                 var rowTr = $("tbody")[0].rows[index];
                 rowTr.children[0].children[1].innerHTML = name;
                 rowTr.children[1].innerHTML = phone;
-                rowTr.children[2].children[0].innerHTML = relation;
+                rowTr.children[2].children[0].innerHTML = $("#editRelation").val();
 
                 // 隐藏modal，弹出alert
                 $('#editModal').modal('hide');
                 $("#myAlert").append(alert("success", "修改成功！"));
             },
             error: function (xhr) {
-                console.log("failed");
-                console.log(xhr);
                 $("#myAlert").append(alert("danger", "修改失败！"));
             }
         })
@@ -162,17 +137,13 @@ function addAward() {
         url: 'addAward',
         dataType: 'json',
         method: 'POST',
-        data: json,
+        data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>" + content + "</a> </td> <td class='description'>" + date + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "添加失败！"));
         }
     })
@@ -192,8 +163,6 @@ function delAward(node) {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $(rowTr).fadeTo("fast", 0.01, function () {
                 $(rowTr).slideUp("fast", function () {
                     $(rowTr).remove();
@@ -202,8 +171,6 @@ function delAward(node) {
             $("#myAlert").append(alert("success", "删除成功！"));
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "删除失败！"));
         }
     })
@@ -224,8 +191,6 @@ function upAward(node, values) {
             method: 'POST',
             data: JSON.stringify(json),
             success: function (data) {
-                console.log("success");
-                console.log(data);
                 // 赋值
                 var index = $(".myEdit").index($(node));
                 var rowTr = $("tbody")[0].rows[index];
@@ -237,8 +202,6 @@ function upAward(node, values) {
                 $("#myAlert").append(alert("success", "修改成功！"));
             },
             error: function (xhr) {
-                console.log("failed");
-                console.log(xhr);
                 $("#myAlert").append(alert("danger", "修改失败！"));
             }
         })
@@ -257,15 +220,11 @@ function addFailed() {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
             $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>" + term + "</a> </td> <td class='description'>" + subject + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>");
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "添加失败！"));
         }
     })
@@ -285,8 +244,6 @@ function delFailed(node) {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $(rowTr).fadeTo("fast", 0.01, function () {
                 $(rowTr).slideUp("fast", function () {
                     $(rowTr).remove();
@@ -295,8 +252,6 @@ function delFailed(node) {
             $("#myAlert").append(alert("success", "删除成功！"));
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "删除失败！"));
         }
     })
@@ -317,8 +272,6 @@ function upFailed(node, values) {
             method: 'POST',
             data: JSON.stringify(json),
             success: function (data) {
-                console.log("success");
-                console.log(data);
                 // 赋值
                 var index = $(".myEdit").index($(node));
                 var rowTr = $("tbody")[0].rows[index];
@@ -330,8 +283,6 @@ function upFailed(node, values) {
                 $("#myAlert").append(alert("success", "修改成功！"));
             },
             error: function (xhr) {
-                console.log("failed");
-                console.log(xhr);
                 $("#myAlert").append(alert("danger", "修改失败！"));
             }
         })
@@ -342,7 +293,6 @@ function addWithdrawInst() {
     var comment = $("#instComment").val();
     var studentId = getStudentId();
     var json = {comment: comment, studentId: studentId};
-    console.log(json);
     $.ajaxFileUpload({
         url: 'addWithdrawInst',
         secureuri: false,
@@ -377,8 +327,6 @@ function delWithdrawInst(node) {
         method: 'POST',
         data: JSON.stringify(json),
         success: function (data) {
-            console.log("success");
-            console.log(data);
             $(rowTr).fadeTo("fast", 0.01, function () {
                 $(rowTr).slideUp("fast", function () {
                     $(rowTr).remove();
@@ -387,8 +335,6 @@ function delWithdrawInst(node) {
             $("#myAlert").append(alert("success", "删除成功！"));
         },
         error: function (xhr) {
-            console.log("failed");
-            console.log(xhr);
             $("#myAlert").append(alert("danger", "删除失败！"));
         }
     })
@@ -404,7 +350,6 @@ function upWithdrawInst(node, values) {
         var comment = $("#editComment").val();
         var studentId = getStudentId();
         var json = {instId: instId, comment: comment, studentId: studentId};
-        console.log(json);
         $.ajaxFileUpload({
             url: 'upWithdrawInst',
             secureuri: false,
@@ -412,8 +357,6 @@ function upWithdrawInst(node, values) {
             fileElementId: 'editPicture',
             dataType: 'json',
             success: function (data, status) {
-                console.log("success")
-                console.log(data.object);
                 var instList = data.object;
                 $('#editModal').modal('hide');
                 $("tbody").empty();
