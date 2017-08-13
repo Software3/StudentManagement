@@ -1,12 +1,13 @@
 package org.csu.sm.web;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.csu.sm.domain.*;
-import org.csu.sm.exception.action.HandleAccountServiceException;
 import org.csu.sm.exception.action.HandleFileUploadException;
 import org.csu.sm.exception.action.HandleInfoServiceException;
+import org.csu.sm.exception.action.HandleTransationException;
 import org.csu.sm.exception.service.InfoManageServiceException;
+import org.csu.sm.exception.service.TransationException;
 import org.csu.sm.service.InfoManageService;
+import org.csu.sm.util.ConfigUtil;
 import org.csu.sm.util.IOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -207,38 +207,38 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "addWithdrawInst", method = RequestMethod.POST)
     public ResponseEntity<Result> insertWithdrawInst(@RequestPart("instPicture") MultipartFile instPicture,
                                                      WithdrawInst withdrawInst, HttpServletRequest request) throws HandleFileUploadException {
+        String path = request.getSession().getServletContext().getRealPath("upImg");
+        ConfigUtil.setPath(path);
         try {
-            String path = request.getSession().getServletContext().getRealPath("upImg");
-            System.out.println(path);
             String fileName = instPicture.getOriginalFilename();
             String targetName = (new Date().getTime()) + "_" + withdrawInst.getStudentId() + "_" + fileName;
-            System.out.println(targetName);
-            IOUtil.saveFile(targetName, path, instPicture);
-            withdrawInst.setDescription("upImg/" + targetName);
+            String picName = IOUtil.saveFile(targetName, path, instPicture);
+            withdrawInst.setDescription("upImg/" + picName);
             List<WithdrawInst> withdrawInstList =  infoManageService.addWithdrawInstInfo(withdrawInst);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "运动员退队信息添加成功", withdrawInstList), HttpStatus.OK);
         } catch (IOException e) {
             throw new HandleFileUploadException(e);
-        } catch (InfoManageServiceException e) {
-            throw new HandleInfoServiceException(e);
+        } catch (TransationException e) {
+            throw new HandleTransationException(e);
         }
     }
 
     @RequestMapping(value = "upWithdrawInst", method = RequestMethod.POST)
-    public ResponseEntity<Result> upWithdrawInst(@RequestPart("instPicture") MultipartFile instPicture,
+    public ResponseEntity<Result> upWithdrawInst(@RequestPart("editPicture") MultipartFile editPicture,
                                                  WithdrawInst withdrawInst, HttpServletRequest request) throws HandleFileUploadException {
+        String path = request.getSession().getServletContext().getRealPath("upImg");
+        ConfigUtil.setPath(path);
         try {
-            String path = request.getSession().getServletContext().getRealPath("upImg");
-            String fileName = instPicture.getOriginalFilename();
-            String targetName = (new Date().getTime()) + "_" + fileName + "_" + withdrawInst.getStudentId();
-            IOUtil.saveFile(targetName, path, instPicture);
-            withdrawInst.setDescription("upImg/" + targetName);
-            infoManageService.modifyWithdrawInstInfo(withdrawInst);
-            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "运动员退队信息修改成功", null), HttpStatus.OK);
+            String fileName = editPicture.getOriginalFilename();
+            String targetName = (new Date().getTime()) + "_" + withdrawInst.getStudentId() + "_" + fileName;
+            String picName = IOUtil.saveFile(targetName, path, editPicture);
+            if (!picName.equals("")) withdrawInst.setDescription("upImg/" + picName);
+            List<WithdrawInst> withdrawInstList = infoManageService.modifyWithdrawInstInfo(withdrawInst);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "运动员退队信息修改成功", withdrawInstList), HttpStatus.OK);
         } catch (IOException e) {
             throw new HandleFileUploadException(e);
-        } catch (InfoManageServiceException e) {
-            throw new HandleInfoServiceException(e);
+        } catch (TransationException e) {
+            throw new HandleTransationException(e);
         }
     }
 
@@ -246,8 +246,9 @@ public class InfoManageActionBean extends AbstractActionBean {
     public ResponseEntity<Result> deleteWithdrawInst(@RequestBody WithdrawInst withdrawInst, HttpServletRequest request) {
         try {
             WithdrawInst withdrawInst1 = infoManageService.getWithdrawInst(withdrawInst.getInstId());
-            WithdrawInst deletedInst = infoManageService.deleteWithdrawInstInfo(withdrawInst);
+            WithdrawInst deletedInst = infoManageService.deleteWithdrawInstInfo(withdrawInst1);
             String path = request.getSession().getServletContext().getRealPath("upImg");
+            path = path.substring(0, path.lastIndexOf(System.getProperty("file.separator")));
             IOUtil.removeFile(deletedInst.getDescription(), path);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "退队说明删除成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
