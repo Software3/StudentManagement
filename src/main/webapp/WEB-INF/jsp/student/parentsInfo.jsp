@@ -55,7 +55,7 @@
                             <c:out value="${parent.phone}"/>
                         </td>
                         <td>
-                            <span class="label label-success"><c:out value="${parent.relation}"/></span>
+                            <span class="label label-success"><c:if test="${parent.relation == 0}">母亲</c:if> <c:if test="${parent.relation == 1}">父亲</c:if></span>
                         </td>
                         <td>
                             <ul class="actions">
@@ -81,9 +81,6 @@
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
 <!-- scripts -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/theme.js"></script>
 <script src="js/widge/model.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
@@ -133,5 +130,4 @@
     }
 
 </script>
-</body>
-</html>
+<%@include file="../common/includeBottom.jsp" %>

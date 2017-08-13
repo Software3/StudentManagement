@@ -44,6 +44,13 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/theme.js"></script>
+    <!-- persistence js -->
+    <script src="js/util/userUtil.js"></script>
+    <!-- persistence js -->
 </head>
 <body>
 <!-- navbar -->
@@ -138,7 +145,7 @@
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
-            <a href="index.html">
+            <a id="shome">
                 <i class="icon-home"></i>
                 <span>首页</span>
             </a>
@@ -150,11 +157,11 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<%=request.getContextPath()%>/basicInfo">基本信息</a></li>
-                <li><a href="<%=request.getContextPath()%>/parentsInfo">家长信息</a></li>
-                <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
-                <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
-                <li><a href="#">退队说明</a></li>
+                <li><a id="basicInfo">基本信息</a></li>
+                <li><a id="parentsInfo" href="#">家长信息</a></li>
+                <li><a id="awardSitu">奖励情况</a></li>
+                <li><a id="failexamSitu">挂科情况</a></li>
+                <li><a id="withdrawInst">退队说明</a></li>
             </ul>
         </li>
         <li>

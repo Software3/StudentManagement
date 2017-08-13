@@ -74,9 +74,6 @@
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
 <!-- scripts -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/theme.js"></script>
 <script src="js/widge/model.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
@@ -126,5 +123,4 @@
         return [term, subject];
     }
 </script>
-</body>
-</html>
+<%@include file="../common/includeBottom.jsp" %>

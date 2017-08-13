@@ -51,6 +51,9 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!-- persistence js -->
+    <script src="js/util/userUtil.js"></script>
+    <!-- persistence js -->
 </head>
 <body>
 <!-- navbar -->
