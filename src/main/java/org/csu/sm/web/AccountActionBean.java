@@ -1,15 +1,16 @@
 package org.csu.sm.web;
 
-import org.csu.sm.domain.Signon;
-import org.csu.sm.domain.Student;
-import org.csu.sm.domain.Teacher;
+import org.csu.sm.domain.*;
 import org.csu.sm.exception.action.HandleAccountServiceException;
 import org.csu.sm.exception.service.AccountServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.service.AccountService;
 import org.csu.sm.service.InfoManageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,5 +56,22 @@ public class AccountActionBean extends AbstractActionBean {
         }
     }
 
-
+    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
+        Object object = null;
+        try {
+            switch (loginMessage.getType()) {
+                case STUDENT:
+                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
+                    break;
+                case TEACHER:
+                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
+                    ((Teacher) object).setPassword("");
+                    break;
+            }
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
+        } catch (AccountServiceException e) {
+            throw new HandleAccountServiceException(e);
+        }
+    }
 }
