@@ -1,6 +1,7 @@
 package org.csu.sm.persistence.impl;
 
 import org.csu.sm.domain.WithdrawInst;
+import org.csu.sm.exception.service.TransationException;
 import org.csu.sm.persistence.WithdrawInstDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
@@ -26,7 +27,14 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
     public void updateWithdrawInst(WithdrawInst withdrawInst) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.update(withdrawInst);
+        WithdrawInst withdrawInst1 = null;
+        if (withdrawInst.getDescription() == null || withdrawInst.getDescription().equals("")) {
+            withdrawInst1 = session.get(WithdrawInst.class, withdrawInst.getInstId());
+            withdrawInst1.setComment(withdrawInst.getComment());
+            session.update(withdrawInst1);
+        } else {
+            session.update(withdrawInst);
+        }
         transaction.commit();
         session.close();
     }

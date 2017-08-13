@@ -2,6 +2,7 @@ package org.csu.sm.service.impl;
 
 import org.csu.sm.domain.*;
 import org.csu.sm.exception.service.InfoManageServiceException;
+import org.csu.sm.exception.service.TransationException;
 import org.csu.sm.persistence.*;
 import org.csu.sm.service.InfoManageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,12 +103,21 @@ public class InfoManageServiceimpl implements InfoManageService{
         return withdrawInstDAO.getWithdrawInst(instId);
     }
 
-    public void modifyWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException {
-        withdrawInstDAO.updateWithdrawInst(withdrawInst);
+    public List<WithdrawInst> modifyWithdrawInstInfo(WithdrawInst withdrawInst) throws TransationException {
+        try {
+            withdrawInstDAO.updateWithdrawInst(withdrawInst);
+        } catch (RuntimeException e) {
+            throw new TransationException(withdrawInst);
+        }
+        return withdrawInstDAO.getWithdrawInst(withdrawInst.getStudentId());
     }
 
-    public List<WithdrawInst> addWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException {
-        withdrawInstDAO.insertWithdrawInst(withdrawInst);
+    public List<WithdrawInst> addWithdrawInstInfo(WithdrawInst withdrawInst) throws TransationException {
+        try {
+            withdrawInstDAO.insertWithdrawInst(withdrawInst);
+        } catch (RuntimeException e) {
+            throw new TransationException(withdrawInst);
+        }
         return withdrawInstDAO.getWithdrawInst(withdrawInst.getStudentId());
     }
 

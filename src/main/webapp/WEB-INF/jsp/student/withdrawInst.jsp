@@ -30,10 +30,10 @@
                 <tr>
                     <th class="col-md-3">
                         <input type="checkbox">
-                        学期
+                        图片说明
                     </th>
                     <th class="col-md-3">
-                        <span class="line"></span>科目
+                        <span class="line"></span>文本说明
                     </th>
                     <th class="col-md-3">
                         <span class="line">操作</span>
@@ -42,23 +42,25 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <div>
-                            <img src="img/gallery3.jpg" class="img-responsive" />
-                        </div>
-                    </td>
-                    <td class="description">
-                        哈哈啥多撒大所大所大所大所大所大所大所大所大所大所大所大所大所大所大所多撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                    </td>
-                    <td>
-                        <ul class="actions">
-                            <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
-                            <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
-                        </ul>
-                    </td>
-                </tr>
+                <c:forEach var="item" items="${withdrawInstList}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox" id="inst_${item.instId}">
+                            <div>
+                                <img src="${item.description}" class="img-responsive" />
+                            </div>
+                        </td>
+                        <td class="description">
+                            ${item.comment}
+                        </td>
+                        <td>
+                            <ul class="actions">
+                                <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
+                                <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -87,7 +89,7 @@
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#addModal").append(model("添加挂科记录", 2, getModelForm(6), function () {})[0]);
+        $("#addModal").append(model("添加入退队说明", 2, getModelForm(6), function () {})[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
@@ -98,13 +100,13 @@
 
     // delete member
     function deleteRow(node) {
-        delFailed(node)
+        delWithdrawInst(node)
 //        $("tbody")[0].removeChild(rowTr);
     }
 
     function editRow(node) {
         var values = getValues(node, "myEdit");
-        upFailed(node, values);
+        upWithdrawInst(node, values);
     }
 
     /**
@@ -121,10 +123,9 @@
             index = $(".myDelete").index($(node));
         }
         var rowTr = $("tbody")[0].rows[index];
-        console.log(rowTr.children[0])
-        var term = rowTr.children[0].children[1].innerHTML;
-        var subject = trim(rowTr.children[1].innerHTML);
-        return [term, subject];
+        var comment = trim(rowTr.children[1].innerHTML)
+        console.log(comment);
+        return [undefined,comment];
     }
 </script>
 </body>

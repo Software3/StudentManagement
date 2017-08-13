@@ -2,7 +2,7 @@ package org.csu.sm.service;
 
 import org.csu.sm.domain.*;
 import org.csu.sm.exception.service.InfoManageServiceException;
-import org.springframework.stereotype.Controller;
+import org.csu.sm.exception.service.TransationException;
 
 import java.util.List;
 
@@ -139,7 +139,7 @@ public interface InfoManageService {
      * @param withdrawInst
      * @throws InfoManageServiceException
      */
-    void modifyWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException;
+    List<WithdrawInst> modifyWithdrawInstInfo(WithdrawInst withdrawInst) throws TransationException;
 
     /**
      * 添加退队说明
@@ -147,7 +147,7 @@ public interface InfoManageService {
      * @return
      * @throws InfoManageServiceException
      */
-    List<WithdrawInst> addWithdrawInstInfo(WithdrawInst withdrawInst) throws InfoManageServiceException;
+    List<WithdrawInst> addWithdrawInstInfo(WithdrawInst withdrawInst) throws TransationException;
 
     /**
      * 删除退队说明

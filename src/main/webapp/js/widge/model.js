@@ -18,8 +18,8 @@ var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholde
         {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目'}],
     [{label: '说明图片:', id: 'instPicture', type: 'file', placeholder: '请上传说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'instPicture'},
         {label: '说明文字:', id: 'instComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}],
-    [{label: '说明图片:', id: 'editDescribe', type: 'file', placeholder: '请修改说明图片', accept: 'image/jpeg,image/png,image/gif', name: ''},
-        {label: '说明文字', id: 'editComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}]];
+    [{label: '说明图片:', id: 'editPicture', type: 'file', placeholder: '请修改说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'editPicture'},
+        {label: '说明文字:', id: 'editComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}]];
 
 /**
  * 通过传入下标值获取模态框样式
