@@ -89,8 +89,7 @@
                     <div class="field-box">
                         <label>学生类型:</label>
                         <div class="col-md-7">
-                            <input id="studentType" class="form-control inline-input" type="text" readonly="readonly" value="<c:if test="${student.studentType == 0}">本科生</c:if>
-                            <c:if test="${student.studentType == 1}">研究生</c:if><c:if test="${student.studentType == 2}">高水平运动员</c:if>" />
+                            <input id="studentType" class="form-control inline-input" type="text" readonly="readonly" value="<c:if test="${student.studentType == 0}">本科生</c:if><c:if test="${student.studentType == 1}">研究生</c:if><c:if test="${student.studentType == 2}">高水平运动员</c:if>" />
                         </div>
                     </div>
                     <div class="field-box">

@@ -28,14 +28,23 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th class="col-md-3">
+                    <th class="col-md-2">
                         <input type="checkbox">
                         获奖名称
                     </th>
-                    <th class="col-md-3">
+                    <th class="col-md-2">
                         <span class="line"></span>获奖时间
                     </th>
-                    <th class="col-md-3">
+                    <th class="col-md-2">
+                        <span class="line"></span>获奖等级
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>获奖级别
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>获奖排名
+                    </th>
+                    <th class="col-md-2">
                         <span class="line">操作</span>
                     </th>
                 </tr>
@@ -50,6 +59,15 @@
                         </td>
                         <td class="description">
                             <c:out value="${award.date}"/>
+                        </td>
+                        <td class="description">
+                            <c:out value="${award.degree}"/>
+                        </td>
+                        <td class="description">
+                            <c:out value="${award.level}"/>
+                        </td>
+                        <td class="description">
+                            <c:out value="${award.rank}"/>
                         </td>
                         <td>
                             <ul class="actions">
@@ -83,7 +101,7 @@
 <script type="text/javascript">
     $(function () {
         // init modal
-        $("#addModal").append(model("添加获奖记录", 2, getModelForm(2), function () {})[0]);
+        $("#addModal").append(model("添加获奖记录", 5, getModelForm(2), function () {})[0]);
 
         // add new member
         $("#confirmAdd").click(function () {
@@ -119,7 +137,10 @@
         var rowTr = $("tbody")[0].rows[index];
         var content = rowTr.children[0].children[1].innerHTML;
         var date = trim(rowTr.children[1].innerHTML);
-        return [content, date];
+        var degree = trim(rowTr.children[2].innerHTML);
+        var level = trim(rowTr.children[3].innerHTML);
+        var rank = trim(rowTr.children[4].innerHTML);
+        return [content, date, degree, level, rank];
     }
 </script>
 <%@include file="../common/includeBottom.jsp" %>
