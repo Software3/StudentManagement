@@ -165,6 +165,7 @@
             <ul class="submenu">
                 <li><a href="studentList?teacherId=${teacherId}">学生列表</a></li>
                 <li><a href="studentInformation?teacherId=${teacherId}">学生资料</a></li>
+                <li><a href="searchStudent?teacherId=${teacherId}">学生检索</a></li>
             </ul>
         </li>
         <li>

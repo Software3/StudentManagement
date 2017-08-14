@@ -1,8 +1,12 @@
 package org.csu.sm.persistence;
 
+import org.csu.sm.domain.SearchInfo;
+import org.csu.sm.domain.Student;
 import org.csu.sm.domain.Teacher;
+import org.springframework.security.access.method.P;
 
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 /**
  * Created by ltaoj on 2017/8/7.
@@ -22,4 +26,11 @@ public interface TeacherDAO {
      * @throws PersistenceException
      */
     Teacher getTeacher(String username) throws PersistenceException;
+
+    /**
+     * 条件检索学生信息
+     * @return
+     * @throws PersistenceException
+     */
+    List<Student> getSearchStudents(String hql) throws PersistenceException;
 }
