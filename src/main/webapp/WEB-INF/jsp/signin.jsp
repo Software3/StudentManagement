@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.css">
 
     <!-- open sans font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <%--<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>--%>
 
     <![endif]-->
 </head>
@@ -76,11 +76,11 @@
             <form id="loginForm" method="post" name="f" action="${loginUrl}">
                 <input id="account" name="username" class="form-control" type="text" placeholder="学号">
                 <input id="password" name="password" class="form-control" type="password" placeholder="密码">
-                <input type="radio" name="type" id="optionsRadios1" value="0" onclick="whichLogin()">
-                学生登录
-                <input type="radio" name="type" id="optionsRadios2" value="1" onclick="whichLogin()">
-                教师登录
-                <a href="#" class="forgot">忘记密码?</a>
+                <%--<input type="radio" name="type" id="optionsRadios1" value="0" onclick="whichLogin()">--%>
+                <%--学生登录--%>
+                <%--<input type="radio" name="type" id="optionsRadios2" value="1" onclick="whichLogin()">--%>
+                <%--教师登录--%>
+                <%--<a href="#" class="forgot">忘记密码?</a>--%>
                 <%--<div class="remember">--%>
                     <%--<input id="remember-me" type="checkbox">--%>
                     <%--<label for="remember-me">记住密码</label>--%>
@@ -106,14 +106,14 @@
 <script src="js/util/userUtil.js"></script>
 <!-- pre load bg imgs -->
 <script type="text/javascript">
-    function whichLogin() {
-        var type=$('input[name="type"]:checked').val();
-        if(type==0){
-            window.location.href = '<%=request.getContextPath()%>/';
-        }else{
-            window.location.href = '<%=request.getContextPath()%>/teacherhome';
-        }
-    }
+    <%--function whichLogin() {--%>
+        <%--var type=$('input[name="type"]:checked').val();--%>
+        <%--if(type==0){--%>
+            <%--window.location.href = '<%=request.getContextPath()%>/';--%>
+        <%--}else{--%>
+            <%--window.location.href = '<%=request.getContextPath()%>/teacherhome';--%>
+        <%--}--%>
+    <%--}--%>
     <%--$(function () {--%>
         <%--// bg switcher--%>
         <%--var $btns = $(".bg-switch .bg");--%>
