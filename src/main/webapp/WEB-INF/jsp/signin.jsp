@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html class="login-bg">
 <head>
@@ -72,19 +73,20 @@
     <div class="box">
         <div class="content-wrap">
             <h6>登录</h6>
-            <form id="loginForm" method="post" action="<%=request.getContextPath()%>/login">
-                <input id="account" name="account" class="form-control" type="text" placeholder="学号">
+            <form id="loginForm" method="post" name="f" action="${loginUrl}">
+                <input id="account" name="username" class="form-control" type="text" placeholder="学号">
                 <input id="password" name="password" class="form-control" type="password" placeholder="密码">
-                <input type="radio" name="type" id="optionsRadios1" value="0" checked>
+                <input type="radio" name="type" id="optionsRadios1" value="0" onclick="whichLogin()">
                 学生登录
-                <input type="radio" name="type" id="optionsRadios2" value="1">
+                <input type="radio" name="type" id="optionsRadios2" value="1" onclick="whichLogin()">
                 教师登录
                 <a href="#" class="forgot">忘记密码?</a>
                 <%--<div class="remember">--%>
                     <%--<input id="remember-me" type="checkbox">--%>
                     <%--<label for="remember-me">记住密码</label>--%>
                 <%--</div>--%>
-                <a class="btn-glow primary login" id="login">登录</a>
+                <%--<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>--%>
+                <button class="btn-glow primary login" id="login" type="submit">登录</button>
             </form>
         </div>
     </div>
@@ -104,63 +106,71 @@
 <script src="js/util/userUtil.js"></script>
 <!-- pre load bg imgs -->
 <script type="text/javascript">
-    $(function () {
-        // bg switcher
-        var $btns = $(".bg-switch .bg");
-        $btns.click(function (e) {
-            e.preventDefault();
-            $btns.removeClass("active");
-            $(this).addClass("active");
-            var bg = $(this).data("img");
+    function whichLogin() {
+        var type=$('input[name="type"]:checked').val();
+        if(type==0){
+            window.location.href = '<%=request.getContextPath()%>/';
+        }else{
+            window.location.href = '<%=request.getContextPath()%>/teacherhome';
+        }
+    }
+    <%--$(function () {--%>
+        <%--// bg switcher--%>
+        <%--var $btns = $(".bg-switch .bg");--%>
+        <%--$btns.click(function (e) {--%>
+            <%--e.preventDefault();--%>
+            <%--$btns.removeClass("active");--%>
+            <%--$(this).addClass("active");--%>
+            <%--var bg = $(this).data("img");--%>
 
-            $("html").css("background-image", "url('img/bgs/" + bg + "')");
-        });
+            <%--$("html").css("background-image", "url('img/bgs/" + bg + "')");--%>
+        <%--});--%>
 
-        // login
-        $("#login").click(function () {
-            var account = $("#account").val()
-            var password = $("#password").val();
-            var type = $("input:radio:checked").val();
-            if (!account) {
-                console.log("用户名不能为空");
-                return false;
-            }
-            if (!password) {
-                console.log("密码不能为空");
-                return false;
-            }
+        <%--// login--%>
+        <%--$("#login").click(function () {--%>
+            <%--var account = $("#account").val()--%>
+            <%--var password = $("#password").val();--%>
+            <%--var type = $("input:radio:checked").val();--%>
+            <%--if (!account) {--%>
+                <%--console.log("用户名不能为空");--%>
+                <%--return false;--%>
+            <%--}--%>
+            <%--if (!password) {--%>
+                <%--console.log("密码不能为空");--%>
+                <%--return false;--%>
+            <%--}--%>
 
-//            $("#loginForm").submit();
-            var json = {account: account, password: password, type: type};
-            $.ajaxSetup({contentType: 'application/json'});
-            $.ajax({
-                url: 'loginCheck',
-                dataType: 'json',
-                method: 'POST',
-                data: JSON.stringify(json),
-                success: function (data) {
-                    var result = data.object;
-                    if (result == undefined) {
-                        console.log("登录失败，请重试");
-                        return;
-                    }
-                    if (type == 0) {
-                        result.userid = result.studentId;
-                        saveStudent(result);
-                        window.location.href = '<%=request.getContextPath()%>/shome?userid=' + getStudentId();
-                        return;
-                    } else if (type == 1) {
-                        saveTeacher(result);
-                        window.location.href = '<%=request.getContextPath()%>/teacherhome?teacherId=' + getTeacherId();
-                        return;
-                    }
-                },
-                error: function (xhr) {
+<%--//            $("#loginForm").submit();--%>
+            <%--var json = {account: account, password: password, type: type};--%>
+            <%--$.ajaxSetup({contentType: 'application/json'});--%>
+            <%--$.ajax({--%>
+                <%--url: 'loginCheck',--%>
+                <%--dataType: 'json',--%>
+                <%--method: 'POST',--%>
+                <%--data: JSON.stringify(json),--%>
+                <%--success: function (data) {--%>
+                    <%--var result = data.object;--%>
+                    <%--if (result == undefined) {--%>
+                        <%--console.log("登录失败，请重试");--%>
+                        <%--return;--%>
+                    <%--}--%>
+                    <%--if (type == 0) {--%>
+                        <%--result.userid = result.studentId;--%>
+                        <%--saveStudent(result);--%>
+                        <%--window.location.href = '<%=request.getContextPath()%>/shome?userid=' + getStudentId();--%>
+                        <%--return;--%>
+                    <%--} else if (type == 1) {--%>
+                        <%--saveTeacher(result);--%>
+                        <%--window.location.href = '<%=request.getContextPath()%>/teacherhome?teacherId=' + getTeacherId();--%>
+                        <%--return;--%>
+                    <%--}--%>
+                <%--},--%>
+                <%--error: function (xhr) {--%>
 
-                }
-            })
-        });
-    });
+                <%--}--%>
+            <%--})--%>
+        <%--});--%>
+    <%--});--%>
 </script>
 </body>
 </html>

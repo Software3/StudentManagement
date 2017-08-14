@@ -49,4 +49,11 @@ public class SignonDAOimpl implements SignonDAO{
         session.update(teacher);
         transaction.commit();
     }
+
+    public Signon getSignon(Long studentId) throws PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Signon signon=session.get(Signon.class,studentId);
+        session.close();
+        return signon;
+    }
 }

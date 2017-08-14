@@ -119,7 +119,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a href="#">基本信息</a></li>
-                <li><a href="#">退出登录</a></li>
+                <li><a href="<%=request.getContextPath()%>/logout">退出登录</a></li>
             </ul>
         </li>
         <li class="settings hidden-xs hidden-sm">
@@ -128,7 +128,7 @@
             </a>
         </li>
         <li class="settings hidden-xs hidden-sm">
-            <a href="signin.html" role="button">
+            <a href="<%=request.getContextPath()%>/logout" role="button">
                 <i class="icon-share-alt"></i>
             </a>
         </li>

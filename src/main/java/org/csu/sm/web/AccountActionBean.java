@@ -9,11 +9,18 @@ import org.csu.sm.service.InfoManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by ltaoj on 2017/8/8.
@@ -30,48 +37,62 @@ public class AccountActionBean extends AbstractActionBean {
         this.accountService = accountService;
     }
 
-    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
-    public String showLoginForm() {
+//    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
+//    public String showLoginForm() {
+//        return "signin";
+//    }
+
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login(String account, String password, Integer type) {
+//        Object object = null;
+//        try {
+//            switch (type) {
+//                case STUDENT:
+//                    object = accountService.studentLogin(new Signon(Long.parseLong(account), password));
+//                    break;
+//                case TEACHER:
+//                    object = accountService.teacherLogin(new Teacher(account, password));
+//                    break;
+//            }
+//            if (object == null) {
+//                return "redirect:/";
+//            }
+//            return type == 0 ? ("redirect:/basicInfo?userid=" + getPrincipal() + "&authenticated=true") : ("redirect:/teacherhome?teacherId=" + account);
+//        } catch (AccountServiceException e) {
+//            throw new HandleAccountServiceException(e);
+//        }
+//    }
+
+//    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+//    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
+//        Object object = null;
+//        try {
+//            switch (loginMessage.getType()) {
+//                case STUDENT:
+//                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
+//                    break;
+//                case TEACHER:
+//                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
+//                    ((Teacher) object).setPassword("");
+//                    break;
+//            }
+//            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
+//        } catch (AccountServiceException e) {
+//            throw new HandleAccountServiceException(e);
+//        }
+//    }
+
+    @RequestMapping(value = "signin", method = RequestMethod.GET)
+    public String showSignin() {
         return "signin";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(String account, String password, Integer type) {
-        Object object = null;
-        try {
-            switch (type) {
-                case STUDENT:
-                    object = accountService.studentLogin(new Signon(Long.parseLong(account), password));
-                    break;
-                case TEACHER:
-                    object = accountService.teacherLogin(new Teacher(account, password));
-                    break;
-            }
-            if (object == null) {
-                return "redirect:/";
-            }
-            return type == 0 ? ("redirect:/basicInfo?userid=" + account + "&authenticated=true") : ("redirect:/teacherhome?teacherId=" + account);
-        } catch (AccountServiceException e) {
-            throw new HandleAccountServiceException(e);
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-    }
-
-    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
-    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
-        Object object = null;
-        try {
-            switch (loginMessage.getType()) {
-                case STUDENT:
-                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
-                    break;
-                case TEACHER:
-                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
-                    ((Teacher) object).setPassword("");
-                    break;
-            }
-            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
-        } catch (AccountServiceException e) {
-            throw new HandleAccountServiceException(e);
-        }
+        return "redirect:/signin?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
 }

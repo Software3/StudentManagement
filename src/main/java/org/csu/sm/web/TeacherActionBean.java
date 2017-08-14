@@ -10,6 +10,8 @@ import org.csu.sm.service.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,21 +38,34 @@ public class TeacherActionBean {
         this.teacherService = teacherService;
     }
 
+    public String getPrincipal(){
+        String userId=null;
+        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails){
+            userId=((UserDetails) principal).getUsername();
+        }else{
+            userId=principal.toString();
+        }
+        return userId;
+    }
+
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
-    public String showTeacherHome(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showTeacherHome(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                   Model model) {
-        model.addAttribute("teacherId", teacherId);
+        model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
         return "teacher/index";
     }
 
     @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)
-    public String showteacherBasicInfo(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showteacherBasicInfo(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                        Model model) {
         try {
-            Teacher teacher = infoManageService.getTeacherInfo(teacherId);
+            Teacher teacher = infoManageService.getTeacherInfo(getPrincipal());
             model.addAttribute("teacher", teacher);
             model.addAttribute("collegeList", Constant.getColleges());
-            model.addAttribute("teacherId", teacherId);
+            model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
         } catch (InfoManageServiceException e) {
             e.printStackTrace();
         }
@@ -61,18 +76,19 @@ public class TeacherActionBean {
     /**
      * 审核学生
      *
-     * @param teacherId
+     * @param
      * @param model
      * @return
      */
     @RequestMapping(value = "verify", method = RequestMethod.GET)
-    public String showAudited(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showAudited(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                               @RequestParam(value = "state", defaultValue = "") String state,
                               Model model) {
         try {
-            List<Student> students = teacherService.getStudentListByTeacherIdAndState(teacherId, state);
+            List<Student> students = teacherService.getStudentListByTeacherIdAndState(getPrincipal(), state);
             model.addAttribute("students", students);
-            model.addAttribute("teacherId", teacherId);
+            model.addAttribute("teacherId", getPrincipal());
         } catch (TeacherServiceException e) {
             e.printStackTrace();
         }
@@ -80,9 +96,10 @@ public class TeacherActionBean {
     }
 
     @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
-    public String showAuditedLog(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showAuditedLog(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                  Model model) {
-        model.addAttribute("teacherId", teacherId);
+        model.addAttribute("teacherId", getPrincipal());
         return "teacher/auditedLog";
     }
 
@@ -114,16 +131,18 @@ public class TeacherActionBean {
     }
 
     @RequestMapping(value = "studentInformation", method = RequestMethod.GET)
-    public String showStudentInformation(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showStudentInformation(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                          Model model) {
-        model.addAttribute("teacherId", teacherId);
+        model.addAttribute("teacherId", getPrincipal());
         return "teacher/studentInformation";
     }
 
     @RequestMapping(value = "studentList", method = RequestMethod.GET)
-    public String showStudentList(@RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+    public String showStudentList(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
                                   Model model) {
-        model.addAttribute("teacherId", teacherId);
+        model.addAttribute("teacherId", getPrincipal());
         return "teacher/studentList";
     }
 

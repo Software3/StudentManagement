@@ -13,7 +13,8 @@ public class Signon {
     private long studentId;
     @Column(name = "password")
     private String password;
-
+    @Column(name = "authorities")
+    private String authorities;
     public Signon() {
     }
 
@@ -36,6 +37,14 @@ public class Signon {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
     }
 
     @Override
