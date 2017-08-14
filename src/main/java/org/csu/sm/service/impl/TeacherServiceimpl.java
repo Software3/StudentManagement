@@ -43,4 +43,8 @@ public class TeacherServiceimpl implements TeacherService {
         verifyLogDAO.insertVerifyLog(verifyLog);
     }
 
+    public void insertStudentList(List<Student> students) throws TeacherServiceException {
+        studentDAO.insertStudentList(students);
+    }
+
 }

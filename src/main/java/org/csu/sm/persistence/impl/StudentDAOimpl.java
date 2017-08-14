@@ -87,4 +87,19 @@ public class StudentDAOimpl implements StudentDAO {
         transaction.commit();
     }
 
+    public void insertStudentList(List<Student> students) throws PersistenceException {
+        try {
+            Session session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            for (int i = 0; i < students.size(); i++) {
+                session.save(students.get(i));
+            }
+            transaction.commit();
+            session.close();
+        } catch (RuntimeException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+
 }

@@ -38,13 +38,13 @@ public class TeacherActionBean {
         this.teacherService = teacherService;
     }
 
-    public String getPrincipal(){
-        String userId=null;
-        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof UserDetails){
-            userId=((UserDetails) principal).getUsername();
-        }else{
-            userId=principal.toString();
+    public String getPrincipal() {
+        String userId = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userId = ((UserDetails) principal).getUsername();
+        } else {
+            userId = principal.toString();
         }
         return userId;
     }
@@ -52,7 +52,7 @@ public class TeacherActionBean {
     @RequestMapping(value = "teacherhome", method = RequestMethod.GET)
     public String showTeacherHome(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                                  Model model) {
+            Model model) {
         model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
         return "teacher/index";
     }
@@ -60,10 +60,10 @@ public class TeacherActionBean {
     @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)
     public String showteacherBasicInfo(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                                       Model model) {
+            Model model) {
         try {
             Teacher teacher = infoManageService.getTeacherInfo(getPrincipal());
-            System.out.println(teacher.getName()+" "+teacher.getEmail());
+            System.out.println(teacher.getName() + " " + teacher.getEmail());
             model.addAttribute("teacher", teacher);
             model.addAttribute("collegeList", Constant.getColleges());
             model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
@@ -84,8 +84,8 @@ public class TeacherActionBean {
     @RequestMapping(value = "verify", method = RequestMethod.GET)
     public String showAudited(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                              @RequestParam(value = "state", defaultValue = "") String state,
-                              Model model) {
+            @RequestParam(value = "state", defaultValue = "") String state,
+            Model model) {
         try {
             List<Student> students = teacherService.getStudentListByTeacherIdAndState(getPrincipal(), state);
             model.addAttribute("students", students);
@@ -99,7 +99,7 @@ public class TeacherActionBean {
     @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
     public String showAuditedLog(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                                 Model model) {
+            Model model) {
         model.addAttribute("teacherId", getPrincipal());
         return "teacher/auditedLog";
     }
@@ -134,7 +134,7 @@ public class TeacherActionBean {
     @RequestMapping(value = "studentInformation", method = RequestMethod.GET)
     public String showStudentInformation(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                                         Model model) {
+            Model model) {
         model.addAttribute("teacherId", getPrincipal());
         return "teacher/studentInformation";
     }
@@ -142,7 +142,7 @@ public class TeacherActionBean {
     @RequestMapping(value = "studentList", method = RequestMethod.GET)
     public String showStudentList(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
-                                  Model model) {
+            Model model) {
         model.addAttribute("teacherId", getPrincipal());
         return "teacher/studentList";
     }
@@ -174,6 +174,16 @@ public class TeacherActionBean {
             e.printStackTrace();
         }
         return "teacher/auditInformationModifiable";
+    }
+
+    /**
+     * 老师请求老师管理界面
+     *
+     * @return
+     */
+    @RequestMapping(value = "studentManagement", method = RequestMethod.GET)
+    public String showauditInformationModifiable() {
+        return "teacher/studentManagement";
     }
 
     /*******************************************异步请求****************************************************/
@@ -251,4 +261,14 @@ public class TeacherActionBean {
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "importInfo", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<Result> importInfo(@RequestBody List<Student> students) {
+        try {
+            teacherService.insertStudentList(students);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS), HttpStatus.OK);
+        } catch (TeacherServiceException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
+    }
 }

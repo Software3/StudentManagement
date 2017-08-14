@@ -78,5 +78,13 @@ public interface StudentDAO {
      * @param verifyLog
      * @throws PersistenceException
      */
-    void updateStudentVerifyState(VerifyLog verifyLog,boolean isVerify) throws PersistenceException;
+    void updateStudentVerifyState(VerifyLog verifyLog, boolean isVerify) throws PersistenceException;
+
+    /**
+     * 添加学生列表
+     *
+     * @param students
+     * @throws PersistenceException
+     */
+    void insertStudentList(List<Student> students) throws PersistenceException;
 }
