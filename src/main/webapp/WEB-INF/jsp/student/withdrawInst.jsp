@@ -55,6 +55,7 @@
                         </td>
                         <td>
                             <ul class="actions">
+                                <li><a class="viewPic" onclick="viewInstPic(this)" data-toggle="modal" href="#viewModal">查看图片</a></li>
                                 <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
                                 <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
                             </ul>

@@ -383,6 +383,9 @@ function upWithdrawInst(node, values) {
     }, values)[0]);
 }
 
+function viewInstPic(node) {
+
+}
 function checkPassword() {
     var studentId=$('#studentId').val();
     var password=$('#old_password').val();
