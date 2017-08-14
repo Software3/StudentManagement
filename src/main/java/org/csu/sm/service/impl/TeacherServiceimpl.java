@@ -48,21 +48,25 @@ public class TeacherServiceimpl implements TeacherService {
     }
 
     public List<Student> getSearchStudents(SearchInfo searchInfo) throws TeacherServiceException {
-        String hql="from Student as s where counselorName=" + searchInfo.getCounselorName();
-        if(searchInfo.getStudentId()!=null){
-            hql+=" and studentId="+searchInfo.getStudentId();
-        }else if(searchInfo.getName()!=""){
-            hql+=" and name='"+searchInfo.getName()+"'";
-        }else if(searchInfo.getNativePlace()!=""){
-            hql+=" and nativePlace='"+searchInfo.getNativePlace()+"'";
-        }else if(searchInfo.getMajor()!=""){
-            hql+=" and major='"+searchInfo.getMajor()+"'";
-        }else if(searchInfo.getType()!=""){
-            hql+=" and studentType='"+searchInfo.getType()+"'";
+        String hql = "from Student as s where counselorName=" + searchInfo.getCounselorName();
+        if (searchInfo.getStudentId() != null) {
+            hql += " and studentId=" + searchInfo.getStudentId();
+        } else if (searchInfo.getName() != "") {
+            hql += " and name='" + searchInfo.getName() + "'";
+        } else if (searchInfo.getNativePlace() != "") {
+            hql += " and nativePlace='" + searchInfo.getNativePlace() + "'";
+        } else if (searchInfo.getMajor() != "") {
+            hql += " and major='" + searchInfo.getMajor() + "'";
+        } else if (searchInfo.getType() != "") {
+            hql += " and studentType='" + searchInfo.getType() + "'";
         }
         System.out.println(hql);
-        List<Student> list=teacherDAO.getSearchStudents(hql);
+        List<Student> list = teacherDAO.getSearchStudents(hql);
         return list;
+    }
+
+    public void insertStudentList(List<Student> students) throws TeacherServiceException {
+        studentDAO.insertStudentList(students);
     }
 
 }

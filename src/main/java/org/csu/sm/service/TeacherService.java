@@ -55,10 +55,11 @@ public interface TeacherService {
 
     /**
      * 条件检索学生信息
-     * @param hql
      * @return
      * @throws TeacherServiceException
      */
     List<Student> getSearchStudents(SearchInfo searchInfo) throws TeacherServiceException;
+
+    void insertStudentList(List<Student> students) throws TeacherServiceException;
 }
 
