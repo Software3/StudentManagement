@@ -120,7 +120,9 @@
                 <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
                 <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
                 <li><a href="#">退队说明</a></li>
+                <li><a href="<%=request.getContextPath()%>/changePassword">密码修改</a></li>
                 <li><a href="<%=request.getContextPath()%>/logout">退出登录</a></li>
+
             </ul>
         </li>
         <li class="settings hidden-xs hidden-sm">
@@ -162,6 +164,7 @@
                 <li><a id="awardSitu">奖励情况</a></li>
                 <li><a id="failexamSitu">挂科情况</a></li>
                 <li><a id="withdrawInst">退队说明</a></li>
+                <li><a id="changePassword" href="/changePassword">密码修改</a></li>
             </ul>
         </li>
         <li>

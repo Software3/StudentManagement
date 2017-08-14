@@ -4,8 +4,10 @@ import org.csu.sm.domain.*;
 import org.csu.sm.exception.action.HandleFileUploadException;
 import org.csu.sm.exception.action.HandleInfoServiceException;
 import org.csu.sm.exception.action.HandleTransationException;
+import org.csu.sm.exception.service.AccountServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.exception.service.TransationException;
+import org.csu.sm.service.AccountService;
 import org.csu.sm.service.InfoManageService;
 import org.csu.sm.util.ConfigUtil;
 import org.csu.sm.util.IOUtil;
@@ -31,7 +33,6 @@ import java.util.List;
 public class InfoManageActionBean extends AbstractActionBean {
 
     private InfoManageService infoManageService;
-
     @Autowired
     public InfoManageActionBean(InfoManageService infoManageService) {
         this.infoManageService = infoManageService;
@@ -124,6 +125,16 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
+    @RequestMapping(value = "changePassword", method = RequestMethod.GET)
+    public String showChangePassword(Model model){
+        try {
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
+            return "student/changePassword";
+        }catch (InfoManageServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
+    }
     /************************************ json交互action **************************************/
 
     @RequestMapping(value = "/upBasicInfo", method = RequestMethod.POST)

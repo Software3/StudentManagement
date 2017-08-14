@@ -22,10 +22,9 @@ public interface AccountService {
      * 修改学生密码
      * @param studentId
      * @param newPassword 新密码
-     * @param oldPassword 旧密码
      * @throws AccountServiceException
      */
-    void changeStudPassword(long studentId, String newPassword, String oldPassword) throws AccountServiceException;
+    void changeStudPassword(long studentId, String newPassword) throws AccountServiceException;
 
     /**
      * 老师登录
