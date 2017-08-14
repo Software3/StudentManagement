@@ -33,4 +33,14 @@ public class TeacherServiceimpl implements TeacherService {
         return studentDAO.getStudentListByTeacherIdAndState(teacherId, state);
     }
 
+    public void auditedPass(VerifyLog verifyLog) throws TeacherServiceException {
+        studentDAO.updateStudentVerifyState(verifyLog, true);
+        verifyLogDAO.insertVerifyLog(verifyLog);
+    }
+
+    public void auditedFail(VerifyLog verifyLog) throws TeacherServiceException {
+        studentDAO.updateStudentVerifyState(verifyLog, false);
+        verifyLogDAO.insertVerifyLog(verifyLog);
+    }
+
 }

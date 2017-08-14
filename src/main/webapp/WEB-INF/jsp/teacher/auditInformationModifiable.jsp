@@ -195,6 +195,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="step-pane" id="step5">
+                    <div class="row form-wrapper payment-info">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-3">
+                                            <input type="checkbox">
+                                            图片说明
+                                        </th>
+                                        <th class="col-md-3">
+                                            <span class="line"></span>文本说明
+                                        </th>
+                                        <th class="col-md-3">
+                                            <span class="line">操作</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <c:forEach var="item" items="${withdrawInstList}">
+                                        <tr class="first">
+                                            <td>
+                                                <input type="checkbox" id="inst_${item.instId}">
+                                                <div>
+                                                    <img src="${item.description}" class="img-responsive"/>
+                                                </div>
+                                            </td>
+                                            <td class="description">
+                                                    ${item.comment}
+                                            </td>
+                                            <td>
+                                                <ul class="actions">
+                                                    <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal"
+                                                           href="#editModal">编辑</a></li>
+                                                    <li class="last"><a onclick="deleteRow(this)" class="myDelete"
+                                                                        href="#">删除</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="wizard-actions">
                     <button type="button" disabled class="btn-glow primary btn-prev">
