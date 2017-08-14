@@ -39,20 +39,22 @@
                 </thead>
                 <tbody>
                 <!-- row -->
-                <c:forEach var="student" items="#{students}">
+                <c:forEach var="student" items="${students}">
                     <tr class="first">
                         <td>
                             <input type="checkbox">
-                            <a href="#" class="name"><c:out value="${student.name}"/> </a>
+                            <a href="#" class="name">${student.name} </a>
                         </td>
                         <td class="description">
-                            <c:out value="${student.studentId}"/>
+                                ${student.studentId}
                         </td>
                         <td>
                             <ul class="actions">
-                                <li><a a href="<%=request.getContextPath()%>/auditInformation">查看信息</a></li>
-                                <li><a  onclick="pass(this)">通过</a></li>
-                                <li class="last"><a  onclick="fail(this)">未通过</a></li>
+                                <li>
+                                    <a href="<%=request.getContextPath()%>/auditInformation?studentId=${student.studentId}&teacherId=${teacherId}">查看信息</a>
+                                </li>
+                                <li><a href="#" onclick="pass(this)" class="pass">通过</a></li>
+                                <li class="last"><a href="#" onclick="fail(this)" class="fail">未通过</a></li>
                             </ul>
                         </td>
                     </tr>
@@ -73,14 +75,34 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
 <script>
-    function pass() {
+    function pass(obj) {
         var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        var studentName = obj.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
         studentId = $.trim(studentId);
+        var verify = {};
+        verify.studentId = studentId;
+        verify.studentName = studentName;
+        verify.counselorName =${teacherId};
+        verify.verifyOperate = 1;
+        var date = new Date();
+        verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+        var index = $(".pass").index($(node));
+        var rowTr = $("tbody")[0].rows[index];
+        $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
-            url: 'getInformation',
-            dataType: 'text',
-            method: 'GET',
+            url: 'auditedPass',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(verify),
             success: function (data) {
+                if (data.result == "success") {
+                    //操作
+                    $(rowTr).fadeTo("fast", 0.01, function () {
+                        $(rowTr).slideUp("fast", function () {
+                            $(rowTr).remove();
+                        })
+                    })
+                }
             },
             error: function (xhr) {
                 // 导致出错的原因较多，以后再研究
@@ -98,14 +120,36 @@
         });
     }
 
-    function fail() {
+    function fail(obj) {
         var studentId = obj.parentNode.parentNode.parentNode.parentNode.childNodes[3].innerHTML;
+        var studentName = obj.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
         studentId = $.trim(studentId);
+        var verify = {};
+        verify.studentId = studentId;
+        verify.studentName = studentName;
+        verify.counselorName =${teacherId};
+        verify.verifyOperate = 0;
+        var date = new Date();
+        verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+        var index = $(".fail").index($(node));
+        var rowTr = $("tbody")[0].rows[index];
+
+        $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
-            url: 'getInformation',
-            dataType: 'text',
-            method: 'GET',
+            url: 'auditedFail',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(verify),
             success: function (data) {
+                if (data.result == "success") {
+                    //操作
+                    $(rowTr).fadeTo("fast", 0.01, function () {
+                        $(rowTr).slideUp("fast", function () {
+                            $(rowTr).remove();
+                        })
+                    })
+                }
             },
             error: function (xhr) {
                 // 导致出错的原因较多，以后再研究

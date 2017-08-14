@@ -1,6 +1,7 @@
 package org.csu.sm.persistence;
 
 import org.csu.sm.domain.Student;
+import org.csu.sm.domain.VerifyLog;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -63,10 +64,19 @@ public interface StudentDAO {
 
     /**
      * 通过老师和状态查找学生列表
+     *
      * @param teacherId
      * @param state
      * @return
      * @throws PersistenceException
      */
     List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws PersistenceException;
+
+    /**
+     * 更新学生的审核状态由1到2
+     *
+     * @param verifyLog
+     * @throws PersistenceException
+     */
+    void updateStudentVerifyState(VerifyLog verifyLog,boolean isVerify) throws PersistenceException;
 }

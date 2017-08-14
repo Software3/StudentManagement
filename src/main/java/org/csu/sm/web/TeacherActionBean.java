@@ -92,7 +92,7 @@ public class TeacherActionBean {
         } catch (TeacherServiceException e) {
             e.printStackTrace();
         }
-        return state == "0" ? "teacher/uncommitted" : state == "1" ? "teacher/noAudited" : "teacher/audited";
+        return state.equals("0") ? "teacher/uncommitted" : (state.equals("1") ? "teacher/noAudited" : "teacher/audited");
     }
 
     @RequestMapping(value = "auditedLog", method = RequestMethod.GET)
@@ -228,8 +228,26 @@ public class TeacherActionBean {
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "passStudent", method = RequestMethod.GET)
-    public ResponseEntity<Result> passStudent(@RequestParam String studentId) {
-        return null;
+    @RequestMapping(value = "auditedPass", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<Result> auditedPass(@RequestBody VerifyLog verifyLog) {
+        try {
+            teacherService.auditedPass(verifyLog);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS), HttpStatus.OK);
+        } catch (TeacherServiceException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "auditedFail", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<Result> auditedFail(@RequestBody VerifyLog verifyLog) {
+        try {
+            teacherService.auditedFail(verifyLog);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS), HttpStatus.OK);
+        } catch (TeacherServiceException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
+    }
+
 }

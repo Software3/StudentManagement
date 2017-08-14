@@ -109,11 +109,12 @@
         teacher.majors = $('#major').val();
         teacher.role = $('#type').val();
         teacher.email = $('#email').val();
+        $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
             url: 'getInformation',
-            dataType: 'text',
+            dataType: 'json',
             method: 'POST',
-            data: $.JSON(teacher),
+            data: JSON.stringify(teacher),
             success: function (data) {
                 var result = data.result;
                 if (result == success)

@@ -195,6 +195,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="step-pane" id="step5">
+                    <div class="row form-wrapper payment-info">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-3">
+                                            <input type="checkbox">
+                                            图片说明
+                                        </th>
+                                        <th class="col-md-3">
+                                            <span class="line"></span>文本说明
+                                        </th>
+                                        <th class="col-md-3">
+                                            <span class="line">操作</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- row -->
+                                    <c:forEach var="item" items="${withdrawInstList}">
+                                        <tr class="first">
+                                            <td>
+                                                <input type="checkbox" id="inst_${item.instId}">
+                                                <div>
+                                                    <img src="${item.description}" class="img-responsive"/>
+                                                </div>
+                                            </td>
+                                            <td class="description">
+                                                    ${item.comment}
+                                            </td>
+                                            <td>
+                                                <ul class="actions">
+                                                    <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal"
+                                                           href="#editModal">编辑</a></li>
+                                                    <li class="last"><a onclick="deleteRow(this)" class="myDelete"
+                                                                        href="#">删除</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="wizard-actions">
                     <button type="button" disabled class="btn-glow primary btn-prev">
@@ -253,5 +301,47 @@
             $wizard.wizard('next');
         });
     });
+
+    function updateBasicInfo() {
+        var studentId = $("#studentId").val();
+        var name = $("#name").val();
+        var sex = $("#sex").val();
+        var birthday = $("#birthday").val();
+        var nativePlace = $("#nativePlace").val();
+        var residence = $("#residence").val();
+        var major = $("#major").val();
+        var employmentUnit = $("#employmentUnit").val();
+        var counselorName = $("#counselorName").val();
+        var counselorPhone = $("#counselorPhone").val();
+        var studentType = getStudentType($("#studentType").val());
+        var remarks = $("#remarks").val();
+        json = {
+            studentId: studentId,
+            name: name,
+            sex: sex,
+            birthday: birthday,
+            nativePlace: nativePlace,
+            residence: residence,
+            major: major,
+            employmentUnit: employmentUnit,
+            counselorName: counselorName,
+            counselorPhone: counselorPhone,
+            studentType: studentType,
+            remarks: remarks
+        };
+        $.ajaxSetup({contentType: 'application/json'});
+        $.ajax({
+            url: 'upBasicInfo',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(json),
+            success: function (data) {
+                $("#myAlert").append(alert("success", "修改成功！"));
+            },
+            error: function (xhr) {
+                $("#myAlert").append(alert("danger", "修改失败！请稍后重试"))
+            }
+        });
+    }
 </script>
 <%@include file="../common/teacIncludeBottom.jsp" %>

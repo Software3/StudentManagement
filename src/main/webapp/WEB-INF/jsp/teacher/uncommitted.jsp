@@ -34,26 +34,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">弹七 </a>
-                    </td>
-                    <td class="description">
-                        3903150301
-                    </td>
-                </tr>
-                <!-- row -->
-                <tr class="first">
-                    <td>
-                        <input type="checkbox">
-                        <a href="#" class="name">六八 </a>
-                    </td>
-                    <td class="description">
-                        3903150302
-                    </td>
-                </tr>
+                <c:forEach var="student" items="${students}">
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox">
+                            <a href="#" class="name">${student.name} </a>
+                        </td>
+                        <td class="description">
+                                ${audited.studentId}
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -64,7 +55,7 @@
 <!-- end main container -->
 
 <!-- this page specific styles -->
-<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/compiled/tables.css" type="text/css" media="screen"/>
 <!-- scripts -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
