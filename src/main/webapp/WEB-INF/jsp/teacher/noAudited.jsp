@@ -86,7 +86,7 @@
         verify.verifyOperate = 1;
         var date = new Date();
         verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-        var index = $(".pass").index($(node));
+        var index = $(".pass").index($(obj));
         var rowTr = $("tbody")[0].rows[index];
         $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
@@ -132,7 +132,7 @@
         var date = new Date();
         verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
 
-        var index = $(".fail").index($(node));
+        var index = $(".fail").index($(obj));
         var rowTr = $("tbody")[0].rows[index];
 
         $.ajaxSetup({contentType: 'application/json'});

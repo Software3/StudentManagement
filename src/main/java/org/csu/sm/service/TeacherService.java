@@ -50,5 +50,8 @@ public interface TeacherService {
      * @throws TeacherServiceException
      */
     void auditedFail(VerifyLog verifyLog) throws TeacherServiceException;
+
+
+    void insertStudentList(List<Student> students) throws TeacherServiceException;
 }
 
