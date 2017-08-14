@@ -158,7 +158,7 @@ function delAward(node) {
     var json = {content: content, date: date, studentId: studentId};
     $.ajaxSetup({contentType: 'application/json'});
     $.ajax({
-        url: 'delMember',
+        url: 'delAward',
         dataType: 'json',
         method: 'POST',
         data: JSON.stringify(json),
@@ -267,7 +267,7 @@ function upFailed(node, values) {
         var json = {term: term, subject: subject, studentId: studentId};
         $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
-            url: 'upAward',
+            url: 'upFailed',
             dataType: 'json',
             method: 'POST',
             data: JSON.stringify(json),
