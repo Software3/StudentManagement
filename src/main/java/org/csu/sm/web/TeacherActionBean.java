@@ -271,4 +271,15 @@ public class TeacherActionBean {
         }
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "exportInfo", method = RequestMethod.GET)
+    public ResponseEntity<Result> exportInfo() {
+        try {
+            List<Student> students = teacherService.getStudentList();
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, students), HttpStatus.OK);
+        } catch (TeacherServiceException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
+    }
 }

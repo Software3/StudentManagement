@@ -51,7 +51,20 @@ public interface TeacherService {
      */
     void auditedFail(VerifyLog verifyLog) throws TeacherServiceException;
 
-
+    /**
+     * 导入学生Excel
+     *
+     * @param students
+     * @throws TeacherServiceException
+     */
     void insertStudentList(List<Student> students) throws TeacherServiceException;
+
+    /**
+     * 导出学生Excel
+     *
+     * @return
+     * @throws TeacherServiceException
+     */
+    List<Student> getStudentList() throws TeacherServiceException;
 }
 

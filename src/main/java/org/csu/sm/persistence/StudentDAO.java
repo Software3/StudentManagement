@@ -87,4 +87,13 @@ public interface StudentDAO {
      * @throws PersistenceException
      */
     void insertStudentList(List<Student> students) throws PersistenceException;
+
+
+    /**
+     * 获得学生信息
+     *
+     * @return
+     * @throws PersistenceException
+     */
+    List<Student> getStudentList() throws PersistenceException;
 }

@@ -47,4 +47,7 @@ public class TeacherServiceimpl implements TeacherService {
         studentDAO.insertStudentList(students);
     }
 
+    public List<Student> getStudentList() throws TeacherServiceException {
+        return studentDAO.getStudentList();
+    }
 }

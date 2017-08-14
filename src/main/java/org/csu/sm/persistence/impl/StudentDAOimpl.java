@@ -6,6 +6,7 @@ import org.csu.sm.persistence.StudentDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
@@ -96,6 +97,20 @@ public class StudentDAOimpl implements StudentDAO {
             }
             transaction.commit();
             session.close();
+        } catch (RuntimeException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    public List<Student> getStudentList() throws PersistenceException {
+        try {
+            Session session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("from Student");
+            List<Student> students = query.list();
+            transaction.commit();
+            session.close();
+            return students;
         } catch (RuntimeException e) {
             throw new PersistenceException(e);
         }
