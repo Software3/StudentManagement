@@ -81,15 +81,4 @@ public class AccountActionBean extends AbstractActionBean {
     public String showSignin() {
         return "signin";
     }
-
-    public String getPrincipal(){
-        String userId=null;
-        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof UserDetails){
-            userId=((UserDetails) principal).getUsername();
-        }else{
-            userId=principal.toString();
-        }
-        return userId;
-    }
 }

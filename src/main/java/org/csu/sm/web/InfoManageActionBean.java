@@ -129,6 +129,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "/upBasicInfo", method = RequestMethod.POST)
     public ResponseEntity<Result> updateBasicInfo(@RequestBody Student student) {
         try {
+            student.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.modifyBasicInfo(student);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "学生基本信息更新成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -139,6 +140,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "addMember", method = RequestMethod.POST)
     public ResponseEntity<Result> insertParent(@RequestBody Parent parent) {
         try {
+            parent.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.addParentInfo(parent);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "成员添加成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -149,6 +151,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "upMember", method = RequestMethod.POST)
     public ResponseEntity<Result> updateParent(@RequestBody Parent parent) {
         try {
+            parent.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.modifyParentInfo(parent);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "更新成员信息成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -159,6 +162,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "delMember", method = RequestMethod.POST)
     public ResponseEntity<Result> deleteMember(@RequestBody Parent parent) {
         try {
+            parent.setStudentId(Long.valueOf(getPrincipal()));
             List<Parent> parentList = infoManageService.deleteParentInfo(parent);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "成员删除成功", parentList), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -169,6 +173,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "/addAward", method = RequestMethod.POST)
     public ResponseEntity<Result> insertAward(@RequestBody AwardRecord awardRecord) {
         try {
+            awardRecord.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.addAwardInfo(awardRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "奖励记录添加成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -179,6 +184,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "upAward", method = RequestMethod.POST)
     public ResponseEntity<Result> updateAward(@RequestBody AwardRecord awardRecord) {
         try {
+            awardRecord.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.modifyAwardInfo(awardRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "获奖记录更新成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -189,6 +195,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "delAward", method = RequestMethod.POST)
     public ResponseEntity<Result> deleteAward(@RequestBody AwardRecord awardRecord) {
         try {
+            awardRecord.setStudentId(Long.valueOf(getPrincipal()));
             List<AwardRecord> awardList = infoManageService.deleteAwardInfo(awardRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "删除获奖记录成功", awardList), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -199,6 +206,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "addFailed", method = RequestMethod.POST)
     public ResponseEntity<Result> insertFailed(@RequestBody FailexamRecord failexamRecord) {
         try {
+            failexamRecord.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.addFailexamInfo(failexamRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "挂科记录添加成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -209,6 +217,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "upFailed", method = RequestMethod.POST)
     public ResponseEntity<Result> updateFailed(@RequestBody FailexamRecord failexamRecord) {
         try {
+            failexamRecord.setStudentId(Long.valueOf(getPrincipal()));
             infoManageService.modifyFailexamInfo(failexamRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "挂科记录修改成功", null), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -219,6 +228,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "delFailed", method = RequestMethod.POST)
     public ResponseEntity<Result> deleteAward(@RequestBody FailexamRecord failexamRecord) {
         try {
+            failexamRecord.setStudentId(Long.valueOf(getPrincipal()));
             List<FailexamRecord> failedList = infoManageService.deleteFailexamInfo(failexamRecord);
             return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "挂科记录删除成功", failedList), HttpStatus.OK);
         } catch (InfoManageServiceException e) {
@@ -232,6 +242,7 @@ public class InfoManageActionBean extends AbstractActionBean {
         String path = request.getSession().getServletContext().getRealPath("upImg");
         ConfigUtil.setPath(path);
         try {
+            withdrawInst.setStudentId(Long.valueOf(getPrincipal()));
             String fileName = instPicture.getOriginalFilename();
             String targetName = (new Date().getTime()) + "_" + withdrawInst.getStudentId() + "_" + fileName;
             String picName = IOUtil.saveFile(targetName, path, instPicture);
@@ -251,6 +262,7 @@ public class InfoManageActionBean extends AbstractActionBean {
         String path = request.getSession().getServletContext().getRealPath("upImg");
         ConfigUtil.setPath(path);
         try {
+            withdrawInst.setStudentId(Long.valueOf(getPrincipal()));
             String fileName = editPicture.getOriginalFilename();
             String targetName = (new Date().getTime()) + "_" + withdrawInst.getStudentId() + "_" + fileName;
             String picName = IOUtil.saveFile(targetName, path, editPicture);
@@ -267,6 +279,7 @@ public class InfoManageActionBean extends AbstractActionBean {
     @RequestMapping(value = "delWithdrawInst", method = RequestMethod.POST)
     public ResponseEntity<Result> deleteWithdrawInst(@RequestBody WithdrawInst withdrawInst, HttpServletRequest request) {
         try {
+            withdrawInst.setStudentId(Long.valueOf(getPrincipal()));
             WithdrawInst withdrawInst1 = infoManageService.getWithdrawInst(withdrawInst.getInstId());
             WithdrawInst deletedInst = infoManageService.deleteWithdrawInstInfo(withdrawInst1);
             String path = request.getSession().getServletContext().getRealPath("upImg");
