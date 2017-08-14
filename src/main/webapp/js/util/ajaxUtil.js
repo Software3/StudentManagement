@@ -291,8 +291,7 @@ function upFailed(node, values) {
 
 function addWithdrawInst() {
     var comment = $("#instComment").val();
-    var studentId = getStudentId();
-    var json = {comment: comment, studentId: studentId};
+    var json = {comment: comment};
     $.ajaxFileUpload({
         url: 'addWithdrawInst',
         secureuri: false,
@@ -348,8 +347,7 @@ function upWithdrawInst(node, values) {
         var rowTr = $("tbody")[0].rows[index];
         var instId = rowTr.children[0].children[0].id.split('_')[1];
         var comment = $("#editComment").val();
-        var studentId = getStudentId();
-        var json = {instId: instId, comment: comment, studentId: studentId};
+        var json = {instId: instId, comment: comment};
         $.ajaxFileUpload({
             url: 'upWithdrawInst',
             secureuri: false,
