@@ -208,10 +208,14 @@
                     <button type="button" class="btn-glow primary btn-next" data-last="Finish">
                         下一级 <i class="icon-chevron-right"></i>
                     </button>
-                    <button type="button" class="btn-glow success btn-finish">
+                    <button type="button" class="btn-glow success btn-finish"
+                            href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"
+                            onclick="pass(${student.studentId},${student.name})">
                         审核通过
                     </button>
-                    <button type="button" class="btn-glow success btn-finish">
+                    <button type="button" class="btn-glow success btn-finish"
+                            href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"
+                            onclick="faile(${student.studentId},${student.name})">
                         审核不通过
                     </button>
                 </div>
@@ -261,5 +265,72 @@
             $wizard.wizard('next');
         });
     });
+
+
+    function pass(studentId, studentName) {
+        var verify = {};
+        verify.studentId = studentId;
+        verify.studentName = studentName;
+        verify.counselorName =${teacherId};
+        verify.verifyOperate = 1;
+        var date = new Date();
+        verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+        $.ajaxSetup({contentType: 'application/json'});
+        $.ajax({
+            url: 'auditedPass',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(verify),
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
+
+    function fail(studentId, studentName) {
+        var verify = {};
+        verify.studentId = studentId;
+        verify.studentName = studentName;
+        verify.counselorName =${teacherId};
+        verify.verifyOperate = 0;
+        var date = new Date();
+        verify.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+
+        $.ajaxSetup({contentType: 'application/json'});
+        $.ajax({
+            url: 'auditedFail',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(verify),
+            success: function (data) {
+            },
+            error: function (xhr) {
+                // 导致出错的原因较多，以后再研究
+                alert('error:' + JSON.stringify(xhr));
+            }
+        }).done(function (data) {
+            // 请求成功后要做的工作
+            console.log('success');
+        }).fail(function () {
+            // 请求失败后要做的工作
+            console.log('error');
+        }).always(function () {
+            // 不管成功或失败都要做的工作
+            console.log('complete');
+        });
+    }
 </script>
 <%@include file="../common/teacIncludeBottom.jsp" %>

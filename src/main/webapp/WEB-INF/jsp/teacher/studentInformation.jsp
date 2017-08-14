@@ -81,7 +81,7 @@
                             "</td>" +
                             "<td>" +
                             "<ul class=\"actions\">" +
-                            "<li><a href=\"<%=request.getContextPath()%>/auditInformationModifiable?studentId=\" + studentList[i].studentId +\"&teacherId=\"+${teacherId}+\">查看信息</a></li>" +
+                            "<li><a href=\"<%=request.getContextPath()%>/auditInformationModifiable?studentId=\""+ studentList[i].studentId +"\"&&teacherId=\"+${teacherId}+\">查看信息</a></li>" +
                             "</ul>" +
                             "</td>" +
                             "</tr>"
