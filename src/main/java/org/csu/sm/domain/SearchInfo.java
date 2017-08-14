@@ -8,7 +8,7 @@ public class SearchInfo {
     private String name;
     private String nativePlace;
     private String major;
-    private String type;
+    private int type;
     private String counselorName;
     public SearchInfo() {
     }
@@ -53,11 +53,11 @@ public class SearchInfo {
         this.major = major;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

@@ -88,7 +88,10 @@
                     <label>专业:</label>&nbsp;
                     <div class="ui-select span5">
                         <select id="search_major">
-                            <option value="无"></option>
+                            <option value=""></option>
+                            <c:forEach var="item" items="${collegeList}">
+                                <option value="${item}">${item}</option>
+                            </c:forEach>
                             <option value="软件工程">软件工程</option>
                             <option value="土木工程">土木工程</option>
                         </select>
@@ -101,7 +104,7 @@
                             <option value="无"></option>
                             <option value="本科生">本科生</option>
                             <option value="研究生">研究生</option>
-                            <option value="运动员">运动员</option>
+                            <option value="高水平运动员">高水平运动员</option>
                         </select>
                     </div>
                 </div>
@@ -126,6 +129,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/fuelux.wizard.js"></script>
+<script src="js/util/util.js"></script>
 <!-- call this page plugins -->
 <script>
     function searchStudents() {
@@ -133,7 +137,7 @@
         var name=$('#search_name').val();
         var nativeplace=$('#search_place').val();
         var major=$('#search_major option:selected').val();
-        var type=$('#search_type option:selected').val();
+        var type=getStudentType($('#search_type option:selected').val());
         var searchInfo = {studentId: studentId, name: name,nativePlace:nativeplace,major:major,type:type};
         $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
@@ -167,7 +171,7 @@
                         data[i].major+
                         "</td>" +
                         "<td>" +
-                        data[i].studentType+
+                        parseStudentType(data[i].studentType)+
                         "</td>" +
                         "</tr>"
                     )

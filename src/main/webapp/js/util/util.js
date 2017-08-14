@@ -23,7 +23,7 @@ function formatDateToYYYYmmdd(date) {
  * @returns {number}
  */
 function getStudentType(textType) {
-    var type = 0;
+    var type = -1;
     if (textType == '本科生') {
         type = 0;
     } else if (textType == '研究生') {
@@ -32,4 +32,16 @@ function getStudentType(textType) {
         type = 2;
     }
     return type;
+}
+
+function parseStudentType(type) {
+    var str = "";
+    if (type == 0) {
+        str = '本科生';
+    } else if (type == 1) {
+        str = '研究生';
+    } else if (type == 2) {
+        str = '高水平运动员';
+    }
+    return str;
 }

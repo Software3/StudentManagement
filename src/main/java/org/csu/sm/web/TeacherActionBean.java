@@ -183,6 +183,7 @@ public class TeacherActionBean {
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
             Model model) {
         model.addAttribute("teacherId", getPrincipal());
+        model.addAttribute("collegeList", Constant.getColleges());
         return "teacher/searchStudents";
     }
 

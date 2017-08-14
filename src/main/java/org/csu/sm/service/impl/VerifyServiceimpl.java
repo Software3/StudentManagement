@@ -1,9 +1,11 @@
 package org.csu.sm.service.impl;
 
 import org.csu.sm.domain.Student;
+import org.csu.sm.domain.Teacher;
 import org.csu.sm.domain.VerifyLog;
 import org.csu.sm.exception.service.VerifyServiceException;
 import org.csu.sm.persistence.StudentDAO;
+import org.csu.sm.persistence.TeacherDAO;
 import org.csu.sm.persistence.VerifyLogDAO;
 import org.csu.sm.service.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,18 @@ public class VerifyServiceimpl implements VerifyService{
 
     private VerifyLogDAO verifyLogDAO;
     private StudentDAO studentDAO;
+    private TeacherDAO teacherDAO;
 
     @Autowired
-    public VerifyServiceimpl(VerifyLogDAO verifyLogDAO, StudentDAO studentDAO) {
+    public VerifyServiceimpl(VerifyLogDAO verifyLogDAO, StudentDAO studentDAO, TeacherDAO teacherDAO) {
         this.verifyLogDAO = verifyLogDAO;
         this.studentDAO = studentDAO;
+        this.teacherDAO = teacherDAO;
     }
 
     public List<VerifyLog> getVerifyLogListForTeacher(String counselorName) throws VerifyServiceException {
-        return verifyLogDAO.getVerifyLogListByCounselorName(counselorName);
+        Teacher teacher = teacherDAO.getTeacher(counselorName);
+        return verifyLogDAO.getVerifyLogListByCounselorName(teacher.getName());
     }
 
     public List<VerifyLog> getVerifyLogListForStudent(long studentId) throws VerifyServiceException {
