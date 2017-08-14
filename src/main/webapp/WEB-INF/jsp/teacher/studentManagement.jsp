@@ -29,7 +29,6 @@
                 <input type="file" name="file1" size="30" onchange="setObj(this)"/>
                 <input class="form-control btn-flat primary"
                        onclick="importf()" type="button" value="一键上传"/>
-                <button onclick="downloadExl(jsono)">导出</button>
             </div>
         </div>
         <!-- end products table -->
