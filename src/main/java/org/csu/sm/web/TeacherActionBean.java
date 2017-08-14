@@ -63,6 +63,7 @@ public class TeacherActionBean {
                                        Model model) {
         try {
             Teacher teacher = infoManageService.getTeacherInfo(getPrincipal());
+            System.out.println(teacher.getName()+" "+teacher.getEmail());
             model.addAttribute("teacher", teacher);
             model.addAttribute("collegeList", Constant.getColleges());
             model.addAttribute("teacherId", Long.valueOf(getPrincipal()));

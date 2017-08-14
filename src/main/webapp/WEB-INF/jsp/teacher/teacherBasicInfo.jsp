@@ -44,8 +44,7 @@
                     <div class="col-md-7">
                         <select style="width:250px" class="select2" id="major">
                             <c:forEach var="item" items="${collegeList}">
-                                <option value="${item}"
-                                        <c:if test="${item == teacher.major}">selected="selected"</c:if>>${item}</option>
+                                <option value="${item}" <c:if test="${item == teacher.majors}">selected="selected"</c:if>>${item}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -53,7 +52,8 @@
                 <div class="field-box">
                     <label>辅导学生类型:</label>
                     <div class="col-md-7">
-                        <input class="form-control inline-input" type="text" readonly="readonly" value="本科生" id="type"/>
+                        <input class="form-control inline-input" type="text" readonly="readonly" value="<c:if test="${teacher.role == 0}">本科生</c:if>
+                            <c:if test="${teacher.role == 1}">研究生</c:if><c:if test="${teacher.role == 2}">高水平运动员</c:if>" id="type"/>
                     </div>
                 </div>
                 <div class="field-box">

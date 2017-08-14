@@ -11,7 +11,7 @@
 <div id="pad-wrapper">
     <div class="row filter-block">
         <div class="pull-left">
-            <a class="btn-flat success" href="<%=request.getContextPath()%>/studentInformation?teacherId=${teacherId}">返回</a>
+            <a class="btn-flat success" href="<%=request.getContextPath()%>/studentInformation">返回</a>
         </div>
     </div>
     <div class="row">
@@ -54,7 +54,8 @@
                             </div>
                             <div class="field-box">
                                 <label>性别:</label>
-                                <input class="form-control" type="text" value="${student.sex}"/>
+                                <input class="form-control" type="text"
+                                       value="<c:if test='${student.sex==0}'>女</c:if><c:if test='${student.sex==1}'>男</c:if>"/>
                             </div>
                             <div class="field-box">
                                 <label>出生日期:</label>
@@ -86,7 +87,9 @@
                             </div>
                             <div class="field-box">
                                 <label>学生类型:</label>
-                                <input class="form-control" type="text" value="${student.studentType}"/>
+                                <input class="form-control" type="text"
+                                       value="<c:if test="${student.studentType == 0}">本科生</c:if>
+                            <c:if test="${student.studentType == 1}">研究生</c:if><c:if test="${student.studentType == 2}">高水平运动员</c:if>"/>
                             </div>
                         </div>
                     </div>
@@ -119,8 +122,9 @@
                                                 <c:out value="${parent.phone}"/>
                                             </td>
                                             <td>
-                                                <span class="label label-success"><c:out
-                                                        value="${parent.relation}"/> </span>
+                                                <span class="label label-success"><c:if
+                                                        test="${parent.relation == 0}">母亲</c:if> <c:if
+                                                        test="${parent.relation == 1}">父亲</c:if> </span>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -251,9 +255,9 @@
                     <button type="button" class="btn-glow primary btn-next" data-last="Finish">
                         下一级 <i class="icon-chevron-right"></i>
                     </button>
-                    <button type="button" class="btn-glow success btn-finish">
-                        确认修改
-                    </button>
+                    <%--<button type="button" class="btn-glow success btn-finish">--%>
+                        <%--确认修改--%>
+                    <%--</button>--%>
                 </div>
             </div>
         </div>

@@ -55,7 +55,8 @@
                             </div>
                             <div class="field-box">
                                 <label>性别:</label>
-                                <input class="form-control" type="text" readonly="readonly" value="${student.sex}"/>
+                                <input class="form-control" type="text" readonly="readonly"
+                                       value="<c:if test='${student.sex==0}'>女</c:if><c:if test='${student.sex==1}'>男</c:if>"/>
                             </div>
                             <div class="field-box">
                                 <label>出生日期:</label>
@@ -94,7 +95,8 @@
                             <div class="field-box">
                                 <label>学生类型:</label>
                                 <input class="form-control" type="text" readonly="readonly"
-                                       value="${student.studentType}"/>
+                                       value="<c:if test="${student.studentType == 0}">本科生</c:if>
+                            <c:if test="${student.studentType == 1}">研究生</c:if><c:if test="${student.studentType == 2}">高水平运动员</c:if>"/>"/>
                             </div>
                         </div>
                     </div>
@@ -126,8 +128,9 @@
                                                 <c:out value="${parent.phone}"/>
                                             </td>
                                             <td>
-                                                <span class="label label-success"><c:out
-                                                        value="${parent.relation}"/> </span>
+                                                <span class="label label-success"><c:if
+                                                        test="${parent.relation == 0}">母亲</c:if> <c:if
+                                                        test="${parent.relation == 1}">父亲</c:if> </span>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -208,16 +211,16 @@
                     <button type="button" class="btn-glow primary btn-next" data-last="Finish">
                         下一级 <i class="icon-chevron-right"></i>
                     </button>
-                    <button type="button" class="btn-glow success btn-finish"
-                            href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"
-                            onclick="pass(${student.studentId},${student.name})">
-                        审核通过
-                    </button>
-                    <button type="button" class="btn-glow success btn-finish"
-                            href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"
-                            onclick="faile(${student.studentId},${student.name})">
-                        审核不通过
-                    </button>
+                    <%--<button type="button" class="btn-glow success btn-finish"--%>
+                    <%--href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"--%>
+                    <%--onclick="pass(${student.studentId},${student.name})">--%>
+                    <%--审核通过--%>
+                    <%--</button>--%>
+                    <%--<button type="button" class="btn-glow success btn-finish"--%>
+                    <%--href="<%=request.getContextPath()%>/verify?teacherId=${teacherId}&&state=1"--%>
+                    <%--onclick="faile(${student.studentId},${student.name})">--%>
+                    <%--审核不通过--%>
+                    <%--</button>--%>
                 </div>
             </div>
         </div>

@@ -53,6 +53,7 @@
     <![endif]-->
     <!-- persistence js -->
     <script src="js/util/userUtil.js"></script>
+    <script src="js/util/util.js"></script>
     <!-- persistence js -->
 </head>
 <body>
@@ -150,7 +151,7 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-toggle" href="<%=request.getContextPath()%>/teacherBasicInfo?teacherId=${teacherId}">
+            <a href="<%=request.getContextPath()%>/teacherBasicInfo?teacherId=${teacherId}">
                 <i class="icon-cog"></i>
                 <span>我的信息</span>
             </a>
