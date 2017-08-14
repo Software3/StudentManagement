@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auditInformationModifiable").access("hasRole('ADMIN')")
                 .anyRequest().permitAll()
                 .and().formLogin().loginPage("/signin")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/signin").invalidateHttpSession(true)
                 .and().csrf().disable();
     }
 }
