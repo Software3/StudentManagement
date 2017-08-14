@@ -1,6 +1,8 @@
 package org.csu.sm.web;
 
 import org.csu.sm.domain.*;
+import org.csu.sm.exception.action.HandleAccountServiceException;
+import org.csu.sm.exception.action.HandleInfoServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.exception.service.TeacherServiceException;
 import org.csu.sm.exception.service.VerifyServiceException;
@@ -176,6 +178,14 @@ public class TeacherActionBean {
         return "teacher/auditInformationModifiable";
     }
 
+    @RequestMapping(value = "searchStudent", method = RequestMethod.GET)
+    public String showSearchStudent(
+//            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
+            Model model) {
+        model.addAttribute("teacherId", getPrincipal());
+        return "teacher/searchStudents";
+    }
+
     /**
      * 老师请求老师管理界面
      *
@@ -185,6 +195,7 @@ public class TeacherActionBean {
     public String showauditInformationModifiable() {
         return "teacher/studentManagement";
     }
+
 
     /*******************************************异步请求****************************************************/
     /**
@@ -259,6 +270,17 @@ public class TeacherActionBean {
             e.printStackTrace();
         }
         return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "searchStudentInfo", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity<List<Student>> searchStudentInfo(@RequestBody SearchInfo searchInfo) {
+        try {
+            searchInfo.setCounselorName(getPrincipal());
+            List<Student> list = teacherService.getSearchStudents(searchInfo);
+            return new ResponseEntity<List<Student>>(list, HttpStatus.OK);
+        } catch (TeacherServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
     }
 
     @RequestMapping(value = "importInfo", method = RequestMethod.POST, consumes = "application/json")
