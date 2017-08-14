@@ -55,7 +55,7 @@
                         </td>
                         <td>
                             <ul class="actions">
-                                <li><a class="viewPic" onclick="viewInstPic(this)" data-toggle="modal" href="#viewModal">查看图片</a></li>
+                                <li><a class="viewPic" onclick="viewPic(this)" data-toggle="modal" href="#viewModal">查看图片</a></li>
                                 <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
                                 <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
                             </ul>
@@ -71,6 +71,7 @@
 </div>
 <!-- end main container -->
 <!-- modal start-->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true"></div>
 <!-- modal end-->
@@ -107,6 +108,11 @@
         upWithdrawInst(node, values);
     }
 
+    function viewPic(node) {
+        var values = getPicSrcAttr(node);
+        viewInstPic(node, values);
+    }
+
     /**
      * 获取name, phone, relation的值
      * @param node
@@ -124,6 +130,18 @@
         var comment = trim(rowTr.children[1].innerHTML)
         console.log(comment);
         return [undefined,comment];
+    }
+
+    /**
+     * 获取图片url
+     * @param node
+     */
+    function getPicSrcAttr(node) {
+        var index = undefined;
+        index = $(".viewPic").index($(node));
+        var rowTr = $("tbody")[0].rows[index];
+        var instPicUrl = rowTr.children[0].children[1].children[0].getAttribute("src");
+        return [instPicUrl];
     }
 </script>
 <%@include file="../common/includeBottom.jsp" %>

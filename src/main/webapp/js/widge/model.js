@@ -25,7 +25,8 @@ var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholde
     [{label: '说明图片:', id: 'instPicture', type: 'file', placeholder: '请上传说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'instPicture'},
         {label: '说明文字:', id: 'instComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}],
     [{label: '说明图片:', id: 'editPicture', type: 'file', placeholder: '请修改说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'editPicture'},
-        {label: '说明文字:', id: 'editComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}]];
+        {label: '说明文字:', id: 'editComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}],
+    [{type: 'img', id: 'viewInstPic'}]];
 
 /**
  * 通过传入下标值获取模态框样式
@@ -88,7 +89,11 @@ function model(title, rowNum, rowObjArray, feedback, values) {
         header.appendChild(createElementWithHTML(createElementWithAttribute("button", {class: 'close', type: 'button', 'data-dismiss': 'modal', 'aria-hidden': true}), '&times;'));
         header.appendChild(createElementWithHTML(createElementWithAttribute("h4", {class:'modal-title'}), title));
         var body = createElementWithAttribute("div", {class: "modal-body"});
-        body.appendChild(createForm(rowNum, rowObjArray, values));
+        if (rowObjArray[0].type == 'img') {
+            body.appendChild(createElementWithAttribute("img", {src: values[0], id: rowObjArray[0].id, style: 'width:500px;height:500px'}));
+        }else {
+            body.appendChild(createForm(rowNum, rowObjArray, values));
+        }
         var footer = createElementWithAttribute("div", {class: "modal-footer"});
         footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-default', 'data-dismiss': 'modal'}), '取消'));
         footer.appendChild(createElementWithHTML(createElementWithAttribute("button", {type: 'button', class: 'btn btn-primary', id: 'confirmAdd', onclick: 'feedback()'}), '确认'));
