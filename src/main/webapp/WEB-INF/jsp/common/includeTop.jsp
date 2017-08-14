@@ -36,16 +36,16 @@
     <link rel="stylesheet" type="text/css" href="css/compiled/icons.css">
 
     <!-- open sans font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <%--<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>--%>
 
     <!-- lato font -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <%--<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>--%>
 
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
     <![endif]-->
     <!-- scripts -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
     <!-- persistence js -->
@@ -120,7 +120,9 @@
                 <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
                 <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
                 <li><a href="#">退队说明</a></li>
+                <li><a href="<%=request.getContextPath()%>/changePassword">密码修改</a></li>
                 <li><a href="<%=request.getContextPath()%>/logout">退出登录</a></li>
+
             </ul>
         </li>
         <li class="settings hidden-xs hidden-sm">
@@ -129,7 +131,7 @@
             </a>
         </li>
         <li class="settings hidden-xs hidden-sm">
-            <a href="signin.html" role="button">
+            <a href="<%=request.getContextPath()%>/logout" role="button">
                 <i class="icon-share-alt"></i>
             </a>
         </li>
@@ -162,6 +164,7 @@
                 <li><a id="awardSitu">奖励情况</a></li>
                 <li><a id="failexamSitu">挂科情况</a></li>
                 <li><a id="withdrawInst">退队说明</a></li>
+                <li><a id="changePassword" href="/changePassword">密码修改</a></li>
             </ul>
         </li>
         <li>

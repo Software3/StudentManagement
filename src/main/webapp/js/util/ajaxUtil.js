@@ -158,7 +158,7 @@ function delAward(node) {
     var json = {content: content, date: date, studentId: studentId};
     $.ajaxSetup({contentType: 'application/json'});
     $.ajax({
-        url: 'delMember',
+        url: 'delAward',
         dataType: 'json',
         method: 'POST',
         data: JSON.stringify(json),
@@ -267,7 +267,7 @@ function upFailed(node, values) {
         var json = {term: term, subject: subject, studentId: studentId};
         $.ajaxSetup({contentType: 'application/json'});
         $.ajax({
-            url: 'upAward',
+            url: 'upFailed',
             dataType: 'json',
             method: 'POST',
             data: JSON.stringify(json),
@@ -291,8 +291,7 @@ function upFailed(node, values) {
 
 function addWithdrawInst() {
     var comment = $("#instComment").val();
-    var studentId = getStudentId();
-    var json = {comment: comment, studentId: studentId};
+    var json = {comment: comment};
     $.ajaxFileUpload({
         url: 'addWithdrawInst',
         secureuri: false,
@@ -348,8 +347,7 @@ function upWithdrawInst(node, values) {
         var rowTr = $("tbody")[0].rows[index];
         var instId = rowTr.children[0].children[0].id.split('_')[1];
         var comment = $("#editComment").val();
-        var studentId = getStudentId();
-        var json = {instId: instId, comment: comment, studentId: studentId};
+        var json = {instId: instId, comment: comment};
         $.ajaxFileUpload({
             url: 'upWithdrawInst',
             secureuri: false,
@@ -373,4 +371,57 @@ function upWithdrawInst(node, values) {
     }, values)[0]);
 }
 
+function checkPassword() {
+    var studentId=$('#studentId').val();
+    var password=$('#old_password').val();
+    var signon = {studentId: studentId, password: password};
+    $.ajaxSetup({contentType: 'application/json'});
+    $.ajax({
+        url: 'checkPassword',
+        dataType: 'json',
+        method: 'POST',
+        data: JSON.stringify(signon),
+        success: function (data) {
+           if(data.result=="success"){
+               $('#newPasswordDiv').attr("style",'');
+               $('#confirmPasswordDiv').attr("style",'');
+               $('#confirmChangeDiv').attr("style",'');
+           }else {
+               $("#myAlert").append(alert("danger", "密码错误！"));
+           }
+        },
+        error: function (xhr) {
+            $("#myAlert").append(alert("danger", "修改失败！"));
+        }
+    })
+}
 
+function changeStuPassword() {
+    var studentId=$('#studentId').val();
+    var newPassword=$('#new_password').val();
+    var confirmPassword=$('#confirm_password').val();
+    if(newPassword!=confirmPassword){
+        $("#myAlert").append(alert("danger", "两次密码不一致！"));
+    }else if(newPassword==""&&confirmPassword==""){
+        $("#myAlert").append(alert("danger", "密码不能为空！"));
+    }else{
+        var signon = {studentId: studentId, password: newPassword};
+        $.ajaxSetup({contentType: 'application/json'});
+        $.ajax({
+            url: 'changeStuPassword',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(signon),
+            success: function (data) {
+                if(data.result=="success"){
+                    $("#myAlert").append(alert("success", "修改成功！"));
+                }else {
+                    $("#myAlert").append(alert("success", "修改失败！"));
+                }
+            },
+            error: function (xhr) {
+                $("#myAlert").append(alert("danger", "修改失败！"));
+            }
+        })
+    }
+}

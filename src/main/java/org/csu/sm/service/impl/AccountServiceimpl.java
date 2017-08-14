@@ -30,9 +30,8 @@ public class AccountServiceimpl implements AccountService{
         return isLoginSuccess == 1 ? studentDAO.getStudent(signon.getStudentId()) : null;
     }
 
-    public void changeStudPassword(long studentId, String newPassword, String oldPassword) throws AccountServiceException {
-        Integer isPasswordCorrect = signonDAO.studentLogin(new Signon(studentId, oldPassword));
-        if (isPasswordCorrect == 1) signonDAO.updateStudentSignon(new Signon(studentId, newPassword));
+    public void changeStudPassword(long studentId, String newPassword) throws AccountServiceException {
+      signonDAO.updateStudentSignon(new Signon(studentId, newPassword));
     }
 
     public Teacher teacherLogin(Teacher teacher) throws AccountServiceException {

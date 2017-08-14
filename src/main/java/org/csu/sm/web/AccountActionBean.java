@@ -2,6 +2,7 @@ package org.csu.sm.web;
 
 import org.csu.sm.domain.*;
 import org.csu.sm.exception.action.HandleAccountServiceException;
+import org.csu.sm.exception.action.HandleInfoServiceException;
 import org.csu.sm.exception.service.AccountServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.service.AccountService;
@@ -93,6 +94,30 @@ public class AccountActionBean extends AbstractActionBean {
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/signin?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+        return "redirect:/signin?logout";
+    }
+
+    @RequestMapping(value = "checkPassword", method = RequestMethod.POST)
+    public ResponseEntity<Result> checkPassword(@RequestBody Signon signon) {
+        try {
+            Student student=accountService.studentLogin(signon);
+            if(student!=null) {
+                return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "核对密码成功"), HttpStatus.OK);
+            }else{
+                return new ResponseEntity<Result>(new Result(Result.RESULT_ERROR, "核对密码失败"), HttpStatus.OK);
+            }
+        } catch (AccountServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
+    }
+
+    @RequestMapping(value = "changeStuPassword", method = RequestMethod.POST)
+    public ResponseEntity<Result> changeStuPassword(@RequestBody Signon signon) {
+        try {
+            accountService.changeStudPassword(signon.getStudentId(),signon.getPassword());
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "修改密码成功"), HttpStatus.OK);
+        } catch (AccountServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
     }
 }
