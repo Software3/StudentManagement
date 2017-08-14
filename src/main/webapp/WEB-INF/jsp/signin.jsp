@@ -85,7 +85,7 @@
                     <%--<input id="remember-me" type="checkbox">--%>
                     <%--<label for="remember-me">记住密码</label>--%>
                 <%--</div>--%>
-                <input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>
+                <%--<input type="hidden"name="${_csrf.parameterName}"value="${_csrf.token}"/>--%>
                 <button class="btn-glow primary login" id="login" type="submit">登录</button>
             </form>
         </div>

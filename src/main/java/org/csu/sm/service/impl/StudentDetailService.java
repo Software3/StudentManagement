@@ -17,7 +17,7 @@ import java.util.List;
  * Created by GF on 2017/8/13.
  */
 @Service("studentDetailService")
-public class studentDetailService implements UserDetailsService{
+public class StudentDetailService implements UserDetailsService{
     @Autowired
     SignonDAO signonDAO;
 

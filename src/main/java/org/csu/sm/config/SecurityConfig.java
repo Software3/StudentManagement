@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/awardSitu").access("hasRole('USER')")
                 .antMatchers("/failexamSitu").access("hasRole('USER')")
                 .antMatchers("/withdrawInst").access("hasRole('USER')")
+                .antMatchers("/addAward").access("hasRole('USER')")
                 .antMatchers("/teacherhome").access("hasRole('ADMIN')")
                 .antMatchers("/teacherBasicInfo").access("hasRole('ADMIN')")
                 .antMatchers("/verify").access("hasRole('ADMIN')")
@@ -73,7 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/studentInformation").access("hasRole('ADMIN')")
                 .antMatchers("/studentList").access("hasRole('ADMIN')")
                 .antMatchers("/auditInformationModifiable").access("hasRole('ADMIN')")
+                .anyRequest().permitAll()
                 .and().formLogin().loginPage("/signin")
-                .and().csrf();
+                .and().csrf().disable();
     }
 }

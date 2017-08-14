@@ -166,7 +166,7 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
-    @RequestMapping(value = "addAward", method = RequestMethod.POST)
+    @RequestMapping(value = "/addAward", method = RequestMethod.POST)
     public ResponseEntity<Result> insertAward(@RequestBody AwardRecord awardRecord) {
         try {
             infoManageService.addAwardInfo(awardRecord);

@@ -58,24 +58,24 @@ public class AccountActionBean extends AbstractActionBean {
 //        }
 //    }
 
-    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
-    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
-        Object object = null;
-        try {
-            switch (loginMessage.getType()) {
-                case STUDENT:
-                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
-                    break;
-                case TEACHER:
-                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
-                    ((Teacher) object).setPassword("");
-                    break;
-            }
-            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
-        } catch (AccountServiceException e) {
-            throw new HandleAccountServiceException(e);
-        }
-    }
+//    @RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+//    public ResponseEntity<Result> loginCheck(@RequestBody LoginMessage loginMessage) {
+//        Object object = null;
+//        try {
+//            switch (loginMessage.getType()) {
+//                case STUDENT:
+//                    object = accountService.studentLogin(new Signon(Long.parseLong(loginMessage.getAccount()), loginMessage.getPassword()));
+//                    break;
+//                case TEACHER:
+//                    object = accountService.teacherLogin(new Teacher(loginMessage.getAccount(), loginMessage.getPassword()));
+//                    ((Teacher) object).setPassword("");
+//                    break;
+//            }
+//            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "登录成功", object), HttpStatus.OK);
+//        } catch (AccountServiceException e) {
+//            throw new HandleAccountServiceException(e);
+//        }
+//    }
 
     @RequestMapping(value = "signin", method = RequestMethod.GET)
     public String showSignin() {
