@@ -26,6 +26,7 @@
         </div>
 
 
+
         <div class="row">
             <table class="table table-hover">
                 <thead>
@@ -50,7 +51,8 @@
     </div>
     <!-- end products table -->
 </div>
-</div>
+
+
 <!-- end main container -->
 
 <!-- this page specific styles -->

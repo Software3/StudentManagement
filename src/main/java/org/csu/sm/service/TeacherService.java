@@ -1,11 +1,13 @@
 package org.csu.sm.service;
 
+import org.csu.sm.domain.SearchInfo;
 import org.csu.sm.domain.Student;
 import org.csu.sm.domain.VerifyLog;
 import org.csu.sm.exception.service.TeacherServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**
@@ -52,6 +54,26 @@ public interface TeacherService {
     void auditedFail(VerifyLog verifyLog) throws TeacherServiceException;
 
 
+    /* 条件检索学生信息
+    * @return
+    * @throws TeacherServiceException
+    */
+    List<Student> getSearchStudents(SearchInfo searchInfo) throws TeacherServiceException;
+
+    /**
+     * 导入学生Excel
+     *
+     * @param students
+     * @throws TeacherServiceException
+     */
     void insertStudentList(List<Student> students) throws TeacherServiceException;
+
+    /**
+     * 导出学生Excel
+     *
+     * @return
+     * @throws TeacherServiceException
+     */
+    List<Student> getStudentList() throws TeacherServiceException;
 }
 
