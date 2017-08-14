@@ -28,6 +28,7 @@ public class SignonDAOimpl implements SignonDAO{
     public void updateStudentSignon(Signon signon) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
+        signon.setAuthorities("ROLE_USER");
         session.update(signon);
         transaction.commit();
     }

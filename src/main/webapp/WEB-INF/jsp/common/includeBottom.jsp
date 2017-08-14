@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
-    var tabNames = ['shome', 'basicInfo', 'parentsInfo', 'awardSitu', 'failexamSitu', 'withdrawInst'];
-    var tabparams = [[],['userid'],['userid'],['userid'],['userid'],['userid']];
+    var tabNames = ['shome', 'basicInfo', 'parentsInfo', 'awardSitu', 'failexamSitu', 'withdrawInst','changePassword'];
+    var tabparams = [[],['userid'],['userid'],['userid'],['userid'],['userid'],[]];
 
     var contextPath = '<%=request.getContextPath()%>' + '/';
 
