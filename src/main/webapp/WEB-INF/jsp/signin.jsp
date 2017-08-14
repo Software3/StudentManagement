@@ -38,36 +38,36 @@
 
 
 <!-- background switcher -->
-<div class="bg-switch visible-desktop">
-    <div class="bgs">
-        <a href="#" data-img="landscape.jpg" class="bg active">
-            <img src="img/bgs/landscape.jpg" />
-        </a>
-        <a href="#" data-img="blueish.jpg" class="bg">
-            <img src="img/bgs/blueish.jpg" />
-        </a>
-        <a href="#" data-img="7.jpg" class="bg">
-            <img src="img/bgs/7.jpg" />
-        </a>
-        <a href="#" data-img="8.jpg" class="bg">
-            <img src="img/bgs/8.jpg" />
-        </a>
-        <a href="#" data-img="9.jpg" class="bg">
-            <img src="img/bgs/9.jpg" />
-        </a>
-        <a href="#" data-img="10.jpg" class="bg">
-            <img src="img/bgs/10.jpg" />
-        </a>
-        <a href="#" data-img="11.jpg" class="bg">
-            <img src="img/bgs/11.jpg" />
-        </a>
-    </div>
-</div>
+<%--<div class="bg-switch visible-desktop">--%>
+    <%--<div class="bgs">--%>
+        <%--<a href="#" data-img="landscape.jpg" class="bg active">--%>
+            <%--<img src="img/bgs/landscape.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="blueish.jpg" class="bg">--%>
+            <%--<img src="img/bgs/blueish.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="7.jpg" class="bg">--%>
+            <%--<img src="img/bgs/7.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="8.jpg" class="bg">--%>
+            <%--<img src="img/bgs/8.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="9.jpg" class="bg">--%>
+            <%--<img src="img/bgs/9.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="10.jpg" class="bg">--%>
+            <%--<img src="img/bgs/10.jpg" />--%>
+        <%--</a>--%>
+        <%--<a href="#" data-img="11.jpg" class="bg">--%>
+            <%--<img src="img/bgs/11.jpg" />--%>
+        <%--</a>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 
 <div class="login-wrapper">
-    <a href="index.html">
-        <img class="logo" src="img/logo-white.png">
+    <a href="">
+        <img class="logo" src="img/logo-my.png">
     </a>
 
     <div class="box">

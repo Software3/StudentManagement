@@ -66,7 +66,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img src="img/logo.png"></a>
+        <a class="navbar-brand" href="#"><img src="img/logo-m.png"></a>
     </div>
     <ul class="nav navbar-nav pull-right hidden-xs">
         <li class="hidden-xs hidden-sm">
