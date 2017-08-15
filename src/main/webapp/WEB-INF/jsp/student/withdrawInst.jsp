@@ -81,7 +81,7 @@
 <script src="js/widge/model.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
-<script src="js/util/ajaxUtil.js"></script>
+<script src="js/util/withdrawAjax.js"></script>
 <script src="js/uploads/ajaxfileupload.js"></script>
 
 <!-- call this page plugins -->

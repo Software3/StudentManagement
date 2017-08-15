@@ -52,7 +52,7 @@
 <script src="js/jquery.uniform.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/widge/alert.js"></script>
-<script src="js/util/ajaxUtil.js"></script>
+<script src="js/util/pwdManage.js"></script>
 <script src="js/util/util.js"></script>
 <!-- call this page plugins -->
 <script type="text/javascript">

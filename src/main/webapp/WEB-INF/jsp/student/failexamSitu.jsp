@@ -77,7 +77,7 @@
 <script src="js/widge/model.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/util.js"></script>
-<script src="js/util/ajaxUtil.js"></script>
+<script src="js/util/failedAjax.js"></script>
 
 <!-- call this page plugins -->
 <script type="text/javascript">
