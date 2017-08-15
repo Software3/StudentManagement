@@ -4,24 +4,24 @@
  */
 var modelForms = [[{label: '姓名:', id: 'parentName', type: 'text', placeholder: '请输入家长姓名'},
     {label: '联系方式:', id: 'parentPhone', type: 'text', placeholder: '请输入家长联系方式'},
-    {label: '关系:', id: 'parentRelation', type: 'text', placeholder: '请输入与你的关系'}],
-    [{label: '姓名:', id: 'editName', type: 'text', placeholder: '请输入家长姓名'},
+    {label: '关系:', id: 'parentRelation', type: 'select', placeholder: '请输入与你的关系', options: ['父亲', '母亲']}],
+    [{label: '姓名:', id: 'editName', type: 'text', placeholder: '请输入家长姓名', readonly: 'true'},
         {label: '联系方式:', id: 'editPhone', type: 'text', placeholder: '请输入家长联系方式'},
-        {label: '关系:', id: 'editRelation', type: 'text', placeholder: '请输入与你的关系,如父亲或者母亲'}],
+        {label: '关系:', id: 'editRelation', type: 'select', placeholder: '请输入与你的关系,如父亲或者母亲',options: ['父亲', '母亲']}],
     [{label: '获奖名称:', id: 'awardContent', type: 'text', placeholder: '请输入获奖名称'},
         {label: '获奖时间:', id: 'awardDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'},
-        {label: '获奖等级:', id: 'awardDegree', type: 'text', placeholder: '请输入获奖等级'},
-        {label: '获奖级别:', id: 'awardLevel', type: 'text', placeholder: '请输入获奖级别'},
-        {label: '获奖排名:', id: 'awardRank', type: 'text', placeholder: '请输入获奖排名'}],
-    [{label: '获奖名称:', id: 'editContent', type: 'text', placeholder: '请输入获奖名称'},
-        {label: '获奖时间:', id: 'editDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01'},
-        {label: '获奖等级:', id: 'editDegree', type: 'text', placeholder: '请输入获奖等级'},
-        {label: '获奖级别:', id: 'editLevel', type: 'text', placeholder: '请输入获奖级别'},
-        {label: '获奖排名:', id: 'editRank', type: 'text', placeholder: '请输入获奖排名'}],
-    [{label: '学期:', id: 'failedTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
+        {label: '获奖等级:', id: 'awardDegree', type: 'text', placeholder: '请输入获奖等级,如一等、二等、三等、优生'},
+        {label: '获奖级别:', id: 'awardLevel', type: 'select', placeholder: '请输入获奖级别', options: ['国际级', '国家级', '省级', '市级', '校级', '院级']},
+        {label: '获奖排名:', id: 'awardRank', type: 'text', placeholder: '请输入获奖排名, 如1、2、3'}],
+    [{label: '获奖名称:', id: 'editContent', type: 'text', placeholder: '请输入获奖名称', readonly: 'true'},
+        {label: '获奖时间:', id: 'editDate', type: 'text', placeholder: '请输入获奖时间，如2017-08-01', readonly: 'true'},
+        {label: '获奖等级:', id: 'editDegree', type: 'text', placeholder: '请输入获奖等级,如一等、二等、三等、优生'},
+        {label: '获奖级别:', id: 'editLevel', type: 'select', placeholder: '请输入获奖级别', options: ['国际级', '国家级', '省级', '市级', '校级', '院级']},
+        {label: '获奖排名:', id: 'editRank', type: 'text', placeholder: '请输入获奖排名, 如1、2、3'}],
+    [{label: '学期:', id: 'failedTerm', type: 'select', placeholder: '请输入学期，如2016-2017-2', options: ['2014-2015-1','2014-2015-2', '2015-2016-1', '2015-2016-2', '2016-2017-1', '2016-2017-2', '2017-2018-1', '2017-2018-2', '2018-2019-1', '2018-2019-2', '2019-2020-1', '2019-2020-2']},
         {label: '科目:', id: 'failedSubject', type: 'text', placeholder: '请输入科目'}],
-    [{label: '学期:', id: 'editTerm', type: 'text', placeholder: '请输入学期，如2016-2017-2'},
-        {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目'}],
+    [{label: '学期:', id: 'editTerm', type: 'select', placeholder: '请输入学期，如2016-2017-2', options: ['2014-2015-1','2014-2015-2', '2015-2016-1', '2015-2016-2', '2016-2017-1', '2016-2017-2', '2017-2018-1', '2017-2018-2', '2018-2019-1', '2018-2019-2', '2019-2020-1', '2019-2020-2']},
+        {label: '科目:', id: 'editSubject', type: 'text', placeholder: '请输入科目', readonly: 'true'}],
     [{label: '说明图片:', id: 'instPicture', type: 'file', placeholder: '请上传说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'instPicture'},
         {label: '说明文字:', id: 'instComment', type: 'textarea', placeholder: '请输入说明文字', rows: 4}],
     [{label: '说明图片:', id: 'editPicture', type: 'file', placeholder: '请修改说明图片', accept: 'image/jpeg,image/png,image/gif', name: 'editPicture'},
@@ -118,11 +118,24 @@ function model(title, rowNum, rowObjArray, feedback, values) {
             formGroup.appendChild(createElementWithHTML(createElementWithAttribute("label", {for:objArray[i].id, class:"col-lg-2 control-label"}), objArray[i].label));
             var div = createElementWithAttribute("div", {class: "col-lg-10"});
             if (objArray[i].type == 'text'){
-                div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"form-control", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i]}));
+                if (objArray[i].readonly == 'true'){
+                    div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"form-control", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i], readonly: 'readonly'}));
+                }else {
+                    div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"form-control", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i]}));
+                }
             } else if (objArray[i].type == 'file') {
                 div.appendChild(createElementWithAttribute("input", {type:objArray[i].type, class:"pull-left", id:objArray[i].id, placeholder:objArray[i].placeholder, value: values[i], accept: objArray[i].accept, name: objArray[i].name}));
             } else if (objArray[i].type == 'textarea') {
                 div.appendChild(createElementWithHTML(createElementWithAttribute("textarea", {class: 'form-control', id: objArray[i].id, placeholder: objArray[i].placeholder, rows: objArray[i].rows}), values[i]));
+            } else if  (objArray[i].type == 'select') {
+                var selectElement = createElementWithAttribute("select", {class: 'form-control', id: objArray[i].id});
+                var optionElement = undefined;
+                for (var m = 0;m < objArray[i].options.length;m++) {
+                    optionElement = createElementWithHTML(createElementWithAttribute("option", {value: objArray[i].options[m], }), objArray[i].options[m])
+                    if (trim(values[i]) == trim(objArray[i].options[m])) optionElement.setAttribute("selected", "selected");
+                    selectElement.appendChild(optionElement);
+                }
+                div.appendChild(selectElement);
             }
             formGroup.appendChild(div);
             form.appendChild(formGroup);

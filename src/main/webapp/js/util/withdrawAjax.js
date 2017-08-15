@@ -12,7 +12,7 @@ function addWithdrawInst() {
             $('#addModal').modal('hide');
             $("tbody").empty();
             for (var i = 0;i < instList.length;i++) {
-                $("tbody").append("<tr class='first'> <td> <input type='checkbox' id='inst_" + instList[i].instId + "'> <div><img src='" + instList[i].description + "' class='img-responsive' /></div> </td> <td class='description'>" + instList[i].comment + "</td> <td> <ul class='actions'> <li><a class='viewPic' onclick='viewPic(this)' data-toggle='modal' href='#viewModal'>查看图片</a></li><li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>");
+                $("tbody").append("<tr class='first'> <td> <input type='checkbox' id='inst_" + instList[i].instId + "'> <div><img src='" + instList[i].description + "' class='img-responsive' /></div> </td> <td class='description'>" + instList[i].comment + "</td> <td> <ul class='actions'> <li><a class='viewPic' onclick='viewPic(this)' data-toggle='modal' href='#viewModal'>查看图片</a></li><li><a class='myEdit btn btn-info' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete btn btn-danger' href='#'>删除</a></li> </ul> </td> </tr>");
             }
             $("#myAlert").append(alert("success", "添加成功！"));
 

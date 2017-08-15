@@ -112,7 +112,6 @@
                 <c:if test="${student.verifyState == 0 || student.verifyState == 3}">
                     <a id="submitVerify" class="btn btn-danger">提交资料审核</a><br/><br/>
                     <h5 class="text-info">注意:资料提交审核成功后，您的资料将不能再进行更改</h5>
-                    <span><c:out value="${student.verifyState}"/></span>
                 </c:if>
             </div>
         </div>

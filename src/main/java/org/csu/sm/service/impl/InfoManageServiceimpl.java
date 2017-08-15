@@ -82,7 +82,7 @@ public class InfoManageServiceimpl implements InfoManageService{
     }
 
     public void modifyFailexamInfo(FailexamRecord failexamRecord) throws InfoManageServiceException {
-        failexamDAO.insertFailexam(failexamRecord);
+        failexamDAO.updateFailexam(failexamRecord);
     }
 
     public List<FailexamRecord> addFailexamInfo(FailexamRecord failexamRecord) throws InfoManageServiceException {

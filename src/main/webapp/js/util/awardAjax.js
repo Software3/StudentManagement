@@ -15,7 +15,7 @@ function addAward() {
         success: function (data) {
             $('#addModal').modal('hide');
             $("#myAlert").append(alert("success", "添加成功！"));
-            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>" + content + "</a> </td> <td class='description'>" + date + "</td><td class='description'>" + degree + "</td><td class='description'>" + level + "</td><td class='description'>" + rank + "</td> <td> <ul class='actions'> <li><a class='myEdit' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete' href='#'>删除</a></li> </ul> </td> </tr>")
+            $("tbody").append("<tr class='first'> <td> <input type='checkbox'> <a href='#' class='name'>" + content + "</a> </td> <td class='description'>" + date + "</td><td class='description'>" + degree + "</td><td class='description'>" + level + "</td><td class='description'>" + rank + "</td> <td> <ul class='actions'> <li><a class='myEdit btn btn-info' onclick='editRow(this)' data-toggle='modal' href='#editModal'>编辑</a></li> <li class='last'><a onclick='deleteRow(this)' class='myDelete btn btn-danger' href='#'>删除</a></li> </ul> </td> </tr>")
         },
         error: function (xhr) {
             $("#myAlert").append(alert("danger", "添加失败！"));
