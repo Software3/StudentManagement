@@ -100,12 +100,12 @@
 <!-- this page specific styles -->
 <link rel="stylesheet" href="css/compiled/signin.css" type="text/css" media="screen" />
 <!-- scripts -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<%--<script src="http://code.jquery.com/jquery-latest.js"></script>--%>
+<%--<script src="js/bootstrap.min.js"></script>--%>
 <script src="js/theme.js"></script>
 <script src="js/util/userUtil.js"></script>
 <!-- pre load bg imgs -->
-<script type="text/javascript">
+<%--<script type="text/javascript">--%>
     <%--function whichLogin() {--%>
         <%--var type=$('input[name="type"]:checked').val();--%>
         <%--if(type==0){--%>
@@ -171,6 +171,6 @@
             <%--})--%>
         <%--});--%>
     <%--});--%>
-</script>
+<%--</script>--%>
 </body>
 </html>

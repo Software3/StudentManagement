@@ -55,8 +55,14 @@ public class TeacherActionBean {
     public String showTeacherHome(
 //            @RequestParam(value = "teacherId", defaultValue = "") String teacherId,
             Model model) {
-        model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
-        return "teacher/index";
+        try {
+            Teacher teacher = infoManageService.getTeacherInfo(getPrincipal());
+            model.addAttribute("teacherId", Long.valueOf(getPrincipal()));
+            model.addAttribute("teacher", teacher);
+            return "teacher/index";
+        } catch (InfoManageServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
     }
 
     @RequestMapping(value = "teacherBasicInfo", method = RequestMethod.GET)

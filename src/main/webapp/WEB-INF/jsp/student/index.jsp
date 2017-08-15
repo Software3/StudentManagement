@@ -6,10 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../common/teacIncludeTop.jsp" %>
+<%@ include file="../common/includeTop.jsp" %>
 <div id="pad-wrapper">
     <div>
-        <h4>欢迎你,${teacher.name}</h4>
+        <h4>欢迎你,${student.name}</h4><br>
+        <h5 style="color: red">请完善您的信息后在资料审核进行提交</h5>
     </div>
 </div>
 </div>
@@ -21,4 +22,4 @@
 <%--<script src="js/jquery.uniform.min.js"></script>--%>
 <script src="js/select2.min.js"></script>
 <script src="js/theme.js"></script>
-<%@include file="../common/teacIncludeBottom.jsp" %>
+<%@include file="../common/includeBottom.jsp" %>

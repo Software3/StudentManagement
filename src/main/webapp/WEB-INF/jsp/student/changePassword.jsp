@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="field-box">
-                    <label>密码:</label>
+                    <label>原密码:</label>
                     <div class="col-md-7">
                         <input id="old_password" class="form-control" type="password"  onblur="checkPassword()"/>
                     </div>

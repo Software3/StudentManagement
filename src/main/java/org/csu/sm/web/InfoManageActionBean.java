@@ -49,9 +49,15 @@ public class InfoManageActionBean extends AbstractActionBean {
         return userId;
     }
     /************************************** 页面跳转action ************************************/
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showStudentHome() {
-        return "student/basicInfo";
+    @RequestMapping(value = {"/sindex", "/"}, method = RequestMethod.GET)
+    public String showStudentHome(Model model) {
+        try {
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
+            return "student/index";
+        } catch (InfoManageServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
     }
 
     @RequestMapping(value = "/basicInfo", method = RequestMethod.GET)
