@@ -1,8 +1,8 @@
 package org.csu.sm.persistence;
 
 import org.csu.sm.domain.Parent;
+import org.csu.sm.exception.PersistenceException;
 
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**

@@ -1,11 +1,9 @@
 package org.csu.sm.persistence;
 
-import org.csu.sm.domain.SearchInfo;
 import org.csu.sm.domain.Student;
 import org.csu.sm.domain.Teacher;
-import org.springframework.security.access.method.P;
+import org.csu.sm.exception.PersistenceException;
 
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 /**

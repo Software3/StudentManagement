@@ -3,6 +3,7 @@ package org.csu.sm.persistence.impl;
 import org.csu.sm.domain.SearchInfo;
 import org.csu.sm.domain.Student;
 import org.csu.sm.domain.Teacher;
+import org.csu.sm.persistence.AbstractDAO;
 import org.csu.sm.persistence.TeacherDAO;
 import org.csu.sm.util.HibernateUtil;
 import org.hibernate.Session;
@@ -17,31 +18,51 @@ import java.util.List;
  * Created by ltaoj on 2017/8/7.
  */
 @Repository
-public class TeacherDAOimpl implements TeacherDAO{
+public class TeacherDAOimpl extends AbstractDAO implements TeacherDAO{
     public void updateTeacher(Teacher teacher) throws PersistenceException {
         Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(teacher);
-        session.flush();
-        transaction.commit();
-        session.close();
+        Transaction transaction = getTransation(session);
+        try {
+            session.update(teacher);
+            session.flush();
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     public Teacher getTeacher(String username) throws PersistenceException {
         Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        Teacher teacher = session.get(Teacher.class, username);
-        session.flush();
-        transaction.commit();
-        return teacher;
+        Transaction transaction = getTransation(session);
+        try {
+            Teacher teacher = session.get(Teacher.class, username);
+            session.flush();
+            transaction.commit();
+            return teacher;
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     public List<Student> getSearchStudents(String hql) throws PersistenceException {
         Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        List<Student> list = session.createQuery(hql).list();
-        session.flush();
-        transaction.commit();
-        return list;
+        Transaction transaction = getTransation(session);
+        try {
+            List<Student> list = session.createQuery(hql).list();
+            session.flush();
+            transaction.commit();
+            return list;
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }

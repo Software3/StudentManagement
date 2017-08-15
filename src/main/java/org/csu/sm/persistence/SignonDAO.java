@@ -2,8 +2,8 @@ package org.csu.sm.persistence;
 
 import org.csu.sm.domain.Signon;
 import org.csu.sm.domain.Teacher;
+import org.csu.sm.exception.PersistenceException;
 
-import javax.persistence.PersistenceException;
 
 /**
  * Created by ltaoj on 2017/8/7.
