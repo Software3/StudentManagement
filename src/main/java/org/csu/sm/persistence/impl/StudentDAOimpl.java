@@ -183,4 +183,21 @@ public class StudentDAOimpl extends AbstractDAO implements StudentDAO {
             session.close();
         }
     }
+
+    public void changeStudentVerifyState(long studentId, int verifyState) throws org.csu.sm.exception.PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = getTransation(session);
+        try {
+            Student student = session.get(Student.class, studentId);
+            student.setVerifyState(verifyState);
+            session.update(student);
+            session.flush();
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
 }

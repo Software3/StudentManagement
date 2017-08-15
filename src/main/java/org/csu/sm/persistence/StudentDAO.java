@@ -96,4 +96,12 @@ public interface StudentDAO {
      * @throws PersistenceException
      */
     List<Student> getStudentList() throws PersistenceException;
+
+    /**
+     * 修改学生的资料审核状态
+     * @param studentId
+     * @param verifyState
+     * @throws PersistenceException
+     */
+    void changeStudentVerifyState(long studentId, int verifyState) throws PersistenceException;
 }

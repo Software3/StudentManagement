@@ -308,5 +308,13 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
-
+    @RequestMapping(value = "submitVerify", method = RequestMethod.GET)
+    public ResponseEntity<Result> submitVerify() {
+        try {
+            infoManageService.submitVerify(Long.valueOf(getPrincipal()), 1);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "资料审核提交成功", null), HttpStatus.OK);
+        } catch (InfoManageServiceException e) {
+            throw new HandleInfoServiceException(e);
+        }
+    }
 }

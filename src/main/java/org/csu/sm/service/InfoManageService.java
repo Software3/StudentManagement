@@ -171,4 +171,12 @@ public interface InfoManageService {
      * @throws InfoManageServiceException
      */
     void modifyTeacherInfo(Teacher teacher) throws InfoManageServiceException;
+
+    /**
+     * 学生提交审核
+     * @param studentId
+     * @param verifyState
+     * @throws InfoManageServiceException
+     */
+    void submitVerify(long studentId, int verifyState) throws InfoManageServiceException;
 }

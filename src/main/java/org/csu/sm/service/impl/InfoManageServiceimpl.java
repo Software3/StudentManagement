@@ -132,4 +132,8 @@ public class InfoManageServiceimpl implements InfoManageService{
     public void modifyTeacherInfo(Teacher teacher) throws InfoManageServiceException {
         teacherDAO.updateTeacher(teacher);
     }
+
+    public void submitVerify(long studentId, int verifyState) throws InfoManageServiceException {
+        studentDAO.changeStudentVerifyState(studentId, verifyState);
+    }
 }

@@ -39,3 +39,20 @@ function updateBasicInfo() {
         }
     });
 }
+
+function submitVerify(node){
+    $.ajaxSetup({contentType: 'application/json'});
+    $.ajax({
+        url: 'submitVerify',
+        dataType: 'text',
+        method: 'GET',
+        success: function (data) {
+            $("#myAlert").append(alert("success", "提交成功！"));
+            $(node).attr("disabled", "disabled");
+            $("#confirmModify").attr("disabled", "disabled");
+        },
+        error: function (xhr) {
+            $("#myAlert").append(alert("danger", "提交失败！请稍后重试"))
+        }
+    });
+}
