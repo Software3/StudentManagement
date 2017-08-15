@@ -20,6 +20,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO {
         Transaction transaction = session.beginTransaction();
         String hql = "from VerifyLog as v where counselorName='" + counselorName + "'";
         List<VerifyLog> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }
@@ -28,6 +29,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(verifyLog);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -37,6 +39,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO {
         Transaction transaction = session.beginTransaction();
         String hql = "from VerifyLog as v where studentId=" + studentId;
         List<VerifyLog> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }

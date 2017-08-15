@@ -22,6 +22,7 @@ public class StudentDAOimpl implements StudentDAO {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(student);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -31,6 +32,7 @@ public class StudentDAOimpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
         Student student = session.get(Student.class, studentId);
         if (student != null) session.delete(student);
+        session.flush();
         transaction.commit();
         session.close();
         return student != null ? studentId : -1;
@@ -48,6 +50,7 @@ public class StudentDAOimpl implements StudentDAO {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         Student student = session.get(Student.class, studentId);
+        session.flush();
         transaction.commit();
         return student;
     }
@@ -57,6 +60,7 @@ public class StudentDAOimpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
         String hql = "from Student as s where verifyState=" + verifyState;
         List<Student> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }
@@ -66,6 +70,7 @@ public class StudentDAOimpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
         String hql = "from Student as s where counselorName='" + teacherId + "'";
         List<Student> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }
@@ -75,6 +80,7 @@ public class StudentDAOimpl implements StudentDAO {
         Transaction transaction = session.beginTransaction();
         String hql = "from Student as s where counselorName='" + teacherId + "' and verifyState=" + state;
         List<Student> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }
@@ -85,6 +91,7 @@ public class StudentDAOimpl implements StudentDAO {
         Student student = session.load(Student.class, verifyLog.getStudentId());
         student.setVerifyState(isVerify == true ? 2 : 3);
         session.update(student);
+        session.flush();
         transaction.commit();
     }
 
@@ -95,6 +102,7 @@ public class StudentDAOimpl implements StudentDAO {
             for (int i = 0; i < students.size(); i++) {
                 session.save(students.get(i));
             }
+            session.flush();
             transaction.commit();
             session.close();
         } catch (RuntimeException e) {
@@ -108,6 +116,7 @@ public class StudentDAOimpl implements StudentDAO {
             Transaction transaction = session.beginTransaction();
             Query query = session.createQuery("from Student");
             List<Student> students = query.list();
+            session.flush();
             transaction.commit();
             session.close();
             return students;

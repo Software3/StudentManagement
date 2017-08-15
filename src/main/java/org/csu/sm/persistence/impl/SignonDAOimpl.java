@@ -21,6 +21,7 @@ public class SignonDAOimpl implements SignonDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from Signon as signon where studentId=" + signon.getStudentId() + " and password=" + signon.getPassword();
         List<Signon> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list.size() > 0 ? 1 : 0;
     }
@@ -30,6 +31,7 @@ public class SignonDAOimpl implements SignonDAO{
         Transaction transaction = session.beginTransaction();
         signon.setAuthorities("ROLE_USER");
         session.update(signon);
+        session.flush();
         transaction.commit();
     }
 
@@ -38,6 +40,7 @@ public class SignonDAOimpl implements SignonDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from Teacher as t where username='" + teacher.getUsername() + "' and password='" + teacher.getPassword() + "'";
         List<Teacher> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list.size() > 0 ? list.get(0) : null;
     }
@@ -48,12 +51,14 @@ public class SignonDAOimpl implements SignonDAO{
         Teacher teacher = session.get(Teacher.class, username);
         teacher.setPassword(password);
         session.update(teacher);
+        session.flush();
         transaction.commit();
     }
 
     public Signon getSignon(Long studentId) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Signon signon=session.get(Signon.class,studentId);
+        session.flush();
         session.close();
         return signon;
     }

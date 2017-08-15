@@ -22,6 +22,7 @@ public class TeacherDAOimpl implements TeacherDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(teacher);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -30,6 +31,7 @@ public class TeacherDAOimpl implements TeacherDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         Teacher teacher = session.get(Teacher.class, username);
+        session.flush();
         transaction.commit();
         return teacher;
     }
@@ -38,6 +40,7 @@ public class TeacherDAOimpl implements TeacherDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         List<Student> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }

@@ -20,6 +20,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(failexamRecord);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -28,6 +29,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(failexamRecord);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -37,6 +39,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Transaction transaction = session.beginTransaction();
         FailexamRecord failexamRecord = session.get(FailexamRecord.class, new FailexamRecordPK(subject, studentId));
         if (failexamRecord != null) session.delete(failexamRecord);
+        session.flush();
         transaction.commit();
         session.close();
         return failexamRecord != null ? studentId : -1;
@@ -47,6 +50,7 @@ public class FailexamDAOimpl implements FailexamDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from FailexamRecord as f where studentId=" + studentId;
         List<FailexamRecord> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }

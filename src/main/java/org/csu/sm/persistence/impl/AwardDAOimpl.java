@@ -21,6 +21,7 @@ public class AwardDAOimpl implements AwardDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(awardRecord);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -29,6 +30,7 @@ public class AwardDAOimpl implements AwardDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(awardRecord);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -38,6 +40,7 @@ public class AwardDAOimpl implements AwardDAO{
         Transaction transaction = session.beginTransaction();
         AwardRecord awardRecord1 = session.get(AwardRecord.class, new AwardRecordPK(awardRecord.getContent(), awardRecord.getDate(), awardRecord.getStudentId()));
         if (awardRecord1 != null) session.delete(awardRecord1);
+        session.flush();
         transaction.commit();
         session.close();
         return awardRecord != null ? awardRecord.getStudentId() : -1;
@@ -48,6 +51,7 @@ public class AwardDAOimpl implements AwardDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from AwardRecord as a where studentId=" + studentId;
         List<AwardRecord> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }

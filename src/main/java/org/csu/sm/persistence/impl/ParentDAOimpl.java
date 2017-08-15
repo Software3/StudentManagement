@@ -20,6 +20,7 @@ public class ParentDAOimpl implements ParentDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(parent);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -28,6 +29,7 @@ public class ParentDAOimpl implements ParentDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(parent);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -37,6 +39,7 @@ public class ParentDAOimpl implements ParentDAO{
         Transaction transaction = session.beginTransaction();
         Parent parent = session.get(Parent.class, new ParentPK(studentId, name));
         if (parent != null) session.delete(parent);
+        session.flush();
         transaction.commit();
         session.close();
         return parent != null ? studentId : -1;
@@ -47,6 +50,7 @@ public class ParentDAOimpl implements ParentDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from Parent as p where studentId=" + studentId;
         List<Parent> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }

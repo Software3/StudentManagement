@@ -20,6 +20,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(withdrawInst);
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -35,6 +36,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         } else {
             session.update(withdrawInst);
         }
+        session.flush();
         transaction.commit();
         session.close();
     }
@@ -44,6 +46,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         Transaction transaction = session.beginTransaction();
         String hql = "from WithdrawInst as w where studentId=" + studentId;
         List<WithdrawInst> list = session.createQuery(hql).list();
+        session.flush();
         transaction.commit();
         return list;
     }
@@ -52,6 +55,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         WithdrawInst withdrawInst = session.get(WithdrawInst.class, instId);
+        session.flush();
         transaction.commit();
         session.close();
         return withdrawInst;
@@ -63,6 +67,7 @@ public class WithdrawDAOimpl implements WithdrawInstDAO{
         String hql = "from WithdrawInst as w where instId=" + instId + " and studentId=" + studentId;
         List<WithdrawInst> list = session.createQuery(hql).list();
         if (list.size() > 0) session.delete(list.get(0));
+        session.flush();
         transaction.commit();
         session.close();
         return list.size() > 0 ? list.get(0) : null;
