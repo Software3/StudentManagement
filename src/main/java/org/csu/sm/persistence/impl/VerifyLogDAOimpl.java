@@ -18,7 +18,7 @@ public class VerifyLogDAOimpl implements VerifyLogDAO {
     public List<VerifyLog> getVerifyLogListByCounselorName(String counselorName) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from VerifyLog as v where counselorName=" + counselorName;
+        String hql = "from VerifyLog as v where counselorName='" + counselorName + "'";
         List<VerifyLog> list = session.createQuery(hql).list();
         transaction.commit();
         return list;

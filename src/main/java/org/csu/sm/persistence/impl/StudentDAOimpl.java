@@ -64,7 +64,7 @@ public class StudentDAOimpl implements StudentDAO {
     public List<Student> getStudentListByTeacherId(String teacherId) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from Student as s where counselorName=" + teacherId;
+        String hql = "from Student as s where counselorName='" + teacherId + "'";
         List<Student> list = session.createQuery(hql).list();
         transaction.commit();
         return list;
@@ -73,7 +73,7 @@ public class StudentDAOimpl implements StudentDAO {
     public List<Student> getStudentListByTeacherIdAndState(String teacherId, String state) throws PersistenceException {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from Student as s where counselorName=" + teacherId + "and verifyState=" + state;
+        String hql = "from Student as s where counselorName='" + teacherId + "' and verifyState=" + state;
         List<Student> list = session.createQuery(hql).list();
         transaction.commit();
         return list;
