@@ -67,7 +67,7 @@
 
 <div class="login-wrapper">
     <a href="">
-        <img class="logo" src="img/logo-my.png">
+        <img class="logo" src="img/logo-s.png">
     </a>
 
     <div class="box">
