@@ -10,7 +10,7 @@
 <div id="pad-wrapper">
     <div>
         <h4>欢迎你,${student.name}</h4><br>
-        <h5 style="color: red">请完善您的信息后在资料审核进行提交</h5>
+        <h5 style="color: red">请完善您的信息后在基本信息页面进行审核提交</h5>
     </div>
 </div>
 </div>

@@ -20,7 +20,9 @@
 
         <div class="row filter-block">
             <div class="pull-right">
-                <a class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加挂科记录</a>
+                <c:if test="${student.verifyState == 0 || student.verifyState == 3}">
+                    <a class="btn-flat success new-product" data-toggle="modal" href="#addModal">添加挂科记录</a>
+                </c:if>
             </div>
         </div>
 
@@ -53,8 +55,8 @@
                         </td>
                         <td>
                             <ul class="actions">
-                                <li><a class="myEdit" onclick="editRow(this)" data-toggle="modal" href="#editModal">编辑</a></li>
-                                <li class="last"><a onclick="deleteRow(this)" class="myDelete" href="#">删除</a></li>
+                                <li><a class="myEdit btn btn-info" onclick="editRow(this)" <c:if test="${student.verifyState == 1 || student.verifyState == 2}">disabled="disabled" </c:if> data-toggle="modal" href="#editModal">编辑</a></li>
+                                <li class="last"><a onclick="deleteRow(this)" <c:if test="${student.verifyState == 1 || student.verifyState == 2}">disabled="disabled" </c:if> class="myDelete btn btn-danger" href="#">删除</a></li>
                             </ul>
                         </td>
                     </tr>

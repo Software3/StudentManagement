@@ -101,7 +101,7 @@
                     <div class="field-box">
                         <label class="text-success"></label>
                         <div class="col-md-4 actions">
-                            <input id="confirmModify" class="form-control btn-flat primary" value="确认修改" type="button" />
+                            <input id="confirmModify" <c:if test="${student.verifyState == 1 || student.verifyState == 2}">disabled="disabled"</c:if> class="form-control btn-flat primary" value="确认修改" type="button" />
                         </div>
                     </div>
                 </form>

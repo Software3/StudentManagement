@@ -4,10 +4,8 @@ import org.csu.sm.domain.*;
 import org.csu.sm.exception.action.HandleFileUploadException;
 import org.csu.sm.exception.action.HandleInfoServiceException;
 import org.csu.sm.exception.action.HandleTransationException;
-import org.csu.sm.exception.service.AccountServiceException;
 import org.csu.sm.exception.service.InfoManageServiceException;
 import org.csu.sm.exception.service.TransationException;
-import org.csu.sm.service.AccountService;
 import org.csu.sm.service.InfoManageService;
 import org.csu.sm.util.ConfigUtil;
 import org.csu.sm.util.IOUtil;
@@ -82,6 +80,8 @@ public class InfoManageActionBean extends AbstractActionBean {
                                   Model model) {
         try {
             List<Parent> parentList = infoManageService.getParentList(Long.valueOf(getPrincipal()));
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
             model.addAttribute("parentList", parentList);
             return "student/parentsInfo";
         } catch (InfoManageServiceException e) {
@@ -96,6 +96,8 @@ public class InfoManageActionBean extends AbstractActionBean {
                                 Model model) {
         try {
             List<AwardRecord> awardList = infoManageService.getAwardList(Long.valueOf(getPrincipal()));
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
             model.addAttribute("awardList", awardList);
             return "student/awardSitu";
         } catch (InfoManageServiceException e) {
@@ -110,6 +112,8 @@ public class InfoManageActionBean extends AbstractActionBean {
                                    Model model) {
         try {
             List<FailexamRecord> failedList = infoManageService.getFailexamList(Long.valueOf(getPrincipal()));
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
             model.addAttribute("failedList", failedList);
             return "student/failexamSitu";
         } catch (InfoManageServiceException e) {
@@ -124,6 +128,8 @@ public class InfoManageActionBean extends AbstractActionBean {
                                    Model model) {
         try {
             List<WithdrawInst> withdrawInstList = infoManageService.getWithdrawInstList(Long.valueOf(getPrincipal()));
+            Student student = infoManageService.getBasicInfo(Long.valueOf(getPrincipal()));
+            model.addAttribute("student", student);
             model.addAttribute("withdrawInstList", withdrawInstList);
             return "student/withdrawInst";
         } catch (InfoManageServiceException e) {
