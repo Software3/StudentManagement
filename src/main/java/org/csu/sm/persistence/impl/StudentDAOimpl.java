@@ -2,6 +2,7 @@ package org.csu.sm.persistence.impl;
 
 import org.csu.sm.domain.Student;
 import org.csu.sm.domain.VerifyLog;
+import org.csu.sm.exception.service.TransationException;
 import org.csu.sm.persistence.AbstractDAO;
 import org.csu.sm.persistence.StudentDAO;
 import org.csu.sm.util.HibernateUtil;
@@ -11,6 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceException;
+import java.awt.event.HierarchyBoundsAdapter;
 import java.util.List;
 
 /**
@@ -57,6 +59,23 @@ public class StudentDAOimpl extends AbstractDAO implements StudentDAO {
         try {
             session.update(student);
             transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    public String updateStudentByIdPhoto(long studentId, String idPhoto) throws org.csu.sm.exception.PersistenceException {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = getTransation(session);
+        try {
+            Student student = session.get(Student.class, studentId);
+            student.setIdPhoto(idPhoto);
+            session.update(student);
+            transaction.commit();
+            return idPhoto;
         } catch (RuntimeException e) {
             transaction.rollback();
             throw e;

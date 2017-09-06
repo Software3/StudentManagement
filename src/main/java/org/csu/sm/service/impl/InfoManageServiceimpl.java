@@ -41,6 +41,10 @@ public class InfoManageServiceimpl implements InfoManageService{
         studentDAO.updateStudent(student);
     }
 
+    public String modifyBasicInfoByIdPhoto(long studentId, String idPhoto) throws TransationException {
+        return studentDAO.updateStudentByIdPhoto(studentId, idPhoto);
+    }
+
     public List<Parent> getParentList(long studentId) throws InfoManageServiceException {
         return parentDAO.getParents(studentId);
     }

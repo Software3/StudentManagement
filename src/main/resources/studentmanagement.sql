@@ -98,6 +98,7 @@ CREATE TABLE `student` (
   `counselor_phone` varchar(20) NOT NULL COMMENT '辅导员联系方式',
   `student_type` varchar(20) NOT NULL COMMENT '学生类型',
   `verify_state` int(4) NOT NULL DEFAULT '0' COMMENT '审核状态',
+  `id_photo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

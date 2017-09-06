@@ -160,6 +160,22 @@ public class InfoManageActionBean extends AbstractActionBean {
         }
     }
 
+    @RequestMapping(value = "uploadIdPhoto", method = RequestMethod.POST)
+    public ResponseEntity<Result> uploadIdPhoto(@RequestPart("idPhoto") MultipartFile idPhoto,HttpServletRequest request) throws HandleFileUploadException {
+        String path = request.getSession().getServletContext().getRealPath("upImg");
+        ConfigUtil.setPath(path);
+        try {
+            String targetName = new Date().getTime() + "";
+            IOUtil.saveFile(targetName, path, idPhoto);
+            infoManageService.modifyBasicInfoByIdPhoto(Long.valueOf(getPrincipal()), targetName);
+            return new ResponseEntity<Result>(new Result("证件照上传成功", targetName, null), HttpStatus.OK);
+        } catch (TransationException e) {
+            throw new HandleTransationException(e);
+        } catch (IOException e) {
+            throw new HandleFileUploadException(e);
+        }
+    }
+
     @RequestMapping(value = "addMember", method = RequestMethod.POST)
     public ResponseEntity<Result> insertParent(@RequestBody Parent parent) {
         try {

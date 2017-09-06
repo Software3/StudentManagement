@@ -36,6 +36,8 @@ public class Student {
     private String studentType;
     @Column(name = "verify_state")
     private int verifyState;
+    @Column(name = "id_photo")
+    private String idPhoto;
 
     public long getStudentId() {
         return studentId;
@@ -141,6 +143,14 @@ public class Student {
         this.verifyState = verifyState;
     }
 
+    public String getIdPhoto() {
+        return idPhoto;
+    }
+
+    public void setIdPhoto(String idPhoto) {
+        this.idPhoto = idPhoto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,7 +174,7 @@ public class Student {
         if (counselorPhone != null ? !counselorPhone.equals(student.counselorPhone) : student.counselorPhone != null)
             return false;
         if (studentType != null ? !studentType.equals(student.studentType) : student.studentType != null) return false;
-
+        if (idPhoto != null ? !idPhoto.equals(student.idPhoto) : student.idPhoto != null) return false;
         return true;
     }
 
@@ -183,6 +193,7 @@ public class Student {
         result = 31 * result + (counselorPhone != null ? counselorPhone.hashCode() : 0);
         result = 31 * result + (studentType != null ? studentType.hashCode() : 0);
         result = 31 * result + verifyState;
+        result = 31 * result + (idPhoto != null ? idPhoto.hashCode() : 0);
         return result;
     }
 }

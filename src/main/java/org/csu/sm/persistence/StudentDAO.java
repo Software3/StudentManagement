@@ -37,6 +37,15 @@ public interface StudentDAO {
     void updateStudent(Student student) throws PersistenceException;
 
     /**
+     * 更新学生证件照
+     * @param studentId
+     * @param idPhoto
+     * @return
+     * @throws PersistenceException
+     */
+    String updateStudentByIdPhoto(long studentId, String idPhoto) throws PersistenceException;
+
+    /**
      * 通过学号查找学生基本信息
      *
      * @param studentId

@@ -27,6 +27,15 @@ public interface InfoManageService {
     void modifyBasicInfo(Student student) throws InfoManageServiceException;
 
     /**
+     * 修改证件照
+     * @param studentId
+     * @param idPhoto
+     * @return
+     * @throws TransationException
+     */
+    String modifyBasicInfoByIdPhoto(long studentId, String idPhoto) throws TransationException;
+
+    /**
      * 查看家长信息
      * @param studentId
      * @return
