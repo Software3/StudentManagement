@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2017-08-09 10:06:14
+Date: 2017-12-24 15:15:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,6 +23,9 @@ CREATE TABLE `award_record` (
   `content` varchar(50) NOT NULL COMMENT '奖励名称',
   `date` date NOT NULL COMMENT '获奖日期',
   `student_id` bigint(20) NOT NULL COMMENT '学生编号',
+  `degree` varchar(20) DEFAULT NULL COMMENT '等级，如一、二、三等、优生',
+  `level` varchar(20) DEFAULT NULL COMMENT '级别，国际级、国家级、省级、市级、校级',
+  `rank` int(11) unsigned DEFAULT NULL COMMENT '排名',
   PRIMARY KEY (`content`,`date`,`student_id`),
   KEY `award_fk_1` (`student_id`),
   CONSTRAINT `award_fk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -31,6 +34,7 @@ CREATE TABLE `award_record` (
 -- ----------------------------
 -- Records of award_record
 -- ----------------------------
+INSERT INTO `award_record` VALUES ('机器学习大赛', '2017-08-01', '3903150326', '优生', '国家级', '2');
 
 -- ----------------------------
 -- Table structure for `failexam_record`
@@ -48,6 +52,7 @@ CREATE TABLE `failexam_record` (
 -- ----------------------------
 -- Records of failexam_record
 -- ----------------------------
+INSERT INTO `failexam_record` VALUES ('2015-2016-2', '高数下', '3903150326');
 
 -- ----------------------------
 -- Table structure for `parent`
@@ -65,6 +70,8 @@ CREATE TABLE `parent` (
 -- ----------------------------
 -- Records of parent
 -- ----------------------------
+INSERT INTO `parent` VALUES ('李华', '15616188082', '0', '3903150326');
+INSERT INTO `parent` VALUES ('王五', '15616188023', '1', '3903150326');
 
 -- ----------------------------
 -- Table structure for `signon`
@@ -73,12 +80,18 @@ DROP TABLE IF EXISTS `signon`;
 CREATE TABLE `signon` (
   `student_id` bigint(20) NOT NULL COMMENT '学生编号',
   `password` varchar(20) NOT NULL COMMENT '密码',
+  `authorities` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of signon
 -- ----------------------------
+INSERT INTO `signon` VALUES ('111', '111', 'ROLE_ADMIN');
+INSERT INTO `signon` VALUES ('222', '222', 'ROLE_ADMIN');
+INSERT INTO `signon` VALUES ('3903150326', '3903150326', 'ROLE_USER');
+INSERT INTO `signon` VALUES ('3903150327', '3903150327', 'ROLE_USER');
+INSERT INTO `signon` VALUES ('3903150332', '3903150332', 'ROLE_USER');
 
 -- ----------------------------
 -- Table structure for `student`
@@ -105,6 +118,9 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES ('3903150326', '李涛江', '1', '河南省辉县市', '1998-04-17', '河南省辉县市', '软件工程', '中南大学', '修改备注~~~success!', '辅导员', '15616188082', '2', '1', null);
+INSERT INTO `student` VALUES ('3903150327', '陈铭明', '1', '', null, '', '软件工程', '', '', '辅导员', '', '0', '0', null);
+INSERT INTO `student` VALUES ('3903150332', '葛凡', '1', '', '2001-01-03', '', '软件工程', '中南大学', '备注啊', '辅导员', '15616188082', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `teacher`
@@ -113,7 +129,7 @@ DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `name` varchar(20) DEFAULT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(20) DEFAULT NULL,
   `phone` varchar(20) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
   `majors` varchar(100) NOT NULL,
@@ -124,6 +140,8 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
+INSERT INTO `teacher` VALUES ('辅导员', '111', null, '15166669999', null, '软件工程', '0');
+INSERT INTO `teacher` VALUES ('副书记', '222', null, '15166889999', null, '软件工程', '1');
 
 -- ----------------------------
 -- Table structure for `verify_log`
@@ -137,11 +155,17 @@ CREATE TABLE `verify_log` (
   `verify_operate` int(4) NOT NULL COMMENT '审核执行的操作',
   `date` date NOT NULL DEFAULT '0000-00-00' COMMENT '日志日期',
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of verify_log
 -- ----------------------------
+INSERT INTO `verify_log` VALUES ('1', '3903150326', '李涛江 ', '111', '1', '2017-07-14');
+INSERT INTO `verify_log` VALUES ('2', '3903150326', '李涛江 ', '111', '0', '2017-07-14');
+INSERT INTO `verify_log` VALUES ('3', '3903150326', '李涛江 ', '111', '0', '2017-07-14');
+INSERT INTO `verify_log` VALUES ('4', '3903150326', '李涛江 ', '111', '0', '2017-07-14');
+INSERT INTO `verify_log` VALUES ('5', '3903150326', '李涛江 ', '111', '0', '2017-07-14');
+INSERT INTO `verify_log` VALUES ('6', '3903150326', '李涛江 ', '111', '1', '2017-07-14');
 
 -- ----------------------------
 -- Table structure for `withdraw_inst`
@@ -150,7 +174,7 @@ DROP TABLE IF EXISTS `withdraw_inst`;
 CREATE TABLE `withdraw_inst` (
   `inst_id` int(11) NOT NULL AUTO_INCREMENT,
   `comment` varchar(1000) NOT NULL,
-  `describe` varchar(300) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
   `student_id` bigint(20) NOT NULL,
   PRIMARY KEY (`inst_id`),
   KEY `inst_fk_1` (`student_id`),
