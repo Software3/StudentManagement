@@ -119,7 +119,9 @@
                 <li><a href="<%=request.getContextPath()%>/parentsInfo">家长信息</a></li>
                 <li><a href="<%=request.getContextPath()%>/awardSitu">奖励情况</a></li>
                 <li><a href="<%=request.getContextPath()%>/failexamSitu">挂科情况</a></li>
+                <c:if test="${student.studentType == 2}">
                 <li><a href="<%=request.getContextPath()%>/withdrawInst">退队说明</a></li>
+                </c:if>
                 <li><a href="<%=request.getContextPath()%>/changePassword">密码修改</a></li>
                 <li><a href="<%=request.getContextPath()%>/logout">退出登录</a></li>
 
@@ -163,7 +165,9 @@
                 <li><a id="parentsInfo">家长信息</a></li>
                 <li><a id="awardSitu">奖励情况</a></li>
                 <li><a id="failexamSitu">挂科情况</a></li>
+                <c:if test="${student.studentType == 2}">
                 <li><a id="withdrawInst">退队说明</a></li>
+                </c:if>
                 <li><a id="changePassword" href="/changePassword">密码修改</a></li>
             </ul>
         </li>
