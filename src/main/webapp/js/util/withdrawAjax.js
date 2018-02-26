@@ -1,5 +1,5 @@
 function addWithdrawInst() {
-    var comment = $("#instComment").val();
+    var comment = $("#comment").val();
     var json = {comment: comment};
     $.ajaxFileUpload({
         url: 'addWithdrawInst',

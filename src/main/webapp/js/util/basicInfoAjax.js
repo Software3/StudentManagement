@@ -56,3 +56,20 @@ function submitVerify(node){
         }
     });
 }
+
+function updatePhoto() {
+    $.ajaxFileUpload({
+        url: 'uploadIdPhoto',
+        secureuri: false,
+        fileElementId: 'idPhoto',
+        dataType: 'json',
+        success: function (data, status) {
+            var photoSrc = data.object;
+            $("#myAlert").append(alert("success", "证件照上传成功！"));
+            $("#idPhotoImg").attr("src", photoSrc);
+        },
+        error: function (data, status, e) {
+            $("#myAlert").append(alert("success", "证件照上传失败！"));
+        }
+    })
+}

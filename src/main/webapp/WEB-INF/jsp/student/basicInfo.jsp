@@ -110,9 +110,9 @@
             <!-- right column -->
             <div class="col-md-4 column pull-right">
                 <div>
-                    <img src="" alt="证件照" style="width: 250px;height: 350px;border: 1px solid #666666"/>
-                    <input type="file"/>
-                    <button>确认更改</button>
+                    <img id="idPhotoImg" src="${student.idPhoto}" alt="证件照" style="width: 250px;height: 350px;border: 1px solid #666666"/>
+                    <input id="idPhoto" name="idPhoto" type="file"/>
+                    <button id="modifyPhoto">确认更改</button>
                 </div>
                 <c:if test="${student.verifyState == 0 || student.verifyState == 3}">
                     <a id="submitVerify" class="btn btn-danger">提交资料审核</a><br/><br/>
@@ -133,6 +133,7 @@
 <script src="js/select2.min.js"></script>
 <script src="js/widge/alert.js"></script>
 <script src="js/util/basicInfoAjax.js"></script>
+<script src="js/uploads/ajaxfileupload.js"></script>
 <script src="js/util/util.js"></script>
 <!-- call this page plugins -->
 <script type="text/javascript">
@@ -170,6 +171,10 @@
         $("#submitVerify").click(function () {
             submitVerify($(this))
         });
+
+        $("#modifyPhoto").click(function () {
+            updatePhoto();
+        })
     });
 </script>
 <%@include file="../common/includeBottom.jsp" %>

@@ -165,10 +165,11 @@ public class InfoManageActionBean extends AbstractActionBean {
         String path = request.getSession().getServletContext().getRealPath("upImg");
         ConfigUtil.setPath(path);
         try {
-            String targetName = new Date().getTime() + "";
+            String targetName = new Date().getTime() + "_" + Long.valueOf(getPrincipal()) +
+                    idPhoto.getOriginalFilename().substring(idPhoto.getOriginalFilename().lastIndexOf('.'));
             IOUtil.saveFile(targetName, path, idPhoto);
-            infoManageService.modifyBasicInfoByIdPhoto(Long.valueOf(getPrincipal()), targetName);
-            return new ResponseEntity<Result>(new Result("证件照上传成功", targetName, null), HttpStatus.OK);
+            infoManageService.modifyBasicInfoByIdPhoto(Long.valueOf(getPrincipal()), "upImg/" + targetName);
+            return new ResponseEntity<Result>(new Result(Result.RESULT_SUCCESS, "证件照上传成功", "upImg/" + targetName), HttpStatus.OK);
         } catch (TransationException e) {
             throw new HandleTransationException(e);
         } catch (IOException e) {

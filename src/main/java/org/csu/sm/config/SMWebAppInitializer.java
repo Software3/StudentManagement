@@ -24,7 +24,7 @@ public class SMWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setMultipartConfig(new MultipartConfigElement("D:\\uploads"));
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp/uploads/smpe"));
     }
 
 }
